@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DiJqueryLogo } from "react-icons/di";
+
 //----IMPORT ICON
 import { MdNotifications } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
@@ -27,14 +28,15 @@ const NavBar = () => {
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
+
     if (btnText == "Discover") {
-      setDiscover(true);
+      setDiscover(pre => !pre);
       setHelp(false);
       setNotification(false);
       setProfile(false);
     } else if (btnText == "Help Center") {
       setDiscover(false);
-      setHelp(true);
+      setHelp(pre => !pre);
       setNotification(false);
       setProfile(false);
     } else {
@@ -57,14 +59,18 @@ const NavBar = () => {
   // };
 
   const openProfile = () => {
-    if (!profile) {
-      setProfile(true);
-      setHelp(false);
-      setDiscover(false);
-      // setNotification(false);
-    } else {
-      setProfile(false);
-    }
+    setProfile(pre => !pre);
+    setHelp(false);
+    setDiscover(false);
+
+    // if (!profile) {
+    //   setProfile(true);
+    //   setHelp(false);
+    //   setDiscover(false);
+    //   // setNotification(false);
+    // } else {
+    //   setProfile(false);
+    // }
   };
 
   const openSideBar = () => {
@@ -151,7 +157,7 @@ const NavBar = () => {
                 className={Style.navbar_container_right_profile}
               />
 
-              {/* {profile && <Profile currentAccount={currentAccount} />} */}
+              {profile && <Profile currentAccount={"currentAccount"} />}
             </div>
           </div>
 

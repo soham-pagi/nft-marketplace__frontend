@@ -21,7 +21,7 @@ const Profile = ({ currentAccount }) => {
         />
 
         <div className={Style.profile_account_info}>
-          <p>Shoaib Bhai</p>
+          <p>John Doe</p>
           <small>{currentAccount.slice(0, 18)}..</small>
         </div>
       </div>
@@ -32,7 +32,7 @@ const Profile = ({ currentAccount }) => {
             <FaUserAlt />
             <p>
               {/* <Link href={{ pathname: "/author" }}>My Profile</Link> */}
-              <Link to= "/author" > My Profile </Link>
+              <Link to= "/profile" > My Profile </Link>
             </p>
           </div>
           <div className={Style.profile_menu_one_item}>

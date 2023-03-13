@@ -4,6 +4,8 @@ import React, { useState, useEffect, useContext } from "react";
 //INTERNAL IMPORT
 import Style from "./HeroSection.module.css";
 import images from "../../img";
+import Button from "../Button/Button";
+
 // import { Button } from "../componentsindex";
 
 //SMART CONTRACT IMPORT
@@ -23,10 +25,10 @@ const HeroSection = () => {
             Discover the most outstanding NTFs in all topics of life. Creative
             your NTFs and sell them
           </p>
-          {/* <Button
+          <Button
             btnName="Start your search"
-            handleClick={() => router.push("/searchPage")}
-          /> */}
+            // handleClick={() => router.push("/searchPage")}
+          />
         </div>
         <div className={Style.heroSection_box_right}>
           <img
