@@ -19,7 +19,7 @@ const NavBar = () => {
   //----USESTATE COMPONNTS
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
-  // const [notification, setNotification] = useState(false);
+  const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
@@ -30,17 +30,17 @@ const NavBar = () => {
     if (btnText == "Discover") {
       setDiscover(true);
       setHelp(false);
-      // setNotification(false);
+      setNotification(false);
       setProfile(false);
     } else if (btnText == "Help Center") {
       setDiscover(false);
       setHelp(true);
-      // setNotification(false);
+      setNotification(false);
       setProfile(false);
     } else {
       setDiscover(false);
       setHelp(false);
-      // setNotification(false);
+      setNotification(false);
       setProfile(false);
     }
   };
