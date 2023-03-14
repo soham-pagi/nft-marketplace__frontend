@@ -62,15 +62,6 @@ const NavBar = () => {
     setProfile(pre => !pre);
     setHelp(false);
     setDiscover(false);
-
-    // if (!profile) {
-    //   setProfile(true);
-    //   setHelp(false);
-    //   setDiscover(false);
-    //   // setNotification(false);
-    // } else {
-    //   setProfile(false);
-    // }
   };
 
   const openSideBar = () => {

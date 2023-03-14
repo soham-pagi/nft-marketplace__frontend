@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import Collection from './components/Collection/Collection';
 import Aboutus from './pages/aboutus';
-import Author from './pages/author';
+// import Author from './pages/author';
 import './index.css';
 
 import {
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
   },
   {
     path: "profile",
-    element: <Author />
+    element: <Aboutus />
   }
 ]);
 
