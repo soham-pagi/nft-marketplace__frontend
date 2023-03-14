@@ -9,7 +9,7 @@ import HeroSection from "./HeroSection/HeroSection";
 // import Category from "./Category/Category";
 // import Filter from "./Filter/Filter";
 // import NFTCard from "./NFTCard/NFTCard";
-// import Collection from "./Collection/Collection";
+import Collection from "./Collection/Collection";
 // import AudioLive from "./AudioLive/AudioLive";
 // import LikeProfile from "./LikeProfile/LikeProfile";
 // import FollowerTab from "./FollowerTab/FollowerTab";
@@ -31,7 +31,7 @@ export {
   // Category,
   // Filter,
   // NFTCard,
-  // Collection,
+  Collection,
   // AudioLive,
   // LikeProfile,
   // FollowerTab,

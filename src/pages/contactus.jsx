@@ -12,9 +12,13 @@ import { HiOutlineMail } from "react-icons/hi";
 import Style from "../styles/contactus.module.css";
 import formStyle from "../AccountPage/Form/Form.module.css";
 import { Button } from "../components/componentsindex";
+import Footer from '../components/Footer/Footer';
+import NavBar from '../components/NavBar/NavBar';
 
 const contactus = () => {
   return (
+    <>
+    <NavBar/>
     <div className={Style.contactus}>
       <div className={Style.contactus_box}>
         <h1>Contact</h1>
@@ -37,19 +41,19 @@ const contactus = () => {
             </div>
             <div className={Style.contactus_box_box_left_item}>
               <h3>🌏 SOCIALS</h3>
-              <a href="#">
+              <a href="/">
                 <TiSocialFacebook />
               </a>
-              <a href="#">
+              <a href="/">
                 <TiSocialLinkedin />
               </a>
-              <a href="#">
+              <a href="/">
                 <TiSocialInstagram />
               </a>
-              <a href="#">
+              <a href="/">
                 <TiSocialYoutube />
               </a>
-              <a href="#">
+              <a href="/">
                 <TiSocialTwitter />
               </a>
             </div>
@@ -92,7 +96,9 @@ const contactus = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
+    </>
   );
 };
 

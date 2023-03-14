@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 // import { useRouter } from "next/router";
+import {useNavigate} from "react-router-dom";
 
 //INTERNAL IMPORT
 import Style from "./HeroSection.module.css";
@@ -14,6 +15,7 @@ import Button from "../Button/Button";
 const HeroSection = () => {
   // const { titleData } = useContext(NFTMarketplaceContext);
   // const router = useRouter();
+  const navigate = useNavigate();
 
   return (
     <div className={Style.heroSection}>
@@ -28,6 +30,7 @@ const HeroSection = () => {
           <Button
             btnName="Start your search"
             // handleClick={() => router.push("/searchPage")}
+            // handleClick={() => navigate.push("/searchPage")}
           />
         </div>
         <div className={Style.heroSection_box_right}>

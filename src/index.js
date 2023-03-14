@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import Collection from './components/Collection/Collection';
 import Aboutus from './pages/aboutus';
+import Contactus from './pages/contactus'
+import Login from './pages/login'
+import SignUp from './pages/signUp'
+
 // import Author from './pages/author';
 import './index.css';
 
@@ -29,7 +33,20 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: <Aboutus />
+  },
+  {
+    path: "contactus",
+    element: <Contactus />
+  },
+  {
+    path: "login",
+    element: <Login />
+  },
+  {
+    path: "signUp",
+    element: <SignUp />
   }
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

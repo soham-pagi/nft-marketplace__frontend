@@ -15,7 +15,7 @@ import { RiSendPlaneFill } from "react-icons/ri";
 //INTERNAL IMPORT
 import Style from "./Footer.module.css";
 
-// import { Discover, HelpCenter } from "../NavBar/index";
+import { Discover, HelpCenter } from "../NavBar/index";
 
 const Footer = () => {
   return (
@@ -53,14 +53,12 @@ const Footer = () => {
 
         <div className={Style.footer_box_discover}>
           <h3>Discover</h3>
-          {/* <Discover /> */}
-          Dis
+          <Discover />
         </div>
 
         <div className={Style.footer_box_help}>
           <h3>Help Center</h3>
-          {/* <HelpCenter /> */}
-          HC
+          <HelpCenter />
         </div>
 
         <div className={Style.subscribe}>
