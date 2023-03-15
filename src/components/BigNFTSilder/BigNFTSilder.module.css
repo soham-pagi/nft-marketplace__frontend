@@ -149,12 +149,13 @@
 
 .bigNFTSlider_box_right_box_img{
     border-radius: 2rem;
+    width: 120%;
 }
 
 .bigNFTSlider_box_right_box_like{
     position: absolute;
     top: 3rem;
-    right: 3rem;
+    right: 11rem;
     display: flex;
     align-items: center;
     gap: 1rem;
