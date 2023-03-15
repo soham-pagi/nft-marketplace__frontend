@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 //INTERNAL IMPORT
 import Style from "../styles/author.module.css";
-import { Banner, NFTCardTwo } from "../collectionPage/collectionIndex";
+import { Banner } from "../components/collectionPage/collectionIndex";
 import { Brand, Title } from "../components/componentsindex";
 import FollowerTabCard from "../components/FollowerTab/FollowerTabCard/FollowerTabCard";
 import images from "../img";
@@ -11,12 +11,12 @@ import {
   AuthorProfileCard,
   AuthorTaps,
   AuthorNFTCardBox,
-} from "../authorPage/componentIndex";
+} from "../components/authorPage/componentIndex";
 
 //IMPORT SMART CONTRACT DATA
-import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
+// import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
-const author = () => {
+const Author = () => {
   const followerArray = [
     {
       background: images.creatorbackground1,
@@ -55,37 +55,38 @@ const author = () => {
   const [like, setLike] = useState(false);
   const [follower, setFollower] = useState(false);
   const [following, setFollowing] = useState(false);
+  const currentAccount = "hello";
 
   //IMPORT SMART CONTRACT DATA
-  const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(
-    NFTMarketplaceContext
-  );
+  // const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(
+  //   NFTMarketplaceContext
+  // );
 
   const [nfts, setNfts] = useState([]);
   const [myNFTs, setMyNFTs] = useState([]);
 
-  useEffect(() => {
-    fetchMyNFTsOrListedNFTs("fetchItemsListed").then((items) => {
-      setNfts(items);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // fetchMyNFTsOrListedNFTs("fetchItemsListed").then((items) => {
+  //   //   setNfts(items);
+  //   // });
+  // }, []);
 
-  useEffect(() => {
-    fetchMyNFTsOrListedNFTs("fetchMyNFTs").then((items) => {
-      setMyNFTs(items);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // fetchMyNFTsOrListedNFTs("fetchMyNFTs").then((items) => {
+  //   //   setMyNFTs(items);
+  //   // });
+  // }, []);
 
   return (
     <div className={Style.author}>
       <Banner bannerImage={images.creatorbackground2} />
       <AuthorProfileCard currentAccount={currentAccount} />
       <AuthorTaps
-        setCollectiables={setCollectiables}
-        setCreated={setCreated}
-        setLike={setLike}
-        setFollower={setFollower}
-        setFollowing={setFollowing}
+        // setCollectiables={setCollectiables}
+        // setCreated={setCreated}
+        // setLike={setLike}
+        // setFollower={setFollower}
+        // setFollowing={setFollowing}
       />
 
       <AuthorNFTCardBox
@@ -99,8 +100,7 @@ const author = () => {
       />
       <Title
         heading="Popular Creators"
-        paragraph="Click on music icon and enjoy NTF music or audio
-"
+        paragraph="Click on music icon and enjoy NTF music or audio"
       />
       <div className={Style.author_box}>
         {followerArray.map((el, i) => (
@@ -113,4 +113,4 @@ const author = () => {
   );
 };
 
-export default author;
+export default Author;

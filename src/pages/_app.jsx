@@ -2,16 +2,20 @@ import "../styles/globals.css";
 
 //INTRNAL IMPORT
 import { NavBar, Footer } from "../components/componentsindex";
-import { NFTMarketplaceProvider } from "../Context/NFTMarketplaceContext";
+// import { NFTMarketplaceProvider } from "../Context/NFTMarketplaceContext";
+// import Footer from '../components/Footer/Footer';
+// import NavBar from "../components/NavBar/NavBar";
 
-const MyApp = ({ Component, pageProps }) => (
-  <div>
-    <NFTMarketplaceProvider>
+const MyApp = ({ children }) => {
+  return (
+    <div>
       <NavBar />
-      <Component {...pageProps} />
-      <Footer />
-    </NFTMarketplaceProvider>
-  </div>
-);
+      <main>
+        {children}
+      </main>
+      <Footer />  
+    </div>
+  );
+}
 
 export default MyApp;

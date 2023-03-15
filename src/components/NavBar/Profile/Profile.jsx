@@ -2,7 +2,7 @@ import React from "react";
 import { FaUserAlt, FaRegImage, FaUserEdit } from "react-icons/fa";
 import { MdHelpCenter } from "react-icons/md";
 import { TbDownloadOff, TbDownload } from "react-icons/tb";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 //INTERNAL IMPORT
 import Style from "./Profile.module.css";
@@ -32,19 +32,22 @@ const Profile = ({ currentAccount }) => {
             <FaUserAlt />
             <p>
               {/* <Link href={{ pathname: "/author" }}>My Profile</Link> */}
-              <Link to= "/profile" > My Profile </Link>
+              {/* <Link to= "/profile" > My Profile </Link> */}
+              <a href="/profile">My Profile</a>
             </p>
           </div>
           <div className={Style.profile_menu_one_item}>
             <FaRegImage />
             <p>
-              <Link href={{ pathname: "/author" }}>My Items</Link>
+              {/* <Link href={{ pathname: "/author" }}>My Items</Link> */}
+              <a href="/author">My Items</a>
             </p>
           </div>
           <div className={Style.profile_menu_one_item}>
             <FaUserEdit />
             <p>
-              <Link href={{ pathname: "/account" }}>Edit Profile</Link>
+              {/* <Link href={{ pathname: "/account" }}>Edit Profile</Link> */}
+              <a href="/account">Edit Profile</a>
             </p>
           </div>
         </div>
@@ -53,13 +56,15 @@ const Profile = ({ currentAccount }) => {
           <div className={Style.profile_menu_one_item}>
             <MdHelpCenter />
             <p>
-              <Link href={{ pathname: "/contactus" }}>Help</Link>
+              {/* <Link href={{ pathname: "/contactus" }}>Help</Link> */}
+              <a href="/contactus">Help</a>
             </p>
           </div>
           <div className={Style.profile_menu_one_item}>
             <TbDownload />
             <p>
-              <Link href={{ pathname: "/aboutus" }}>About Us</Link>
+              {/* <Link href={{ pathname: "/aboutus" }}>About Us</Link> */}
+              <a href="/aboutus">About Us</a>
             </p>
           </div>
         </div>
