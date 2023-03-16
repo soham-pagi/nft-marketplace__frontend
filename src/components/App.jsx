@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import Footer from './Footer/Footer';
 import NavBar from "./NavBar/NavBar";
 import HeroSection from "./HeroSection/HeroSection";
-import COllection from './Collection/Collection'
+import Collection from './Collection/Collection'
 import BigNFTSilder from './BigNFTSilder/BigNFTSilder'
 import Category from './Category/Category'
 
@@ -14,7 +14,7 @@ const App = () => {
         <NavBar/>
         <HeroSection/>
         <BigNFTSilder/>
-        <COllection/>
+        <Collection/>
         <Category/>
         <Footer/>
         </>
