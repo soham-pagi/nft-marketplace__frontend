@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 
@@ -26,7 +26,7 @@ const FollowerTabCard = ({ i, el }) => {
 
       <div className={Style.FollowerTabCard_box}>
         <div className={Style.FollowerTabCard_box_img}>
-          <Image
+          <img
             className={Style.FollowerTabCard_box_img_img}
             src={el.background || images[`creatorbackground${i + 1}`]}
             alt="profile braground"
@@ -37,7 +37,7 @@ const FollowerTabCard = ({ i, el }) => {
         </div>
 
         <div className={Style.FollowerTabCard_box_profile}>
-          <Image
+          <img
             className={Style.FollowerTabCard_box_profile_img}
             alt="profile picture"
             width={50}

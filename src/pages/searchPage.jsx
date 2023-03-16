@@ -2,30 +2,32 @@ import React, { useEffect, useState, useContext } from "react";
 
 //INTRNAL IMPORT
 import Style from "../styles/searchPage.module.css";
-import { Slider, Brand, Loader } from "../components/componentsindex";
-import { SearchBar } from "../SearchPage/searchBarIndex";
+import Slider from "../components/Slider/Slider";
+import Brand from "../components/Brand/Brand";
+import Loader from "../components/Loader/Loader";
+import SearchBar from "../components/SearchPage/SearchBar/SearchBar";
 import { Filter } from "../components/componentsindex";
 
-import { NFTCardTwo, Banner } from "../collectionPage/collectionIndex";
+import { NFTCardTwo, Banner } from "../components/collectionPage/collectionIndex";
 import images from "../img";
 
 //SMART CONTRACT IMPORT
-import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
+// import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
-const searchPage = () => {
-  const { fetchNFTs, setError } = useContext(NFTMarketplaceContext);
+const SearchPage = () => {
+  // const { fetchNFTs, setError } = useContext(NFTMarketplaceContext);
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
 
   useEffect(() => {
-    try {
-      fetchNFTs().then((items) => {
-        setNfts(items.reverse());
-        setNftsCopy(items);
-      });
-    } catch (error) {
-      setError("Please reload the browser", error);
-    }
+    // try {
+    //   fetchNFTs().then((items) => {
+    //     setNfts(items.reverse());
+    //     setNftsCopy(items);
+    //   });
+    // } catch (error) {
+    //   setError("Please reload the browser", error);
+    // }
   }, []);
 
   const onHandleSearch = (value) => {
@@ -71,4 +73,4 @@ const searchPage = () => {
   );
 };
 
-export default searchPage;
+export default SearchPage;

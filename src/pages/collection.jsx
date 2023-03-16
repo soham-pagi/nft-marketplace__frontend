@@ -3,11 +3,17 @@ import React from "react";
 //INTERNAL IMPORT
 import Style from "../styles/collection.module.css";
 import images from "../img";
-import {
-  Banner,
-  CollectionProfile,
-  NFTCardTwo,
-} from "../collectionPage/collectionIndex";
+// import {
+//   Banner,
+//   CollectionProfile,
+//   NFTCardTwo,
+// } from "../components/collectionPage";
+
+import { Banner } from "../components/collectionPage/collectionIndex";
+import CollectionProfile from "../components/collectionPage/collectionProfile/collectionProfile";
+// import NFTCardTwo from "../components/collectionPage/collectionIndex";
+import NFTCardTwo from "../components/collectionPage/NFTCardTwo/NFTCardTwo";
+
 import { Slider, Brand } from "../components/componentsindex";
 import Filter from "../components/Filter/Filter";
 
