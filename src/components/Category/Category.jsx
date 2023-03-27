@@ -1,4 +1,5 @@
 import React from "react";
+// import Image from "next/image";
 import { BsCircleFill } from "react-icons/bs";
 
 //INTERNAL IMPORT
@@ -53,13 +54,6 @@ const Category = () => {
     },
   ];
   return (
-    <>
-    <div className={Style.title}>
-      <div className={Style.title_box}>
-        <h2>Browse by category</h2>
-        <p>Explore the NFTs in the most featured categories.</p>
-      </div>
-    </div>
     <div className={Style.box_category}>
       <div className={Style.category}>
         {CategoryArray.map((el, i) => (
@@ -86,7 +80,6 @@ const Category = () => {
         ))}
       </div>
     </div>
-    </>
   );
 };
 

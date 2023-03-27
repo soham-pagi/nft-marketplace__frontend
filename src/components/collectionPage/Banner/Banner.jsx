@@ -1,5 +1,4 @@
 import React from "react";
-// import Image from "next/image";
 
 //INTERNAL IMPORT
 import Style from "./Banner.module.css";
