@@ -1,7 +1,6 @@
 .NFTCardTwo{
-    width: 80%;
-    margin:  0 auto;
-
+    width: 85%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
