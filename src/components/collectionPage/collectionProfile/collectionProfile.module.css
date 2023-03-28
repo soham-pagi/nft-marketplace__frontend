@@ -1,14 +1,11 @@
-
-
 .collectionProfile{
     width: 100%;
     margin-top: 5rem;
 }
 
 .collectionProfile_box{
-    width: 80%;
+    width:90%;
     margin: 0 auto;
-
     display: grid;
     grid-template-columns: 1fr 3fr;
     gap: 3rem;
@@ -17,7 +14,7 @@
     background-color: var(--main-bg-color);
     box-shadow: var(--box-shadow);
     border-radius: 1rem;
-    padding: 1rem 2rem;
+    padding: 2rem 2rem;
 }
 
 .collectionProfile_box_left_img{
