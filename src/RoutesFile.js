@@ -7,6 +7,7 @@ import Author from './pages/author';
 import Account from './pages/account';
 import SignUp from './pages/signUp';
 import Login from './pages/login';
+import SubscriptionPage from './pages/subscriptionPage';
 
 const RoutesFile = () => {
     return (
@@ -18,6 +19,7 @@ const RoutesFile = () => {
                 <Route path='/author' element={<Author />}/>
                 <Route path='/account' element={<Account />}/>
                 <Route path='/index' element={<Home />}/>
+                <Route path='/subscription' element={<SubscriptionPage />}/>
                 <Route path='/signup' element={<SignUp />}/>
                 <Route path='/login' element={<Login />}/>
                 <Route path="/home" element={<Home/>} />
