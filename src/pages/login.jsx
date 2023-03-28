@@ -4,18 +4,18 @@ import React from "react";
 import Style from "../styles/login.module.css";
 import LoginAndSignUp from "../loginAndSignUp/LoginAndSignUp";
 
-const login = () => {
+const Login = () => {
   return (
-    <div className={Style.login}>
+    <div className={Style.login} style={{marginTop: 94}}>
       <div className={Style.login_box}>
         <h1>Login</h1>
         <LoginAndSignUp />
         <p className={Style.login_box_para}>
-          New user? <a href="#">Create an account</a>
+          New user? <a href="/signup">Create an account</a>
         </p>
       </div>
     </div>
   );
 };
 
-export default login;
+export default Login;

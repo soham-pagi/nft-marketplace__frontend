@@ -53,7 +53,7 @@ const LoginAndSignUp = () => {
         <div className={Style.user_box_input}>
           <div className={Style.user_box_input_box}>
             <label htmlFor="email">Email address</label>
-            <input type="email" placeholder="example@emample.com" />
+            <input type="email" placeholder="someone@emample.com" />
           </div>
 
           <div className={Style.user_box_input_box}>

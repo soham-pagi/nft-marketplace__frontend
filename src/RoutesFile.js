@@ -5,6 +5,8 @@ import Collection from './pages/collection';
 import SearchPage from './pages/searchPage';
 import Author from './pages/author';
 import Account from './pages/account';
+import SignUp from './pages/signUp';
+import Login from './pages/login';
 
 const RoutesFile = () => {
     return (
@@ -16,6 +18,8 @@ const RoutesFile = () => {
                 <Route path='/author' element={<Author />}/>
                 <Route path='/account' element={<Account />}/>
                 <Route path='/index' element={<Home />}/>
+                <Route path='/signup' element={<SignUp />}/>
+                <Route path='/login' element={<Login />}/>
                 <Route path="/home" element={<Home/>} />
                 <Route path="/" element={<Home/>} />
             </Routes>

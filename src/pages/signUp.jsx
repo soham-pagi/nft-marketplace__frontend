@@ -4,7 +4,7 @@ import React from "react";
 import Style from "../styles/login.module.css";
 import LoginAndSignUp from "../loginAndSignUp/LoginAndSignUp";
 
-const signUp = () => {
+const SignUp = () => {
   return (
     <div className={Style.login}>
       <div className={Style.login_box}>
@@ -18,4 +18,4 @@ const signUp = () => {
   );
 };
 
-export default signUp;
+export default SignUp;
