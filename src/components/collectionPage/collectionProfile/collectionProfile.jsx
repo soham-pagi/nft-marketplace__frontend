@@ -26,16 +26,16 @@ const collectionProfile = () => {
           />
 
           <div className={Style.collectionProfile_box_left_social}>
-            <a href="www.facebook.com">
+            <a href="https://www.facebook.com">
               <TiSocialFacebook />
             </a>
-            <a href="www.instagram.com">
+            <a href="https://www.instagram.com">
               <TiSocialInstagram />
             </a>
-            <a href="www.linkedin.com">
+            <a href="https://www.linkedin.com">
               <TiSocialLinkedin />
             </a>
-            <a href="www.twitter.com">
+            <a href="https://www.twitter.com">
               <TiSocialTwitter />
             </a>
           </div>
