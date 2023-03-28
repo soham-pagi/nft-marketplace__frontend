@@ -77,17 +77,22 @@ const NavBar = () => {
   //   NFTMarketplaceContext
   // );
 
+  const handleSearch = () => {
+    const searchQuery = document.getElementById('search-nft').value;
+    window.location.replace(`/searchPage?${searchQuery}`);
+  }
+
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
           <div className={Style.logo}>
-            {/* <DiJqueryLogo onClick={() => router.push("/")} /> */}
+            <DiJqueryLogo onClick={() => window.location.replace('/')} />
           </div>
           <div className={Style.navbar_container_left_box_input}>
             <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder="Search NFT" />
-              <BsSearch onClick={() => {}} className={Style.search_icon} />
+              <input id="search-nft" type="text" placeholder="Search NFT" />
+              <BsSearch onClick={ handleSearch } className={Style.search_icon} />
             </div>
           </div>
         </div>
