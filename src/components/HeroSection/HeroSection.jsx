@@ -28,9 +28,8 @@ const HeroSection = () => {
             your NTFs and sell them
           </p>
           <Button
-            btnName="Start your search"
-            // handleClick={() => router.push("/searchPage")}
-            // handleClick={() => navigate.push("/searchPage")}
+            btnName="Start Your Search"
+            handleClick={() => window.location.replace('/searchPage')}
           />
         </div>
         <div className={Style.heroSection_box_right}>
