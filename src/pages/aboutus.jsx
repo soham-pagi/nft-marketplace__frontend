@@ -1,6 +1,5 @@
 import React from "react";
 
-
 //INTERNAL IMPORT
 import Style from "../styles/aboutus.module.css";
 import { Brand } from "../components/componentsindex";
