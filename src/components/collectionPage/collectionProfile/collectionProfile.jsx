@@ -20,22 +20,22 @@ const collectionProfile = () => {
           <img
             src={images.nft_image_1}
             alt="nft image"
-            width={800}
-            height={800}
+            width={400}
+            height={400}
             className={Style.collectionProfile_box_left_img}
           />
 
           <div className={Style.collectionProfile_box_left_social}>
-            <a href="#">
+            <a href="www.facebook.com">
               <TiSocialFacebook />
             </a>
-            <a href="#">
+            <a href="www.instagram.com">
               <TiSocialInstagram />
             </a>
-            <a href="#">
+            <a href="www.linkedin.com">
               <TiSocialLinkedin />
             </a>
-            <a href="#">
+            <a href="www.twitter.com">
               <TiSocialTwitter />
             </a>
           </div>
