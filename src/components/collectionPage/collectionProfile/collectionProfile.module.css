@@ -1,9 +1,10 @@
 
 
 .collectionProfile{
-    width: 100%;
+    width: 100vw;
     margin-top: 5rem;
 }
+
 
 .collectionProfile_box{
     width: 85%;
@@ -22,6 +23,8 @@
 
 .collectionProfile_box_left_img{
     border-radius: 1rem;
+    width: 35vw;
+    height: 40vw;
 }
 
 .collectionProfile_box_left_social{
@@ -51,12 +54,12 @@
 
 .collectionProfile_box_middle{
     display: grid;
-    align-self: flex-start;
 }
 
 .collectionProfile_box_middle h1{
-    font-size: 2.5rem;
+    font-size: 3vw;
     line-height: 0;
+    white-space: nowrap;
 }
 
 .collectionProfile_box_middle p{
@@ -66,7 +69,7 @@
 
 .collectionProfile_box_middle_box{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     background-color: var(--main-bg-color);
     margin-top: 1.5rem;
@@ -79,7 +82,6 @@
     border-radius: 2rem;
     line-height: 0;
     text-align: center;
-   
 }
 
 .collectionProfile_box_middle_box_item p{
@@ -109,6 +111,11 @@
         padding: 1rem;
     }
 
+    .collectionProfile_box_left_img {
+        width: 77vw;
+        height: 75vw;
+    }
+
     .collectionProfile_box_middle_box{
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
@@ -135,7 +142,8 @@
     }
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media screen and (max-device-width: 1024px) {
+
     .collectionProfile_box{
         width: 80%;
         grid-template-columns: 1fr;
@@ -153,8 +161,9 @@
     }
 
     .collectionProfile_box_middle h1{
-        font-size: 1.8rem;
+        font-size: 1vw;
         line-height: 1;
+        white-space: nowrap;
     }
 
     .collectionProfile_box_middle p{
