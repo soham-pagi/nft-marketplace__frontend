@@ -21,12 +21,7 @@ const aboutus = () => {
       name: "Orla Dwyer",
       position: "Co-founder, Chairman",
       images: images.founder3,
-    },
-    {
-      name: "Dara Frazier",
-      position: "Co-Founder, Chief Strategy Officer",
-      images: images.founder4,
-    },
+    }
   ];
 
   const factsArray = [
@@ -43,6 +38,7 @@ const aboutus = () => {
       info: "Countries and regions have our presence (as of Sept. 30, 2021",
     },
   ];
+
   return (
     <div className={Style.aboutus}>
       <div className={Style.aboutus_box}>
@@ -75,8 +71,8 @@ const aboutus = () => {
                 <img
                   src={el.images}
                   alt={el.name}
-                  width={500}
-                  height={500}
+                  width={350}
+                  height={350}
                   className={Style.aboutus_box_founder_box_img_img}
                 />
                 <h3>{el.name}</h3>
