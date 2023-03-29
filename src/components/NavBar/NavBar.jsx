@@ -10,7 +10,7 @@ import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 //INTERNAL IMPORT
 import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Profile, SideBar } from "./index";
-// import { Button, Error } from "../componentsindex";
+import { Button, Error } from "../componentsindex";
 import images from "../../img";
 import { Notification } from "./index";
 
@@ -24,8 +24,13 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState("");
 
   // const router = useRouter();
+
+  const connectWallet = () => {
+    alert('connect wallet');
+  }
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -126,22 +131,23 @@ const NavBar = () => {
           </div>
 
           {/* CREATE BUTTON SECTION */}
-          {/* <div className={Style.navbar_container_right_button}>
+          <div className={Style.navbar_container_right_button}>
             {currentAccount == "" ? (
               <Button btnName="Connect" handleClick={() => connectWallet()} />
             ) : (
               <Button
                 btnName="Create"
-                handleClick={() => router.push("/uploadNFT")}
+                // handleClick={() => router.push("/uploadNFT")}
+                handleClick={() => window.location.replace("/uploadNFT")}
               />
             )}
-          </div> */}
+          </div>
 
           {/* USER PROFILE */}
           <div className={Style.navbar_container_right_profile_box}>
             <div className={Style.navbar_container_right_profile}>
               <img
-                src={images.user1}
+                src={images.user9}
                 alt="Profile"
                 width={40}
                 height={40}
