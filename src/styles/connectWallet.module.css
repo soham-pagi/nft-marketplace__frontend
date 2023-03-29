@@ -3,6 +3,8 @@
 .connectWallet{
     width: 100%;
     margin-block: 5rem;
+    margin-top: 95px;
+    padding: 2rem;
 }
 
 .connectWallet_box{

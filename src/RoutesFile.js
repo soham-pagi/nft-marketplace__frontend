@@ -9,6 +9,7 @@ import SignUp from './pages/signUp';
 import Login from './pages/login';
 import SubscriptionPage from './pages/subscriptionPage';
 import Contactus from './pages/contactus';
+import ConnectWallet from './pages/connectWallet';
 
 const RoutesFile = () => {
     return (
@@ -20,6 +21,7 @@ const RoutesFile = () => {
                 <Route path='/searchpage' element={<SearchPage />}/>
                 <Route path='/author' element={<Author />}/>
                 <Route path='/account' element={<Account />}/>
+                <Route path='/connectWallet' element={<ConnectWallet />}/>
                 <Route path='/index' element={<Home />}/>
                 <Route path='/subscription' element={<SubscriptionPage />}/>
                 <Route path='/signup' element={<SignUp />}/>

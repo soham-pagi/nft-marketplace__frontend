@@ -18,7 +18,7 @@ const Notification = (notificationData) => {
     <div className={Style.notification}>
       <p>Notifications</p>        
         {sampleNotifications.map((el, i) => (
-          <div className={Style.notification_box}>
+          <div id={i + 1} className={Style.notification_box}>
             <div className={Style.notification_box_img}>
               <img
                 src={images.nft_image_1}
