@@ -12,6 +12,7 @@ import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Profile, SideBar } from "./index";
 // import { Button, Error } from "../componentsindex";
 import images from "../../img";
+import { Notification } from "./index";
 
 //IMPORT FROM SMART CONTRACT
 // import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
@@ -47,16 +48,12 @@ const NavBar = () => {
     }
   };
 
-  // const openNotification = () => {
-  //   if (!notification) {
-  //     setNotification(true);
-  //     setDiscover(false);
-  //     setHelp(false);
-  //     setProfile(false);
-  //   } else {
-  //     setNotification(false);
-  //   }
-  // };
+  const openNotification = () => {
+    setNotification(pre => !pre);
+    setDiscover(false);
+    setHelp(false);
+    setProfile(false);
+  };
 
   const openProfile = () => {
     setProfile(pre => !pre);
@@ -120,13 +117,13 @@ const NavBar = () => {
           </div>
 
           {/* NOTIFICATION */}
-          {/* <div className={Style.navbar_container_right_notify}>
+          <div className={Style.navbar_container_right_notify}>
             <MdNotifications
               className={Style.notify}
               onClick={() => openNotification()}
             />
             {notification && <Notification />}
-          </div> */}
+          </div>
 
           {/* CREATE BUTTON SECTION */}
           {/* <div className={Style.navbar_container_right_button}>
@@ -141,7 +138,6 @@ const NavBar = () => {
           </div> */}
 
           {/* USER PROFILE */}
-
           <div className={Style.navbar_container_right_profile_box}>
             <div className={Style.navbar_container_right_profile}>
               <img
