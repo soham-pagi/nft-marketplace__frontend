@@ -8,6 +8,7 @@ import Account from './pages/account';
 import SignUp from './pages/signUp';
 import Login from './pages/login';
 import SubscriptionPage from './pages/subscriptionPage';
+import Contactus from './pages/contactus';
 
 const RoutesFile = () => {
     return (
@@ -15,6 +16,7 @@ const RoutesFile = () => {
             <Routes>
                 <Route path='/collection' element={<Collection />}/>
                 <Route path='/aboutus' element={<AboutUs />}/>
+                <Route path='/contactus' element={<Contactus />}/>
                 <Route path='/searchpage' element={<SearchPage />}/>
                 <Route path='/author' element={<Author />}/>
                 <Route path='/account' element={<Account />}/>
