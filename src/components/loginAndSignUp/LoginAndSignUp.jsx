@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 
 //INTERNALIMPORT
 import Style from "./loginAndSignUp.module.css";
-import images from "../img";
-import { Button } from "../components/componentsindex.js";
+import images from "../../img";
+import { Button } from "../../components/componentsindex.js";
 
 const LoginAndSignUp = () => {
   const [activeBtn, setActiveBtn] = useState(1);
 
   const socialImage = [
     {
-      social: images.facebook,
-      name: "Continue with Facebook",
+      social: images.google,
+      name: "Continue with Google",
     },
     {
       social: images.twitter,
@@ -21,8 +21,9 @@ const LoginAndSignUp = () => {
     {
       social: images.facebook,
       name: "Continue with Facebook",
-    },
+    }
   ];
+
   return (
     <div className={Style.user}>
       <div className={Style.user_box}>
