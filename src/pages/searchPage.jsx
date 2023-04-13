@@ -58,6 +58,7 @@ const SearchPage = () => {
   //   images.nft_image_1,
   //   images.nft_image_2,
   // ];
+  
   return (
     <div className={Style.searchPage}>
       <Banner bannerImage={images.creatorbackground2} />

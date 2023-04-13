@@ -34,7 +34,7 @@ const Home = () => {
   // }, []);
 
   // const { fetchNFTs } = useContext(NFTMarketplaceContext);
-  const [nfts, setNfts] = useState([]);
+  const [nfts, setNfts] = useState([{image: "nft_image_1"}]);
   const [nftsCopy, setNftsCopy] = useState([]);
 
   // useEffect(() => {
@@ -52,7 +52,7 @@ const Home = () => {
     <div className={Style.homePage}>
       <HeroSection />
       <Service />
-      {/* <BigNFTSilder /> */}
+      <BigNFTSilder />
       <Title
         heading="Image Collection"
         paragraph="Discover the most outstanding NFTs in all topics of life."
@@ -62,28 +62,28 @@ const Home = () => {
 
       {creators.length == 0 ? (
         // <Loader />
-        <h1></h1>
+        <h1></h1> // Loader
       ) : (
         <FollowerTab TopCreator={creators} />
       )}
 
       {/* <Slider /> */}
       <Collection />
+
       <Title
         heading="Featured NFTs"
         paragraph="Discover the most outstanding NFTs in all topics of life."
       />
-      {/* <Filter /> */}
-      {/* {nfts.length == 0 ? <Loader /> : <NFTCard NFTData={nfts} />} */}
+      <Filter />
+      {nfts.length == 0 ? <Loader /> : <NFTCard NFTData={nfts} />}
 
       <Title
         heading="Browse by category"
         paragraph="Explore the NFTs in the most featured categories."
       />
-      {/* <Category />
+      <Category />
       <Subscribe />
       <Brand />
-      <Video /> */}
     </div>
   );
 };

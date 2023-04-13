@@ -1,4 +1,5 @@
 import React from "react";
+import { Title } from "../componentsindex";
 // import Image from "next/image";
 
 //INTERNAL IMPORT
@@ -6,6 +7,11 @@ import Style from "./Service.module.css";
 import images from "../../img";
 const Service = () => {
   return (
+    <>
+    <Title
+        heading="Services"
+        paragraph="Join the NFT Marketplace."
+      />
     <div className={Style.service}>
       <div className={Style.service_box}>
         <div className={Style.service_box_item}>
@@ -58,6 +64,7 @@ const Service = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

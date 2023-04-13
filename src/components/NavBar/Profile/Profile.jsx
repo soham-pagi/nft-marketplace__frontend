@@ -13,7 +13,7 @@ const Profile = ({ currentAccount }) => {
     <div className={Style.profile}>
       <div className={Style.profile_account}>
         <img
-          src={images.user1}
+          src={images.user9}
           alt="user profile"
           width={50}
           height={50}
@@ -21,7 +21,7 @@ const Profile = ({ currentAccount }) => {
         />
 
         <div className={Style.profile_account_info}>
-          <p>John Doe</p>
+          <p>Jane</p>
           <small>{currentAccount.slice(0, 18)}..</small>
         </div>
       </div>
@@ -58,13 +58,6 @@ const Profile = ({ currentAccount }) => {
             <p>
               {/* <Link href={{ pathname: "/contactus" }}>Help</Link> */}
               <a href="/contactus">Help</a>
-            </p>
-          </div>
-          <div className={Style.profile_menu_one_item}>
-            <TbDownload />
-            <p>
-              {/* <Link href={{ pathname: "/aboutus" }}>About Us</Link> */}
-              <a href="/aboutus">About Us</a>
             </p>
           </div>
         </div>

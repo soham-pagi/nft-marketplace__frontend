@@ -10,15 +10,12 @@ import { HiOutlineMail } from "react-icons/hi";
 
 //INTERNAL IMPORT
 import Style from "../styles/contactus.module.css";
-import formStyle from "../AccountPage/Form/Form.module.css";
+import formStyle from "../components/AccountPage/Form/Form.module.css";
 import { Button } from "../components/componentsindex";
 import Footer from '../components/Footer/Footer';
-import NavBar from '../components/NavBar/NavBar';
 
 const contactus = () => {
   return (
-    <>
-    <NavBar/>
     <div className={Style.contactus}>
       <div className={Style.contactus_box}>
         <h1>Contact</h1>
@@ -33,7 +30,7 @@ const contactus = () => {
             </div>
             <div className={Style.contactus_box_box_left_item}>
               <h3>💌 EMAIL</h3>
-              <p>nc.example@example.com</p>
+              <p>someone@example.com</p>
             </div>
             <div className={Style.contactus_box_box_left_item}>
               <h3>☎ PHONE</h3>
@@ -64,7 +61,7 @@ const contactus = () => {
                 <label htmlFor="name">Full Name</label>
                 <input
                   type="text"
-                  placeholder="shoaib bhai"
+                  placeholder="Name"
                   className={formStyle.Form_box_input_userName}
                 />
               </div>
@@ -74,7 +71,7 @@ const contactus = () => {
                   <div className={formStyle.Form_box_input_box_icon}>
                     <HiOutlineMail />
                   </div>
-                  <input type="text" placeholder="Email*" />
+                  <input type="text" placeholder="Email" />
                 </div>
               </div>
               <div className={formStyle.Form_box_input}>
@@ -84,8 +81,8 @@ const contactus = () => {
                   id=""
                   cols="30"
                   rows="6"
-                  placeholder="something about yourself in few words"
-                ></textarea>
+                  placeholder="something about yourself in few words">
+                </textarea>
               </div>
               <Button
                 btnName="Send Message"
@@ -96,9 +93,7 @@ const contactus = () => {
           </div>
         </div>
       </div>
-      <Footer/>
     </div>
-    </>
   );
 };
 

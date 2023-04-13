@@ -45,8 +45,8 @@ const NFTCardTwo = ({ NFTData }) => {
               <img
                 src={el.image}
                 alt="NFT"
-                width={500}
-                height={500}
+                width={400}
+                height={400}
                 objectFit="cover"
                 className={Style.NFTCardTwo_box_img_img}
               />

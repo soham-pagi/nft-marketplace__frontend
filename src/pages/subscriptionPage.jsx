@@ -2,8 +2,9 @@ import React from "react";
 
 //INTERNAL IMPORT
 import Style from "../styles/subscription.module.css";
-import Subscription from "../Subscription/Subscription";
-const subscription = () => {
+import { Subscription } from '../components/componentsindex';
+
+const SubscriptionPage = () => {
   const subscriptionArray = [
     {
       plan: "STARTER",
@@ -57,4 +58,4 @@ const subscription = () => {
   );
 };
 
-export default subscription;
+export default SubscriptionPage;

@@ -10,8 +10,9 @@ import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 //INTERNAL IMPORT
 import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Profile, SideBar } from "./index";
-// import { Button, Error } from "../componentsindex";
+import { Button, Error } from "../componentsindex";
 import images from "../../img";
+import { Notification } from "./index";
 
 //IMPORT FROM SMART CONTRACT
 // import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
@@ -23,8 +24,13 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [currentAccount, setCurrentAccount] = useState("");
 
   // const router = useRouter();
+
+  const connectWallet = () => {
+    alert('connect wallet');
+  }
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -47,16 +53,12 @@ const NavBar = () => {
     }
   };
 
-  // const openNotification = () => {
-  //   if (!notification) {
-  //     setNotification(true);
-  //     setDiscover(false);
-  //     setHelp(false);
-  //     setProfile(false);
-  //   } else {
-  //     setNotification(false);
-  //   }
-  // };
+  const openNotification = () => {
+    setNotification(pre => !pre);
+    setDiscover(false);
+    setHelp(false);
+    setProfile(false);
+  };
 
   const openProfile = () => {
     setProfile(pre => !pre);
@@ -77,17 +79,22 @@ const NavBar = () => {
   //   NFTMarketplaceContext
   // );
 
+  const handleSearch = () => {
+    const searchQuery = document.getElementById('search-nft').value;
+    window.location.replace(`/searchPage?${searchQuery}`);
+  }
+
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
           <div className={Style.logo}>
-            {/* <DiJqueryLogo onClick={() => router.push("/")} /> */}
+            <DiJqueryLogo onClick={() => window.location.replace('/')} />
           </div>
           <div className={Style.navbar_container_left_box_input}>
             <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder="Search NFT" />
-              <BsSearch onClick={() => {}} className={Style.search_icon} />
+              <input id="search-nft" type="text" placeholder="Search NFT" />
+              <BsSearch onClick={ handleSearch } className={Style.search_icon} />
             </div>
           </div>
         </div>
@@ -115,32 +122,32 @@ const NavBar = () => {
           </div>
 
           {/* NOTIFICATION */}
-          {/* <div className={Style.navbar_container_right_notify}>
+          <div className={Style.navbar_container_right_notify}>
             <MdNotifications
               className={Style.notify}
               onClick={() => openNotification()}
             />
             {notification && <Notification />}
-          </div> */}
+          </div>
 
           {/* CREATE BUTTON SECTION */}
-          {/* <div className={Style.navbar_container_right_button}>
+          <div className={Style.navbar_container_right_button}>
             {currentAccount == "" ? (
               <Button btnName="Connect" handleClick={() => connectWallet()} />
             ) : (
               <Button
                 btnName="Create"
-                handleClick={() => router.push("/uploadNFT")}
+                // handleClick={() => router.push("/uploadNFT")}
+                handleClick={() => window.location.replace("/uploadNFT")}
               />
             )}
-          </div> */}
+          </div>
 
           {/* USER PROFILE */}
-
           <div className={Style.navbar_container_right_profile_box}>
             <div className={Style.navbar_container_right_profile}>
               <img
-                src={images.user1}
+                src={images.user9}
                 alt="Profile"
                 width={40}
                 height={40}
