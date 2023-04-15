@@ -3,7 +3,7 @@ import { MdVerified } from "react-icons/md";
 
 //INTERNAL IMPORT
 import Style from "./DaysComponents.module.css";
-import images from '../../../img'
+import images from "../../../img";
 
 const DaysComponents = ({ el, i }) => {
   return (
@@ -16,7 +16,7 @@ const DaysComponents = ({ el, i }) => {
             alt="profile background"
             width={320}
             height={200}
-            objectFit="covers"
+            style={{ objectFit: "cover" }}
           />
         </div>
 
@@ -27,7 +27,7 @@ const DaysComponents = ({ el, i }) => {
             width={100}
             height={100}
             className={Style.daysComponent_box_img_1}
-            objectFit="covers"
+            style={{ objectFit: "cover" }}
           />
           <img
             src={images[`creatorbackground${i + 4}`]}
@@ -35,7 +35,7 @@ const DaysComponents = ({ el, i }) => {
             width={100}
             height={100}
             className={Style.daysComponent_box_img_2}
-            objectFit="covers"
+            style={{ objectFit: "cover" }}
           />
           <img
             src={images[`creatorbackground${i + 3}`]}
@@ -43,7 +43,7 @@ const DaysComponents = ({ el, i }) => {
             width={100}
             height={100}
             className={Style.daysComponent_box_img_3}
-            objectFit="covers"
+            style={{ objectFit: "cover" }}
           />
         </div>
 
@@ -56,14 +56,14 @@ const DaysComponents = ({ el, i }) => {
                 alt="profile"
                 width={30}
                 height={30}
-                objectFit="covers"
+                style={{ objectFit: "cover" }}
                 className={Style.daysComponent_box_title_info_profile_img}
               />
 
               <p>
                 Creator
                 <span>
-                  Shoaib Bhai
+                  Jane
                   <small>
                     <MdVerified />
                   </small>

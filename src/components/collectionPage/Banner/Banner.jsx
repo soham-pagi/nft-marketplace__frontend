@@ -9,7 +9,7 @@ const Banner = ({ bannerImage }) => {
       <div className={Style.banner_img}>
         <img
           src={bannerImage}
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
           alt="background"
           height={150}
         />
@@ -18,7 +18,7 @@ const Banner = ({ bannerImage }) => {
       <div className={Style.banner_img_mobile}>
         <img
           src={bannerImage}
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
           alt="background"
           height={200}
         />

@@ -13,9 +13,7 @@ import images from "../../img";
 import { Button } from "../componentsindex";
 import { DropZone } from "./uploadNFTIndex";
 
-
 const UploadNFT = ({ uploadToIPFS, createNFT }) => {
-
   // const uploadToIPFS = () => alert('Upload to IPFS');
   // const createNFT = () => alert('Create NFT');
 
@@ -40,10 +38,6 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
     {
       image: images.nft_image_2,
       category: "Arts",
-    },
-    {
-      image: images.nft_image_3,
-      category: "Music",
     },
     {
       image: images.nft_image_1,
@@ -224,7 +218,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
                 name,
                 price,
                 image,
-                description,
+                description
                 // router
                 // website,
                 // royalties,

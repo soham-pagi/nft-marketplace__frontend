@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 //INTERNALIMPORT
 import Style from "./loginAndSignUp.module.css";
 import images from "../../img";
@@ -21,7 +20,7 @@ const LoginAndSignUp = () => {
     {
       social: images.facebook,
       name: "Continue with Facebook",
-    }
+    },
   ];
 
   return (

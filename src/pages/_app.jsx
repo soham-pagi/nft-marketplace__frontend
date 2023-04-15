@@ -7,12 +7,10 @@ const MyApp = ({ children }) => {
   return (
     <div>
       <NavBar />
-      <main style={{marginTop: 94}}>
-        {children}
-      </main>
-      <Footer />  
+      <main style={{ marginTop: 94 }}>{children}</main>
+      <Footer />
     </div>
   );
-}
+};
 
 export default MyApp;
