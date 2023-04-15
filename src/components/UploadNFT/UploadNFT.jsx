@@ -61,7 +61,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
 
   return (
     <div className={Style.upload}>
-      <h1>Hello</h1>
+      <h1>Upload your NFT</h1>
       <DropZone
         title="JPG, PNG, WEBM , MAX 100MB"
         heading="Drag & drop file"

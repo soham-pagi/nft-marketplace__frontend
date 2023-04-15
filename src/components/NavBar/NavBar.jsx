@@ -13,6 +13,7 @@ import { Discover, HelpCenter, Profile, SideBar } from "./index";
 import { Button, Error } from "../componentsindex";
 import images from "../../img";
 import { Notification } from "./index";
+import { UploadNFT } from "../UploadNFT/uploadNFTIndex";
 
 //IMPORT FROM SMART CONTRACT
 // import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
@@ -24,12 +25,34 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-  const [currentAccount, setCurrentAccount] = useState("");
+  var [currentAccount, setCurrentAccount] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
 
   // const router = useRouter();
 
-  const connectWallet = () => {
-    alert('connect wallet');
+  async function connectWallet() {
+    console.log('Requesting account...');
+
+    // ❌ Check if Meta Mask Extension exists 
+    if(window.ethereum) {
+      console.log('detected');
+
+      try {
+        const accounts = await window.ethereum.request({method: "eth_requestAccounts"});
+        setWalletAddress(accounts[0]);
+        console.log({walletAddress});
+        setCurrentAccount(accounts[0]);
+        console.log({currentAccount});
+      } catch (error) {
+        console.log('Error connecting...');
+        console.log(error);
+      }
+
+      
+
+    } else {
+      alert('Meta Mask not detected');
+    }
   }
 
   const openMenu = (e) => {
@@ -134,13 +157,17 @@ const NavBar = () => {
           <div className={Style.navbar_container_right_button}>
             {currentAccount == "" ? (
               <Button btnName="Connect" handleClick={() => connectWallet()} />
+              
             ) : (
               <Button
                 btnName="Create"
                 // handleClick={() => router.push("/uploadNFT")}
                 handleClick={() => window.location.replace("/uploadNFT")}
+                // handleClick={<UploadNFT/>}
+                
               />
             )}
+          {console.log({currentAccount})}
           </div>
 
           {/* USER PROFILE */}
