@@ -1,0 +1,159 @@
+.signup {
+    width: 100%;
+    margin-block: 5rem;
+    font-size: 1.5rem;
+  }
+
+.signup_box{
+    width: 30%;
+    margin: 0 auto;
+}
+
+.signup_box h1{
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 5rem;
+}
+
+.input{
+    margin-top: 3rem;
+}
+
+.input_box{
+    display: grid;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.input_box input{
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.input_box_label{
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    line-height: 0;
+}
+/*   
+@media (prefers-reduced-motion: no-preference) {
+    .signup_logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+} */
+  
+/*   
+  [type="text"] {
+    padding: 0.3rem 1rem;
+    border: 2px solid blueviolet;
+    font-size: large;
+  }
+  
+  [type="email"] {
+    padding: 0.3rem 1rem;
+    border: 2px solid blueviolet;
+    font-size: large;
+  } */
+
+  /* .signup_display {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 3rem;
+  } */
+  
+  /* .signup_display h3 {
+    color: #404c62;
+    border-bottom: 4px solid blueviolet;
+    width: max-content;
+    margin: 0 auto;
+  } */
+  
+  img {
+    margin: 0rem auto;
+  }
+  
+  .button{
+    width: 30%;
+    border-radius: 1rem;
+    margin: 3rem 0 0 9rem;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+  }
+  
+  .button:hover {
+    transition-duration: 0.1s;
+    background-color: #383816;
+  }
+  
+  .button:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 4em;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 10px 40px white;
+  }
+  
+  .button:active:after {
+    box-shadow: 0 0 0 0 white;
+    position: absolute;
+    border-radius: 4em;
+    left: 0;
+    top:0;
+    opacity: 1;
+    transition: 0s;
+  }
+  
+  .button:active {
+    top: 1px;
+  }
+.error h1{
+    font-size: 1.5rem;
+    color: rgb(163, 19, 19);
+}
+.success h1{
+    font-size: 1.5rem;
+    color: rgb(146, 240, 5);
+}
+
+.user_box_or{
+    text-align: center;
+    margin-top: 2rem;
+    position: relative;
+}
+.user_box_or::before{
+    content: "";
+    width: 45%;
+    border: 1px solid var(--shadow-dark-color);
+    left: 0;
+    top: .8rem;
+    position: absolute;
+}
+.user_box_or::after{
+    content: "";
+    width: 45%;
+    border: 1px solid var(--shadow-dark-color);
+    right: 0;
+    top: .8rem;
+    position: absolute;
+}
+
+.user_box_social_item{
+    display: inline;
+    align-items: center;
+    margin-top: 1.5rem;
+    border: 2px solid var(--shadow-dar-color);
+    padding: 3rem;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all .3s ease-in;
+}
