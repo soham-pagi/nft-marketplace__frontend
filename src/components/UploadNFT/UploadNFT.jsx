@@ -202,7 +202,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
                 <AiTwotonePropertySafety />
               </div>
               <input
-                type="text"
+                type="number"
                 placeholder="Price"
                 onChange={(e) => setPrice(e.target.value)}
               />
