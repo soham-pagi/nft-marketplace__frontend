@@ -32,7 +32,7 @@ const Brand = () => {
           </div> */}
         </div>
         <div className={Style.Brand_box_right}>
-          <img src={images.earn} alt="brand logo" width={700} height={500} />
+          <img src={images.earn} alt="brand logo" width={600} height={400} />
         </div>
       </div>
     </div>

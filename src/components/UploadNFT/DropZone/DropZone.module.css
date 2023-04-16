@@ -1,8 +1,9 @@
 
 
 .DropZone{
-    width: 100%;
-    margin-block: 3rem;
+    width: 30%;
+    margin-block: 2rem;
+    margin-left: 30%;
 }
 
 .DropZone_box{

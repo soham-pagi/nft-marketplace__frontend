@@ -39,7 +39,7 @@
 .aboutus_box_title p{
     font-size: 1.5rem;
     line-height: 1.2;
-    width: 40%;
+    width: 70%;
 }
 
 .aboutus_box_founder{
@@ -89,8 +89,9 @@
 }
 
 .aboutus_box_facts_box_info h3{
-    font-size: 4rem;
+    font-size: 3rem;
     line-height: 0;
+    text-align: center;
 }
 
 @media screen and (max-width: 35em) {

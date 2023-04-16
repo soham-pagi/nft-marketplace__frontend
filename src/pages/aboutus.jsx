@@ -71,8 +71,8 @@ const aboutus = () => {
                 <img
                   src={el.images}
                   alt={el.name}
-                  width={350}
-                  height={350}
+                  width={300}
+                  height={300}
                   className={Style.aboutus_box_founder_box_img_img}
                 />
                 <h3>{el.name}</h3>
