@@ -56,7 +56,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
   return (
     <div className={Style.upload}>
       <h1>Upload your NFT</h1>
-      <DropZone
+      {/* <DropZone
         title="JPG, PNG, WEBM , MAX 100MB"
         heading="Drag & drop file"
         subHeading="or Browse media on your device"
@@ -69,14 +69,14 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
         properties={properties}
         setImage={setImage}
         uploadToIPFS={uploadToIPFS}
-      />
+  /> */}
 
       <div className={Style.upload_box}>
         <div className={formStyle.Form_box_input}>
           <label htmlFor="nft">Item Name</label>
           <input
             type="text"
-            placeholder="shoaib bhai"
+            placeholder="eg. Doodles"
             className={formStyle.Form_box_input_userName}
             onChange={(e) => setName(e.target.value)}
           />
@@ -97,9 +97,9 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
           </div>
 
           <p className={Style.upload_box_input_para}>
-            Ciscrypt will include a link to this URL on this item's detail page,
-            so that users can click to learn more about it. You are welcome to
-            link to your own webpage with more details.
+            We will include a link to this URL on this item's detail page, so
+            that users can click to learn more about it. You are welcome to link
+            to your own webpage with more details.
           </p>
         </div>
 
@@ -176,11 +176,12 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
               </div>
               <input
                 type="text"
-                placeholder="165MB"
+                placeholder="10MB"
                 onChange={(e) => setFileSize(e.target.value)}
               />
             </div>
           </div>
+          {/*
           <div className={formStyle.Form_box_input}>
             <label htmlFor="Property">Property</label>
             <div className={formStyle.Form_box_input_box}>
@@ -194,6 +195,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
               />
             </div>
           </div>
+              */}
 
           <div className={formStyle.Form_box_input}>
             <label htmlFor="Price">Price</label>
