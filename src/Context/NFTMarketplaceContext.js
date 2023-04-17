@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { create as ipfsHttpClient } from "ipfs-http-client";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 
 // const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
