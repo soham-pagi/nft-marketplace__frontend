@@ -32,7 +32,7 @@ const LoginAndSignUp = () => {
               key={i + 1}
               onClick={() => setActiveBtn(i + 1)}
               className={`${Style.user_box_social_item} ${
-                activeBtn == i + 1 ? Style.active : ""
+                activeBtn === i + 1 ? Style.active : ""
               }`}
             >
               <img

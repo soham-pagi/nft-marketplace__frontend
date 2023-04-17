@@ -187,7 +187,7 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
       </div>
 
       <div className={Style.sideBar_button}>
-        {currentAccount == "" ? (
+        {currentAccount === "" ? (
           <Button btnName="connect" handleClick={() => connectWallet()} />
         ) : (
           {/* <Button

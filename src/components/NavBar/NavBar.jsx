@@ -58,12 +58,12 @@ const NavBar = () => {
   const openMenu = (e) => {
     const btnText = e.target.innerText;
 
-    if (btnText == "Discover") {
+    if (btnText === "Discover") {
       setDiscover(pre => !pre);
       setHelp(false);
       setNotification(false);
       setProfile(false);
-    } else if (btnText == "Help Center") {
+    } else if (btnText === "Help Center") {
       setDiscover(false);
       setHelp(pre => !pre);
       setNotification(false);
@@ -155,7 +155,7 @@ const NavBar = () => {
 
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
-            {currentAccount == "" ? (
+            {currentAccount === "" ? (
               <Button btnName="Connect" handleClick={() => connectWallet()} />
               
             ) : (

@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 //INTERNAL IMPORT
 import Style from "./SliderCard.module.css";
-import images from "../../../img";
-import LikeProfile from "../../LikeProfile/LikeProfile";
+// import images from "../../../img";
+// import LikeProfile from "../../LikeProfile/LikeProfile";
 
 const SliderCard = ({ el, i }) => {
   return (

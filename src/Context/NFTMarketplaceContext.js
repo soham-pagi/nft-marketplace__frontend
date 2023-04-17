@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Wenb3Modal from "web3modal";
 import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +66,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const checkIfWalletConnected = async () => {
     try {
       if (!window.ethereum)
-        return setOpenError(true), setError("Install MetaMask");
+        return (setOpenError(true), setError("Install MetaMask"));
 
       const accounts = await window.ethereum.request({
         method: "eth_accounts",
@@ -92,7 +92,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const connectWallet = async () => {
     try {
       if (!window.ethereum)
-        return setOpenError(true), setError("Install MetaMask");
+        return (setOpenError(true), setError("Install MetaMask"));
 
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -120,7 +120,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
   //---CREATENFT FUNCTION
   const createNFT = async (name, price, image, description, router) => {
     if (!name || !description || !price || !image)
-      return setError("Data Is Missing"), setOpenError(true);
+      return (setError("Data Is Missing"), setOpenError(true));
 
     const data = JSON.stringify({ name, description, image });
 
@@ -217,7 +217,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const contract = await connectingWithSmartContract();
 
       const data =
-        type == "fetchItemsListed"
+        type === "fetchItemsListed"
           ? await contract.fetchItemsListed()
           : await contract.fetchMyNFTs();
 
