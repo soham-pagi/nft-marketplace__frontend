@@ -10,7 +10,7 @@ import Style from "./UploadNFT.module.css";
 import formStyle from "../AccountPage/Form/Form.module.css";
 import images from "../../img";
 import { Button } from "../componentsindex";
-// import { DropZone } from "./uploadNFTIndex";
+import { DropZone } from "./uploadNFTIndex";
 
 const UploadNFT = ({ uploadToIPFS, createNFT }) => {
   // const uploadToIPFS = () => alert('Upload to IPFS');
