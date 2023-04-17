@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import Wenb3Modal from "web3modal";
+// import Wenb3Modal from "web3modal";
+import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { Buffer } from "buffer";
-
-// const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 //INTERNAL  IMPORT
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
@@ -16,6 +15,8 @@ const projectSecretKey = "SecretKey";
 const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString(
   "base64"
 )}`;
+
+// const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
 const subdomain = "your sub domain";
 
@@ -40,7 +41,7 @@ const fetchContract = (signerOrProvider) =>
 
 const connectingWithSmartContract = async () => {
   try {
-    const web3Modal = new Wenb3Modal();
+    const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
@@ -51,7 +52,7 @@ const connectingWithSmartContract = async () => {
   }
 };
 
-export const NFTMarketplaceContext = React.createContext();
+export const NFTMarketplaceContext = React.createContext("");
 
 export const NFTMarketplaceProvider = ({ children }) => {
   const titleData = "Discover, collect, and sell NFTs";
@@ -89,21 +90,21 @@ export const NFTMarketplaceProvider = ({ children }) => {
   }, []);
 
   //---CONNET WALLET FUNCTION
-  const connectWallet = async () => {
-    try {
-      if (!window.ethereum)
-        return setOpenError(true), setError("Install MetaMask");
+  // const connectWallet = async () => {
+  //   try {
+  //     if (!window.ethereum)
+  //       return setOpenError(true), setError("Install MetaMask");
 
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      setCurrentAccount(accounts[0]);
-      // window.location.reload();
-    } catch (error) {
-      setError("Error while connecting to wallet");
-      setOpenError(true);
-    }
-  };
+  //     const accounts = await window.ethereum.request({
+  //       method: "eth_requestAccounts",
+  //     });
+  //     setCurrentAccount(accounts[0]);
+  //     // window.location.reload();
+  //   } catch (error) {
+  //     setError("Error while connecting to wallet");
+  //     setOpenError(true);
+  //   }
+  // };
 
   //---UPLOAD TO IPFS FUNCTION
   const uploadToIPFS = async (file) => {
@@ -279,7 +280,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
     <NFTMarketplaceContext.Provider
       value={{
         checkIfWalletConnected,
-        connectWallet,
+        // connectWallet,
         uploadToIPFS,
         createNFT,
         fetchNFTs,

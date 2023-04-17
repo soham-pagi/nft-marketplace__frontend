@@ -2,15 +2,17 @@
 .uploadNFT{
     width: 100%;
     margin-block: 8rem;
+    margin-top: 10px;
 }
 
-.uploadNFT_box{
+.uploadNFT_box {
     width: 60%;
     margin:  0 auto;
 }
 
-.uploadNFT_box_heading{
+.uploadNFT_box_heading {
     border-bottom:  1px solid var(--shadow-dark-color);
+    padding: 20px;
 }
 
 .uploadNFT_box_heading h1{
@@ -24,9 +26,10 @@
     line-height: 1.2;
 }
 
-.uploadNFT_box_title{
-    border-bottom:  1px solid var(--shadow-dark-color);
+.uploadNFT_box_title {
+    border-bottom: 1px solid var(--shadow-dark-color);
     margin-top: 4rem;
+    margin-left: 20px;
 }
 
 .uploadNFT_box_title h2{

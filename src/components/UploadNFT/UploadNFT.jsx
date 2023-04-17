@@ -3,8 +3,7 @@ import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
 import { FaPercent } from "react-icons/fa";
 import { AiTwotonePropertySafety } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
-// import Image from "next/image";
-// import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 
 //INTERNAL IMPORT
 import Style from "./UploadNFT.module.css";
@@ -28,7 +27,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
   const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
 
-  // const router = useRouter();
+  const router = useNavigate();
 
   const categoryArry = [
     {
@@ -56,7 +55,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
   return (
     <div className={Style.upload}>
       <h1>Upload your NFT</h1>
-      {/* <DropZone
+      <DropZone
         title="JPG, PNG, WEBM , MAX 100MB"
         heading="Drag & drop file"
         subHeading="or Browse media on your device"
@@ -69,7 +68,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
         properties={properties}
         setImage={setImage}
         uploadToIPFS={uploadToIPFS}
-  /> */}
+      />
 
       <div className={Style.upload_box}>
         <div className={formStyle.Form_box_input}>
@@ -220,13 +219,13 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
                 name,
                 price,
                 image,
-                description
-                // router
-                // website,
-                // royalties,
-                // fileSize,
-                // category,
-                // properties
+                description,
+                router,
+                website,
+                royalties,
+                fileSize,
+                category,
+                properties
               )
             }
             classStyle={Style.upload_box_btn_style}
