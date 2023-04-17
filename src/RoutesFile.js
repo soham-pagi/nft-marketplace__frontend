@@ -5,6 +5,9 @@ import Collection from "./pages/collection";
 import SearchPage from "./pages/searchPage";
 import Author from "./pages/author";
 import Account from "./pages/account";
+import ContactUs from "./pages/contactus";
+import Login from "./pages/login";
+import SignUp from "./pages/signUp";
 import HeroSection from "./components/HeroSection/HeroSection";
 // import Home from './pages';
 import UploadNFTPage from "./pages/uploadNFTPage";
@@ -16,7 +19,9 @@ const RoutesFile = () => {
       <Routes>
         <Route path="/collection" element={<Collection />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        {/* <Route path='/contactus' element={<Contactus />}/> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/contactus" element={<ContactUs />}/>
         <Route path="/searchpage" element={<SearchPage />} />
         <Route path="/author" element={<Author />} />
         <Route path="/account" element={<Account />} />
