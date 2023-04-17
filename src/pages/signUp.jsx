@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { create } from "ipfs-http-client";
+// import { create } from "ipfs-http-client";
 
 //INTERNAL IMPORT
 import Style from "../styles/signUp.module.css";
@@ -24,8 +24,8 @@ const SignUp = () => {
     },
   ];
 
-  const [file, setFile] = useState(null);
-  const [urlArr, setUrlArr] = useState([]);
+  const [/*file,*/ setFile] = useState(null);
+  const [/*urlArr,*/ setUrlArr] = useState([]);
 
   // States for registration
   const [name, setName] = useState('');
@@ -150,7 +150,7 @@ const SignUp = () => {
               key={i + 1}
               onClick={() => setActiveBtn(i + 1)}
               className={`${Style.user_box_social_item} ${
-                activeBtn == i + 1 ? Style.active : ""
+                activeBtn === i + 1 ? Style.active : ""
               }`}
             >
               <img

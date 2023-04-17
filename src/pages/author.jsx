@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState/*, useEffect, useContext */} from "react";
 
 //INTERNAL IMPORT
 import Style from "../styles/author.module.css";
@@ -50,11 +50,11 @@ const Author = () => {
     },
   ];
 
-  const [collectiables, setCollectiables] = useState(true);
-  const [created, setCreated] = useState(false);
-  const [like, setLike] = useState(false);
-  const [follower, setFollower] = useState(false);
-  const [following, setFollowing] = useState(false);
+const [collectiables, /*setCollectiables*/] = useState(true);
+const [created, /*setCreated*/] = useState(false);
+const [like, /*setLike*/] = useState(false);
+const [follower, /*setFollower*/] = useState(false);
+  const [following, /*setFollowing*/] = useState(false);
   const currentAccount = "hello";
 
   //IMPORT SMART CONTRACT DATA
@@ -62,8 +62,8 @@ const Author = () => {
   //   NFTMarketplaceContext
   // );
 
-  const [nfts, setNfts] = useState([]);
-  const [myNFTs, setMyNFTs] = useState([]);
+const [nfts, /*setNfts*/] = useState([]);
+const [myNFTs, /*setMyNFTs*/] = useState([]);
 
   // useEffect(() => {
   //   // fetchMyNFTsOrListedNFTs("fetchItemsListed").then((items) => {

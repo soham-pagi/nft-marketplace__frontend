@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { AiFillFire, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import React, { useState, /*useEffect,*/ useCallback } from "react";
+import { AiFillFire, AiFillHeart/*, AiOutlineHeart*/ } from "react-icons/ai";
 import { MdVerified, MdTimer } from "react-icons/md";
 import { TbArrowBigLeftLines, TbArrowBigRightLine } from "react-icons/tb";
 

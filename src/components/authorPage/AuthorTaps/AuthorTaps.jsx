@@ -34,35 +34,35 @@ const AuthorTaps = ({
   const openTab = (e) => {
     const btnText = e.target.innerText;
     console.log(btnText);
-    if (btnText == "Listed NFTs") {
+    if (btnText === "Listed NFTs") {
       setCollectiables(true);
       setCreated(false);
       setFollower(false);
       setFollowing(false);
       setLike(false);
       setActiveBtn(1);
-    } else if (btnText == "Own NFT") {
+    } else if (btnText === "Own NFT") {
       setCollectiables(false);
       setCreated(true);
       setFollower(false);
       setFollowing(false);
       setLike(false);
       setActiveBtn(2);
-    } else if (btnText == "Liked") {
+    } else if (btnText === "Liked") {
       setCollectiables(false);
       setCreated(false);
       setFollower(false);
       setFollowing(false);
       setLike(true);
       setActiveBtn(3);
-    } else if (btnText == "Following") {
+    } else if (btnText === "Following") {
       setCollectiables(false);
       setCreated(false);
       setFollower(false);
       setFollowing(true);
       setLike(false);
       setActiveBtn(4);
-    } else if (btnText == "Followers") {
+    } else if (btnText === "Followers") {
       setCollectiables(false);
       setCreated(false);
       setFollower(true);
@@ -78,31 +78,31 @@ const AuthorTaps = ({
         <div className={Style.AuthorTaps_box_left}>
           <div className={Style.AuthorTaps_box_left_btn}>
             <button
-              className={`${activeBtn == 1 ? Style.active : ""}`}
+              className={`${activeBtn === 1 ? Style.active : ""}`}
               onClick={(e) => openTab(e)}
             >
               Listed NFTs
             </button>
             <button
-              className={`${activeBtn == 2 ? Style.active : ""}`}
+              className={`${activeBtn === 2 ? Style.active : ""}`}
               onClick={(e) => openTab(e)}
             >
               Own NFT
             </button>
             <button
-              className={`${activeBtn == 3 ? Style.active : ""}`}
+              className={`${activeBtn === 3 ? Style.active : ""}`}
               onClick={(e) => openTab(e)}
             >
               Liked
             </button>
             <button
-              className={`${activeBtn == 4 ? Style.active : ""}`}
+              className={`${activeBtn === 4 ? Style.active : ""}`}
               onClick={(e) => openTab(e)}
             >
               Following
             </button>
             <button
-              className={`${activeBtn == 5 ? Style.active : ""}`}
+              className={`${activeBtn === 5 ? Style.active : ""}`}
               onClick={(e) => openTab(e)}
             >
               Followers
@@ -128,7 +128,7 @@ const AuthorTaps = ({
                   className={Style.AuthorTaps_box_right_list_item}
                 >
                   <p>{el}</p>
-                  <span>{selectedMenu == el && <TiTick />}</span>
+                  <span>{selectedMenu === el && <TiTick />}</span>
                 </div>
               ))}
             </div>

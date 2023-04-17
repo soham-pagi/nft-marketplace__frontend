@@ -45,7 +45,7 @@ const Slider = () => {
     const { current } = dragSlider;
     const scrollAmount = window.innerWidth > 1800 ? 270 : 210;
 
-    if (direction == "left") {
+    if (direction === "left") {
       current.scrollLeft -= scrollAmount;
     } else {
       current.scrollLeft += scrollAmount;

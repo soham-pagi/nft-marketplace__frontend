@@ -10,7 +10,7 @@ import Style from "./UploadNFT.module.css";
 import formStyle from "../AccountPage/Form/Form.module.css";
 import images from "../../img";
 import { Button } from "../componentsindex";
-import { DropZone } from "./uploadNFTIndex";
+// import { DropZone } from "./uploadNFTIndex";
 
 const UploadNFT = ({ uploadToIPFS, createNFT }) => {
   // const uploadToIPFS = () => alert('Upload to IPFS');
@@ -128,7 +128,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
             {categoryArry.map((el, i) => (
               <div
                 className={`${Style.upload_box_slider} ${
-                  active == i + 1 ? Style.active : ""
+                  active === i + 1 ? Style.active : ""
                 }`}
                 key={i + 1}
                 onClick={() => (setActive(i + 1), setCategory(el.category))}

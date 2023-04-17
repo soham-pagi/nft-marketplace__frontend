@@ -67,7 +67,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const checkIfWalletConnected = async () => {
     try {
       if (!window.ethereum)
-        return setOpenError(true), setError("Install MetaMask");
+        return (setOpenError(true), setError("Install MetaMask"));
 
       const accounts = await window.ethereum.request({
         method: "eth_accounts",
@@ -218,7 +218,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const contract = await connectingWithSmartContract();
 
       const data =
-        type == "fetchItemsListed"
+        type === "fetchItemsListed"
           ? await contract.fetchItemsListed()
           : await contract.fetchMyNFTs();
 
