@@ -24,9 +24,6 @@ const SignUp = () => {
     },
   ];
 
-  const [/*file,*/ setFile] = useState(null);
-  const [/*urlArr,*/ setUrlArr] = useState([]);
-
   // States for registration
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,18 +32,6 @@ const SignUp = () => {
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
-
-  const retrieveFile = (e) => {
-    const data = e.target.files[0];
-    const reader = new window.FileReader();
-    reader.readAsArrayBuffer(data);
-
-    reader.onloadend = () => {
-      setFile(Buffer(reader.result));
-    };
-
-    e.preventDefault();
-  };
 
   // Handling the name change
   const handleName = (e) => {
@@ -128,8 +113,7 @@ const SignUp = () => {
                 <a href="#">Forgot password?</a>
               </p>
             </label>
-            <input type="password" onChange={handlePassword} placeholder="********"
-          value={password} />
+            <input type="password" onChange={handlePassword} placeholder="" value={password} />
         </div>
         
         <div className="messages">
@@ -165,34 +149,8 @@ const SignUp = () => {
         </div>
 
       </div>
-
-      {/* <div className={Style.signup_display}>
-        {urlArr.length !== 0
-          ? urlArr.map((el) => <img src={el} alt="nfts" />)
-          : <h3>Upload data</h3>}
-      </div> */}
     </div>
   );
 };
 
 export default SignUp;
-
-// import React from "react";
-
-// //INTERNAL IMPORT
-// import Style from "../styles/signUp.module.css";
-// import SignUpForm from "../components/AccountPage/SignUpForm/SignUpForm";
-// //import LoginAndSignUp from "../components/loginAndSignUp/LoginAndSignUp";
-
-// const SignUp = () => {
-//   return (
-//     <div className={Style.signup}>
-//       <div className={Style.signup_box}>
-//         <h1>SignUp</h1>
-//         <SignUpForm />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SignUp;
