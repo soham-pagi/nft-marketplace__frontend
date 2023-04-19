@@ -8,20 +8,20 @@ import images from "../img";
 const aboutus = () => {
   const founderArray = [
     {
-      name: "TN",
-      position: "abc",
+      name: "Tanmay Nivaskar",
+      position: "Founder",
       images: images.service1,
     },
     {
-      name: "SP",
-      position: "xyz",
+      name: "Soham Pagi",
+      position: "Co-Founder",
       images: images.provider2,
     },
     {
-      name: "SN",
-      position: "abc",
+      name: "Sejal Naik",
+      position: "Co-Founder",
       images: images.provider3,
-    }
+    },
   ];
 
   const factsArray = [
