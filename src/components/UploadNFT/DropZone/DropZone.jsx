@@ -7,8 +7,6 @@ import images from "../../../img";
 
 const DropZone = ({
   title,
-  heading,
-  subHeading,
   name,
   website,
   description,
@@ -21,12 +19,31 @@ const DropZone = ({
 }) => {
   const [fileUrl, setFileUrl] = useState(null);
 
-  const onDrop = useCallback(async (acceptedFile) => {
-    const url = await uploadToIPFS(acceptedFile[0]);
-    setFileUrl(url);
-    setImage(url);
-    console.log(url);
-  });
+  // function uploadToIPFS() {
+  //   console.log("upload to ipfs");
+  // }
+
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      if (acceptedFiles.length === 0) {
+        console.log("Invalid file type.");
+        return;
+      }
+
+      const url = await uploadToIPFS(acceptedFiles[0]);
+      setFileUrl(url);
+      setImage(url);
+      console.log({ fileUrl });
+    },
+    [uploadToIPFS, setFileUrl, setImage]
+  );
+
+  // const onDrop = useCallback(async (acceptedFile) => {
+  //   const url = await uploadToIPFS(acceptedFile[0]);
+  //   setFileUrl(url);
+  //   setImage(url);
+  //   console.log(url);
+  // });
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -50,8 +67,8 @@ const DropZone = ({
               className={Style.DropZone_box_input_img_img}
             />
           </div>
-          <p>{heading}</p>
-          <p>{subHeading}</p>
+          <p>Drag & drop file</p>
+          <p>or Browse media on your device</p>
         </div>
       </div>
 

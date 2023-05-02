@@ -5,7 +5,7 @@ import { DiJqueryLogo } from "react-icons/di";
 import { MdNotifications } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
-// import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 
 //INTERNAL IMPORT
 import Style from "./NavBar.module.css";
@@ -13,59 +13,37 @@ import { Discover, HelpCenter, Profile, SideBar } from "./index";
 import { Button, Error } from "../componentsindex";
 import images from "../../img";
 import { Notification } from "./index";
-import { UploadNFT } from "../UploadNFT/uploadNFTIndex";
 
 //IMPORT FROM SMART CONTRACT
-// import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
+import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
-const NavBar = () => {
+function NavBar() {
   //----USESTATE COMPONNTS
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-  var [currentAccount, setCurrentAccount] = useState("");
-  const [walletAddress, setWalletAddress] = useState("");
+
+  const navigate = useNavigate();
+
+  const { currentAccount, connectWallet } = useContext(NFTMarketplaceContext);
+  // connectWallet();
+  // console.log(connectWallet);
 
   // const router = useRouter();
-
-  async function connectWallet() {
-    console.log('Requesting account...');
-
-    // ❌ Check if Meta Mask Extension exists 
-    if(window.ethereum) {
-      console.log('detected');
-
-      try {
-        const accounts = await window.ethereum.request({method: "eth_requestAccounts"});
-        setWalletAddress(accounts[0]);
-        console.log({walletAddress});
-        setCurrentAccount(accounts[0]);
-        console.log({currentAccount});
-      } catch (error) {
-        console.log('Error connecting...');
-        console.log(error);
-      }
-
-      
-
-    } else {
-      alert('Meta Mask not detected');
-    }
-  }
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
 
     if (btnText === "Discover") {
-      setDiscover(pre => !pre);
+      setDiscover((pre) => !pre);
       setHelp(false);
       setNotification(false);
       setProfile(false);
     } else if (btnText === "Help Center") {
       setDiscover(false);
-      setHelp(pre => !pre);
+      setHelp((pre) => !pre);
       setNotification(false);
       setProfile(false);
     } else {
@@ -77,14 +55,14 @@ const NavBar = () => {
   };
 
   const openNotification = () => {
-    setNotification(pre => !pre);
+    setNotification((pre) => !pre);
     setDiscover(false);
     setHelp(false);
     setProfile(false);
   };
 
   const openProfile = () => {
-    setProfile(pre => !pre);
+    setProfile((pre) => !pre);
     setHelp(false);
     setDiscover(false);
   };
@@ -97,27 +75,23 @@ const NavBar = () => {
     }
   };
 
-  //SMART CONTRACT SECTION
-  // const { currentAccount, connectWallet, openError } = useContext(
-  //   NFTMarketplaceContext
-  // );
-
   const handleSearch = () => {
-    const searchQuery = document.getElementById('search-nft').value;
-    window.location.replace(`/searchPage?${searchQuery}`);
-  }
+    const searchQuery = document.getElementById("search-nft").value;
+    // window.location.replace(`/searchPage?${searchQuery}`);
+    navigate(`/searchPage?${searchQuery}`);
+  };
 
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
           <div className={Style.logo}>
-            <DiJqueryLogo onClick={() => window.location.replace('/')} />
+            <DiJqueryLogo onClick={() => navigate("/")} />
           </div>
           <div className={Style.navbar_container_left_box_input}>
             <div className={Style.navbar_container_left_box_input_box}>
               <input id="search-nft" type="text" placeholder="Search NFT" />
-              <BsSearch onClick={ handleSearch } className={Style.search_icon} />
+              <BsSearch onClick={handleSearch} className={Style.search_icon} />
             </div>
           </div>
         </div>
@@ -157,17 +131,21 @@ const NavBar = () => {
           <div className={Style.navbar_container_right_button}>
             {currentAccount === "" ? (
               <Button btnName="Connect" handleClick={() => connectWallet()} />
-              
             ) : (
               <Button
                 btnName="Create"
-                // handleClick={() => router.push("/uploadNFT")}
-                handleClick={() => window.location.replace("/uploadNFT")}
-                // handleClick={<UploadNFT/>}
-                
+                handleClick={() => navigate("/uploadNFT")}
               />
             )}
-          {console.log({currentAccount})}
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                connectWallet();
+              }}
+            >
+              Test Error
+            </button>
           </div>
 
           {/* USER PROFILE */}
@@ -211,6 +189,6 @@ const NavBar = () => {
       {/* {openError && <Error />} */}
     </div>
   );
-};
+}
 
 export default NavBar;

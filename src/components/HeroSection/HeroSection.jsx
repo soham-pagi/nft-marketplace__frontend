@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-// import { useRouter } from "next/router";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //INTERNAL IMPORT
 import Style from "./HeroSection.module.css";
@@ -13,8 +12,6 @@ import Button from "../Button/Button";
 // import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 const HeroSection = () => {
-  // const { titleData } = useContext(NFTMarketplaceContext);
-  // const router = useRouter();
   const navigate = useNavigate();
 
   return (
@@ -29,16 +26,11 @@ const HeroSection = () => {
           </p>
           <Button
             btnName="Start Your Search"
-            handleClick={() => window.location.replace('/searchPage')}
+            handleClick={() => navigate("/searchPage")}
           />
         </div>
         <div className={Style.heroSection_box_right}>
-          <img
-            src={images.hero}
-            alt="Hero section"
-            width={600}
-            height={600}
-          />
+          <img src={images.hero} alt="Hero section" width={600} height={600} />
         </div>
       </div>
     </div>

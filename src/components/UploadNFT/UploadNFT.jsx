@@ -13,6 +13,7 @@ import { Button } from "../componentsindex";
 import { DropZone } from "./uploadNFTIndex";
 
 const UploadNFT = ({ uploadToIPFS, createNFT }) => {
+  // console.log("here", uploadToIPFS, createNFT);
   // const uploadToIPFS = () => alert('Upload to IPFS');
   // const createNFT = () => alert('Create NFT');
 
@@ -57,8 +58,6 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
       <h1>Upload your NFT</h1>
       <DropZone
         title="JPG, PNG, WEBM , MAX 100MB"
-        heading="Drag & drop file"
-        subHeading="or Browse media on your device"
         name={name}
         website={website}
         description={description}
@@ -214,7 +213,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
         <div className={Style.upload_box_btn}>
           <Button
             btnName="Upload"
-            handleClick={async () =>
+            handleClick={async () => {
               createNFT(
                 name,
                 price,
@@ -226,13 +225,16 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
                 fileSize,
                 category,
                 properties
-              )
-            }
+              );
+            }}
             classStyle={Style.upload_box_btn_style}
           />
           <Button
             btnName="Preview"
-            handleClick={() => {}}
+            handleClick={() => {
+              // router("/search");
+              console.log("preview");
+            }}
             classStyle={Style.upload_box_btn_style}
           />
         </div>

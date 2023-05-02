@@ -6,7 +6,8 @@ import { TiTick } from "react-icons/ti";
 //INTERNAL IMPORT
 import Style from "./FollowerTabCard.module.css";
 import images from "../../../img";
-const FollowerTabCard = ({ i, el }) => {
+
+function FollowerTabCard({ i, el }) {
   const [following, setFollowing] = useState(false);
 
   const followMe = () => {
@@ -16,6 +17,7 @@ const FollowerTabCard = ({ i, el }) => {
       setFollowing(false);
     }
   };
+
   return (
     <div className={Style.FollowerTabCard}>
       <div className={Style.FollowerTabCard_rank}>
@@ -74,6 +76,6 @@ const FollowerTabCard = ({ i, el }) => {
       </div>
     </div>
   );
-};
+}
 
 export default FollowerTabCard;

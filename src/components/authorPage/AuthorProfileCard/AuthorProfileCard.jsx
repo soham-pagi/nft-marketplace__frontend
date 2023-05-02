@@ -19,7 +19,7 @@ import Style from "./AuthorProfileCard.module.css";
 import images from "../../../img";
 import { Button } from "../../componentsindex";
 
-const AuthorProfileCard = ({ currentAccount }) => {
+function AuthorProfileCard({ currentAccount }) {
   const [share, setShare] = useState(false);
   const [report, setReport] = useState(false);
 
@@ -157,6 +157,6 @@ const AuthorProfileCard = ({ currentAccount }) => {
       </div>
     </div>
   );
-};
+}
 
 export default AuthorProfileCard;
