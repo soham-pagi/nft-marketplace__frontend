@@ -1,20 +1,20 @@
 import React from "react";
-// import Image from "next/image";
 
 //INTERNAL IMPORT
 import Style from "./Loader.module.css";
 import images from "../../img";
 
-const Loader = () => {
+const Loader = ({ active = true }) => {
   return (
     <div className={Style.Loader}>
+      {active && <div className={Style.Loader_overlay}></div>}
       <div className={Style.Loader_box}>
         <div className={Style.Loader_box_img}>
           <img
             src={images.loader}
             alt="loader"
-            width={200}
-            height={200}
+            width={100}
+            height={100}
             className={Style.Loader_box_img_img}
             style={{ objectFit: "cover" }}
           />

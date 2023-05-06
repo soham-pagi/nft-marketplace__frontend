@@ -1,53 +1,55 @@
 import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
+// COMPONENT IMPORT
+import { Loader } from "../../componentsindex";
+
 //INTRNAL IMPORT
 import Style from "./DropZone.module.css";
 import images from "../../../img";
 
-const DropZone = ({
-  title,
+function DropZone({
   name,
   website,
   description,
   royalties,
   fileSize,
+  setFileSize,
   category,
   properties,
   uploadToIPFS,
   setImage,
-}) => {
-  const [fileUrl, setFileUrl] = useState(null);
+}) {
+  const [fileUrl, setFileUrl] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
-  // function uploadToIPFS() {
-  //   console.log("upload to ipfs");
-  // }
+  const onDrop = useCallback(async (acceptedFiles) => {
+    if (acceptedFiles.length === 0) {
+      console.log("Invalid file type.");
+      return;
+    }
 
-  const onDrop = useCallback(
-    async (acceptedFiles) => {
-      if (acceptedFiles.length === 0) {
-        console.log("Invalid file type.");
-        return;
-      }
+    const imageFile = acceptedFiles[0];
+    setImage(imageFile);
+    setFileSize((imageFile.size / (1024 * 1024)).toFixed(2));
+    console.log(imageFile);
 
-      const url = await uploadToIPFS(acceptedFiles[0]);
-      setFileUrl(url);
-      setImage(url);
-      console.log({ fileUrl });
-    },
-    [uploadToIPFS, setFileUrl, setImage]
-  );
+    // setIsUploading(true);
+    // const url = await uploadToIPFS(imageFile);
+    // const url = "test";
+    // setIsUploading(false);
 
-  // const onDrop = useCallback(async (acceptedFile) => {
-  //   const url = await uploadToIPFS(acceptedFile[0]);
-  //   setFileUrl(url);
-  //   setImage(url);
-  //   console.log(url);
-  // });
+    // setFileUrl(url);
+    // setImage(url);
+    // setFileSize()
+    // console.log({ url });
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/*",
+    accept: {
+      "image/*": [".jpeg", ".jpg", ".png"],
+    },
     maxSize: 5000000,
   });
 
@@ -56,7 +58,7 @@ const DropZone = ({
       <div className={Style.DropZone_box} {...getRootProps()}>
         <input {...getInputProps()} />
         <div className={Style.DropZone_box_input}>
-          <p>{title}</p>
+          <p>JPG, JPEG, PNG, MAX 100MB</p>
           <div className={Style.DropZone_box_input_img}>
             <img
               src={images.upload}
@@ -80,11 +82,11 @@ const DropZone = ({
             <div className={Style.DropZone_box_aside_box_preview}>
               <div className={Style.DropZone_box_aside_box_preview_one}>
                 <p>
-                  <samp>NFT Name:</samp>
+                  <span>NFT Name:</span>
                   {name || ""}
                 </p>
                 <p>
-                  <samp>Website:</samp>
+                  <span>Website:</span>
                   {website || ""}
                 </p>
               </div>
@@ -103,11 +105,7 @@ const DropZone = ({
                 </p>
                 <p>
                   <span>FileSize</span>
-                  {fileSize || ""}
-                </p>
-                <p>
-                  <span>Properties</span>
-                  {properties || ""}
+                  {fileSize + "MB" || ""}
                 </p>
                 <p>
                   <span>Category</span>
@@ -120,6 +118,6 @@ const DropZone = ({
       )}
     </div>
   );
-};
+}
 
 export default DropZone;

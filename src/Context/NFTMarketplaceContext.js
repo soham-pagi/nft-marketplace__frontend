@@ -9,8 +9,9 @@ import { apiKey, apiSecret } from "../constants";
 // Create context
 const NFTMarketplaceContext = createContext();
 
+// COMPONENT STARTS HERE
 function NFTMarketplaceProvider({ children }) {
-  const titleData = "Discover, collect, and sell NFTs";
+  const [isLoading, setIsLoading] = useState(false);
 
   /// wallet state
   const [currentAccount, setCurrentAccount] = useState("");
@@ -22,14 +23,17 @@ function NFTMarketplaceProvider({ children }) {
 
   async function connectWallet() {
     try {
-      if (window.ethereum) {
+      if (!window.ethereum) {
         console.log("not installed");
-        setOpenError(true);
+
+        // need to fix
         setError("Install MetaMask");
+        setOpenError(true);
       } else {
         const accounts = await window.ethereum.request({
           method: "eth_accounts",
         });
+
         console.log(accounts);
 
         if (accounts.length) {
@@ -54,7 +58,6 @@ function NFTMarketplaceProvider({ children }) {
     );
 
   //---CONNECTING WITH SMART CONTRACT
-
   const connectingWithSmartContract = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -68,11 +71,15 @@ function NFTMarketplaceProvider({ children }) {
   };
 
   //---UPLOAD TO IPFS FUNCTION
-  const uploadToIPFS = async (file) => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
+  const uploadToIPFS = async (image) => {
+    console.log("In uploadToIPFS");
 
+    try {
+      console.log("In try block", image);
+      const formData = new FormData();
+      formData.append("file", image);
+
+      console.log("above axios");
       const resFile = await axios({
         method: "post",
         url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
@@ -84,30 +91,44 @@ function NFTMarketplaceProvider({ children }) {
         },
       });
 
+      console.log("hello", resFile);
+
       const imageLink = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
       console.log(imageLink);
       return imageLink;
     } catch (error) {
-      // console.log("Error sending File to IPFS: ");
-      // console.log(error);
-      setError("Error Uploading to IPFS");
-      setOpenError(true);
+      console.log("Error sending File to IPFS: ");
+      console.log(error);
+      // setError("Error Uploading to IPFS");
+      // setOpenError(true);
     }
   };
 
   //---CREATENFT FUNCTION
-  const createNFT = async (name, price, image, description, router) => {
-    if (!name || !description || !price || !image)
-      return setError("Data Is Missing"), setOpenError(true);
+  const createNFT = async (
+    name,
+    price,
+    image,
+    description,
+    website,
+    royalities,
+    category,
+    properties
+  ) => {
+    // if (!name || !description || !price || !image)
+    //   return setError("Data Is Missing"), setOpenError(true);
 
-    const data = JSON.stringify({ name, description, image });
-    console.log(data);
+    // const data = JSON.stringify({ name, description, image });
+    // console.log(data);
 
     try {
+      setIsLoading(true);
       const url = await uploadToIPFS(image);
+      setIsLoading(false);
       console.log(url);
 
       await createSale(url, price);
+      console.log({ url, price });
       // router("/searchPage");
     } catch (error) {
       setError("Error while creating NFT");
@@ -122,8 +143,11 @@ function NFTMarketplaceProvider({ children }) {
       const price = ethers.utils.parseUnits(formInputPrice, "ether");
 
       const contract = await connectingWithSmartContract();
+      window.contract = contract;
+      console.log({ contract });
 
       const listingPrice = await contract.getListingPrice();
+      console.log({ listingPrice });
 
       const transaction = !isReselling
         ? await contract.createToken(url, price, {
@@ -133,7 +157,8 @@ function NFTMarketplaceProvider({ children }) {
             value: listingPrice.toString(),
           });
 
-      await transaction.wait();
+      const receipt = await transaction.wait();
+      console.log({ receipt });
     } catch (error) {
       setError("error while creating sale");
       setOpenError(true);
@@ -141,23 +166,36 @@ function NFTMarketplaceProvider({ children }) {
   };
 
   //--FETCHNFTS FUNCTION
-
   const fetchNFTs = async () => {
     try {
-      const provider = new ethers.providers.JsonRpcProvider();
+      const provider = new ethers.providers.JsonRpcProvider(
+        "http://127.0.0.1:7545"
+      );
+
       const contract = fetchContract(provider);
+      window.c = contract;
 
       const data = await contract.fetchMarketItems();
-      console.log(data);
 
       const items = await Promise.all(
         data.map(
           async ({ tokenId, seller, owner, price: unformattedPrice }) => {
             const tokenURI = await contract.tokenURI(tokenId);
+            // console.log({ tokenId, tokenURI, seller, owner, unformattedPrice });
 
             const {
               data: { image, name, description },
             } = await axios.get(tokenURI);
+
+            const x = await axios.get(tokenURI);
+            console.log({ x });
+
+            // const {
+            //   data: { image, name, description },
+            // } = await fetch(tokenURI);
+
+            console.log({ image, name, description });
+
             const price = ethers.utils.formatUnits(
               unformattedPrice.toString(),
               "ether"
@@ -184,10 +222,6 @@ function NFTMarketplaceProvider({ children }) {
       setOpenError(true);
     }
   };
-
-  useEffect(() => {
-    fetchNFTs();
-  }, []);
 
   //--FETCHING MY NFT OR LISTED NFTs
   const fetchMyNFTsOrListedNFTs = async (type) => {
@@ -231,10 +265,6 @@ function NFTMarketplaceProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    fetchMyNFTsOrListedNFTs();
-  }, []);
-
   //---BUY NFTs FUNCTION
   const buyNFT = async (nft) => {
     try {
@@ -246,7 +276,7 @@ function NFTMarketplaceProvider({ children }) {
       });
 
       await transaction.wait();
-      // router("/author");
+      // navigate("/author");
     } catch (error) {
       setError("Error While buying NFT");
       setOpenError(true);
@@ -257,8 +287,6 @@ function NFTMarketplaceProvider({ children }) {
     <NFTMarketplaceContext.Provider
       value={{
         connectWallet,
-        // checkIfWalletConnected,
-        // connectWallet,
         uploadToIPFS,
         createNFT,
         fetchNFTs,
@@ -266,11 +294,12 @@ function NFTMarketplaceProvider({ children }) {
         buyNFT,
         createSale,
         currentAccount,
-        titleData,
         openError,
         setOpenError,
         error,
         setError,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

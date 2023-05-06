@@ -138,15 +138,6 @@ function NavBar() {
               />
             )}
           </div>
-          <div>
-            <button
-              onClick={() => {
-                connectWallet();
-              }}
-            >
-              Test Error
-            </button>
-          </div>
 
           {/* USER PROFILE */}
           <div className={Style.navbar_container_right_profile_box}>

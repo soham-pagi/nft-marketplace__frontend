@@ -1,8 +1,18 @@
-
-
+.Loader_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+  
 .Loader{
-    width: 100%;
-    margin-block: 4rem;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .Loader_box{
@@ -14,7 +24,8 @@
 .Loader_box_img{
     margin-bottom: 14rem;
     margin-top: -2rem;
-    animation:  mymove 4s infinite;
+    animation: mymove 4s infinite;
+    position: relative;
 }
 
 @keyframes mymove {
@@ -23,4 +34,9 @@
 
 .Loader_box_img_img{
     border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
 }

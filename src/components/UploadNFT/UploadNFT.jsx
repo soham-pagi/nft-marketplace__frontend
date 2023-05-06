@@ -12,23 +12,20 @@ import images from "../../img";
 import { Button } from "../componentsindex";
 import { DropZone } from "./uploadNFTIndex";
 
-const UploadNFT = ({ uploadToIPFS, createNFT }) => {
-  // console.log("here", uploadToIPFS, createNFT);
-  // const uploadToIPFS = () => alert('Upload to IPFS');
-  // const createNFT = () => alert('Create NFT');
-
+function UploadNFT({ createNFT }) {
+  const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [active, setActive] = useState(0);
-  const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
   const [royalties, setRoyalties] = useState("");
-  const [fileSize, setFileSize] = useState("");
+  const [fileSize, setFileSize] = useState(0);
   const [category, setCategory] = useState(0);
   const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
 
-  const router = useNavigate();
+  const navigate = useNavigate();
+  // console.log(createNFT);
 
   const categoryArry = [
     {
@@ -57,16 +54,15 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
     <div className={Style.upload}>
       <h1>Upload your NFT</h1>
       <DropZone
-        title="JPG, PNG, WEBM , MAX 100MB"
         name={name}
         website={website}
         description={description}
         royalties={royalties}
         fileSize={fileSize}
+        setFileSize={setFileSize}
         category={category}
         properties={properties}
         setImage={setImage}
-        uploadToIPFS={uploadToIPFS}
       />
 
       <div className={Style.upload_box}>
@@ -74,7 +70,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
           <label htmlFor="nft">Item Name</label>
           <input
             type="text"
-            placeholder="eg. Doodles"
+            placeholder="Eg. Doodles"
             className={formStyle.Form_box_input_userName}
             onChange={(e) => setName(e.target.value)}
           />
@@ -86,7 +82,6 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
             <div className={formStyle.Form_box_input_box_icon}>
               <MdOutlineHttp />
             </div>
-
             <input
               type="text"
               placeholder="website"
@@ -175,7 +170,8 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
               <input
                 type="text"
                 placeholder="10MB"
-                onChange={(e) => setFileSize(e.target.value)}
+                value={fileSize + " MB"}
+                readOnly
               />
             </div>
           </div>
@@ -209,7 +205,6 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
             </div>
           </div>
         </div>
-
         <div className={Style.upload_box_btn}>
           <Button
             btnName="Upload"
@@ -219,10 +214,8 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
                 price,
                 image,
                 description,
-                router,
                 website,
                 royalties,
-                fileSize,
                 category,
                 properties
               );
@@ -241,6 +234,6 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
       </div>
     </div>
   );
-};
+}
 
 export default UploadNFT;

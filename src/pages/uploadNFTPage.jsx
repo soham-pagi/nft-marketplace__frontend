@@ -3,17 +3,17 @@ import React, { /*useEffect, useState,*/ useContext } from "react";
 //INTERNAL IMPORT
 import Style from "../styles/upload-nft.module.css";
 import { UploadNFT } from "../components/UploadNFT/uploadNFTIndex";
+import { Loader } from "../components/componentsindex";
 
 //SMART CONTRACT IMPORT
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
 const UploadNFTPage = () => {
-  const { uploadToIPFS, createNFT } = useContext(NFTMarketplaceContext);
-
-  console.log("context", uploadToIPFS, createNFT);
+  const { isLoading, createNFT } = useContext(NFTMarketplaceContext);
 
   return (
     <div className={Style.uploadNFT}>
+      {isLoading && <Loader active={isLoading} />}
       <div className={Style.uploadNFT_box_heading}>
         <h1>Create New NFT</h1>
         <p>
@@ -26,7 +26,7 @@ const UploadNFTPage = () => {
         <h2>Image</h2>
         <p>File types supported: JPG, PNG, Max size: 10 MB</p>
       </div>
-      <UploadNFT uploadToIPFS={uploadToIPFS} createNFT={createNFT} />
+      <UploadNFT createNFT={createNFT} />
     </div>
   );
 };

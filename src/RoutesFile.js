@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import AboutUs from "./pages/aboutus";
-import Collection from "./pages/collection";
+import CollectionPage from "./pages/collection";
 import SearchPage from "./pages/searchPage";
 import Author from "./pages/author";
 import Account from "./pages/account";
@@ -21,7 +21,7 @@ const RoutesFile = () => {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/collection" element={<Collection />} />
+          <Route path="/collection" element={<CollectionPage />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<SignUp />} />

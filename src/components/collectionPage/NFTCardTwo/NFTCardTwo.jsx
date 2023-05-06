@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Image from "next/image";
 import { BsImage } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -9,7 +9,7 @@ import { MdVerified, MdTimer } from "react-icons/md";
 import Style from "./NFTCardTwo.module.css";
 import { LikeProfile } from "../../componentsindex";
 
-const NFTCardTwo = ({ NFTData }) => {
+const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
   const [like, setLike] = useState(false);
   const [likeInc, setLikeInc] = useState(21);
 
@@ -22,6 +22,9 @@ const NFTCardTwo = ({ NFTData }) => {
       setLikeInc(23 + 1);
     }
   };
+
+  const data = fetchNFTs();
+  console.log("here", data);
 
   return (
     <div className={Style.NFTCardTwo}>
