@@ -9,13 +9,13 @@ import { MdVerified, MdTimer } from "react-icons/md";
 import Style from "./NFTCardTwo.module.css";
 import { LikeProfile } from "../../componentsindex";
 
-const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
+const NFTCardTwo = ({ fetchNFTs }) => {
   const [like, setLike] = useState(false);
   const [likeInc, setLikeInc] = useState(21);
-  const [nft, setNft] = useState([]);
+  const [nftData, setNftData] = useState([]);
 
   useEffect(() => {
-    fetchNFTs().then((data) => setNft(data));
+    fetchNFTs().then((data) => setNftData(data));
   }, []);
 
   const likeNFT = () => {
@@ -30,9 +30,9 @@ const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
 
   return (
     <div className={Style.NFTCardTwo}>
-      {nft.map((el, i) => (
-        <a href={{ pathname: "/NFT-details", query: el }} key={i + 1}>
-          <div className={Style.NFTCardTwo_box} key={i + 1}>
+      {nftData.map((nft, i) => (
+        <a href={{ pathname: "/NFT-details", query: nft }} key={i}>
+          <div className={Style.NFTCardTwo_box} key={i}>
             <div className={Style.NFTCardTwo_box_like}>
               <div className={Style.NFTCardTwo_box_like_box}>
                 <div className={Style.NFTCardTwo_box_like_box_box}>
@@ -47,11 +47,10 @@ const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
 
             <div className={Style.NFTCardTwo_box_img}>
               <img
-                src={el.tokenURI}
+                src={nft.tokenURI}
                 alt="NFT"
                 width={400}
                 height={400}
-                style={{ objectFit: "cover" }}
                 className={Style.NFTCardTwo_box_img_img}
               />
             </div>
@@ -59,7 +58,7 @@ const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
             <div className={Style.NFTCardTwo_box_info}>
               <div className={Style.NFTCardTwo_box_info_left}>
                 <LikeProfile />
-                <p>{el.name}</p>
+                <p>{nft.name}</p>
               </div>
               <small>4{i + 2}</small>
             </div>
@@ -67,7 +66,7 @@ const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
             <div className={Style.NFTCardTwo_box_price}>
               <div className={Style.NFTCardTwo_box_price_box}>
                 <small>Current Bid</small>
-                <p>{el.price || i + 4} ETH</p>
+                <p>{nft.price || i + 4} ETH</p>
               </div>
               <p className={Style.NFTCardTwo_box_price_stock}>
                 <MdTimer /> <span>{i + 1} hours left</span>
