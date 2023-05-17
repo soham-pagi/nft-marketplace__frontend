@@ -77,21 +77,41 @@ function NFTMarketplaceProvider({ children }) {
     try {
       console.log("In try block", image);
       const formData = new FormData();
+
+      // formData.append("pinataMetadata", JSON.stringify(metadata));
       formData.append("file", image);
 
       console.log("above axios");
       const resFile = await axios({
         method: "post",
         url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        maxBodyLength: "Infinity",
         data: formData,
         headers: {
+          "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
           pinata_api_key: `${apiKey}`,
           pinata_secret_api_key: `${apiSecret}`,
-          "Content-Type": "multipart/form-data",
+          Accept: "text/plain",
         },
       });
 
-      console.log("hello", resFile);
+      // axios
+      //   .post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
+      //     maxContentLength: "Infinity",
+      //     headers: {
+      //       "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+      //       pinata_api_key: "YOUR_API_KEY",
+      //       pinata_secret_api_key: "YOUR_SECRET_API_KEY",
+      //     },
+      //   })
+      //   .then((response) => {
+      //     console.log("NFT uploaded successfully:", response.data.IpfsHash);
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error while uploading NFT:", error);
+      //   });
+
+      console.log("res.data", resFile.data);
 
       const imageLink = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
       console.log(imageLink);
@@ -127,7 +147,7 @@ function NFTMarketplaceProvider({ children }) {
       setIsLoading(false);
       console.log(url);
 
-      await createSale(url, price);
+      await createSale(url, price, name, description);
       console.log({ url, price });
       // router("/searchPage");
     } catch (error) {
@@ -137,7 +157,14 @@ function NFTMarketplaceProvider({ children }) {
   };
 
   //--- createSale FUNCTION
-  const createSale = async (url, formInputPrice, isReselling, id) => {
+  const createSale = async (
+    url,
+    formInputPrice,
+    name,
+    description,
+    isReselling,
+    id
+  ) => {
     try {
       console.log(url, formInputPrice, isReselling, id);
       const price = ethers.utils.parseUnits(formInputPrice, "ether");
@@ -150,7 +177,7 @@ function NFTMarketplaceProvider({ children }) {
       console.log({ listingPrice });
 
       const transaction = !isReselling
-        ? await contract.createToken(url, price, {
+        ? await contract.createToken(url, price, name, description, {
             value: listingPrice.toString(),
           })
         : await contract.resellToken(id, price, {
@@ -179,43 +206,34 @@ function NFTMarketplaceProvider({ children }) {
 
       const items = await Promise.all(
         data.map(
-          async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+          async ({
+            name,
+            description,
+            tokenId,
+            seller,
+            owner,
+            price: unformattedPrice,
+          }) => {
             const tokenURI = await contract.tokenURI(tokenId);
-            // console.log({ tokenId, tokenURI, seller, owner, unformattedPrice });
-
-            const {
-              data: { image, name, description },
-            } = await axios.get(tokenURI);
-
-            const x = await axios.get(tokenURI);
-            console.log({ x });
-
-            // const {
-            //   data: { image, name, description },
-            // } = await fetch(tokenURI);
-
-            console.log({ image, name, description });
-
             const price = ethers.utils.formatUnits(
               unformattedPrice.toString(),
               "ether"
             );
 
             return {
+              name,
+              description,
+              tokenURI,
               price,
               tokenId: tokenId.toNumber(),
               seller,
               owner,
-              image,
-              name,
-              description,
-              tokenURI,
             };
           }
         )
       );
 
-      // console.log(items);
+      console.log(items);
       return items;
     } catch (error) {
       setError("Error while fetching NFTS");

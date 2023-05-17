@@ -12,6 +12,11 @@ import { LikeProfile } from "../../componentsindex";
 const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
   const [like, setLike] = useState(false);
   const [likeInc, setLikeInc] = useState(21);
+  const [nft, setNft] = useState([]);
+
+  useEffect(() => {
+    fetchNFTs().then((data) => setNft(data));
+  }, []);
 
   const likeNFT = () => {
     if (!like) {
@@ -23,12 +28,9 @@ const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
     }
   };
 
-  const data = fetchNFTs();
-  console.log("here", data);
-
   return (
     <div className={Style.NFTCardTwo}>
-      {NFTData.map((el, i) => (
+      {nft.map((el, i) => (
         <a href={{ pathname: "/NFT-details", query: el }} key={i + 1}>
           <div className={Style.NFTCardTwo_box} key={i + 1}>
             <div className={Style.NFTCardTwo_box_like}>
@@ -37,7 +39,6 @@ const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
                   <BsImage className={Style.NFTCardTwo_box_like_box_box_icon} />
                   <p onClick={() => likeNFT()}>
                     {like ? <AiOutlineHeart /> : <AiFillHeart />}
-                    {""}
                     <span>{likeInc + 1}</span>
                   </p>
                 </div>
@@ -46,10 +47,10 @@ const NFTCardTwo = ({ NFTData, fetchNFTs }) => {
 
             <div className={Style.NFTCardTwo_box_img}>
               <img
-                src={el.image}
+                src={el.tokenURI}
                 alt="NFT"
-                width={350}
-                height={350}
+                width={400}
+                height={400}
                 style={{ objectFit: "cover" }}
                 className={Style.NFTCardTwo_box_img_img}
               />

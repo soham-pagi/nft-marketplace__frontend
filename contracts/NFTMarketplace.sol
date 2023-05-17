@@ -21,6 +21,8 @@ contract NFTMarketplace is ERC721URIStorage {
         address payable owner;
         uint256 price;
         bool sold;
+        string name;
+        string description;
     }
 
     event MarketItemCreated(
@@ -28,7 +30,9 @@ contract NFTMarketplace is ERC721URIStorage {
         address seller,
         address owner,
         uint256 price,
-        bool sold
+        bool sold,
+        string name,
+        string description
     );
 
     modifier onlyOwner() {
@@ -62,18 +66,25 @@ contract NFTMarketplace is ERC721URIStorage {
     /* Mints a token and lists it in the marketplace */
     function createToken(
         string memory tokenURI,
-        uint256 price
+        uint256 price,
+        string memory name,
+        string memory description
     ) public payable returns (uint256) {
         _tokenIds.increment();
         uint256 newTokenId = _tokenIds.current();
 
         _mint(msg.sender, newTokenId);
         _setTokenURI(newTokenId, tokenURI);
-        createMarketItem(newTokenId, price);
+        createMarketItem(newTokenId, price, name, description);
         return newTokenId;
     }
 
-    function createMarketItem(uint256 tokenId, uint256 price) private {
+    function createMarketItem(
+        uint256 tokenId,
+        uint256 price,
+        string memory name,
+        string memory description
+    ) private {
         require(price > 0, "Price must be at least 1 wei");
         require(
             msg.value == listingPrice,
@@ -85,7 +96,9 @@ contract NFTMarketplace is ERC721URIStorage {
             payable(msg.sender),
             payable(address(this)),
             price,
-            false
+            false,
+            name,
+            description
         );
 
         _transfer(msg.sender, address(this), tokenId);
@@ -94,7 +107,9 @@ contract NFTMarketplace is ERC721URIStorage {
             msg.sender,
             address(this),
             price,
-            false
+            false,
+            name,
+            description
         );
     }
 
