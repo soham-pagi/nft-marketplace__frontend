@@ -67,7 +67,7 @@ const aboutus = () => {
         <div className={Style.aboutus_box_founder}>
           <div className={Style.aboutus_box_founder_box}>
             {founderArray.map((el, i) => (
-              <div className={Style.aboutus_box_founder_box_img}>
+              <div key={i} className={Style.aboutus_box_founder_box_img}>
                 <img
                   src={el.images}
                   alt={el.name}
@@ -93,7 +93,10 @@ const aboutus = () => {
         <div className={Style.aboutus_box_facts}>
           <div className={Style.aboutus_box_facts_box}>
             {factsArray.map((el, i) => (
-              <div className={Style.aboutus_box_facts_box_info}>
+              <div
+                key={`abcd${i}`}
+                className={Style.aboutus_box_facts_box_info}
+              >
                 <h3>{el.title}</h3>
                 <p>{el.info}</p>
               </div>

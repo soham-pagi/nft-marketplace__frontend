@@ -24,14 +24,11 @@ function NavBar() {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-
   const navigate = useNavigate();
 
-  const { currentAccount, connectWallet } = useContext(NFTMarketplaceContext);
-  // connectWallet();
-  // console.log(connectWallet);
-
-  // const router = useRouter();
+  const { currentAccount, connectWallet, openError } = useContext(
+    NFTMarketplaceContext
+  );
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -151,7 +148,7 @@ function NavBar() {
                 className={Style.navbar_container_right_profile}
               />
 
-              {profile && <Profile currentAccount={"currentAccount"} />}
+              {profile && <Profile currentAccount={currentAccount} />}
             </div>
           </div>
 
@@ -177,7 +174,7 @@ function NavBar() {
         </div>
       )}
 
-      {/* {openError && <Error />} */}
+      {openError && <Error />}
     </div>
   );
 }

@@ -17,7 +17,7 @@ const Discover = () => {
     },
     {
       name: "NFT Details",
-      link: "NFT-details",
+      link: "nft-details",
     },
     {
       name: "Account Setting",
@@ -39,11 +39,9 @@ const Discover = () => {
 
   return (
     <div>
-      
       {discover.map((el, i) => (
-        <div key={i + 1} className={Style.discover}>
-          <a href={el.link}>{el.name}</a>
-          {/* <Link to={el.link}>{el.name}</Link> */}
+        <div key={i} className={Style.discover}>
+          <Link to={el.link}>{el.name}</Link>
         </div>
       ))}
     </div>

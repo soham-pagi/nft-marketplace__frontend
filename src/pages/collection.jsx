@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 //INTERNAL IMPORT
 import Style from "../styles/collection.module.css";
@@ -15,28 +15,12 @@ import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 const CollectionPage = () => {
   const { fetchNFTs } = useContext(NFTMarketplaceContext);
 
-  const [nftArray, setNftArray] = useState([]);
-  const collectionArray = [
-    {
-      image: images.nft_image_1,
-    },
-    {
-      image: images.nft_image_2,
-    },
-    {
-      image: images.nft_image_3,
-    },
-  ];
-
-  // repeating the collectionArray for testing
-  const repeatedArr = Array.from({ length: 10 }, () => collectionArray).flat();
-
   return (
     <div className={Style.collection}>
       <Banner bannerImage={images.creatorbackground1} />
       <CollectionProfile />
       <Filter />
-      <NFTCardTwo NFTData={repeatedArr} fetchNFTs={fetchNFTs} />
+      <NFTCardTwo fetchType={"all"} />
       {/* <Slider /> */}
       <Brand />
     </div>

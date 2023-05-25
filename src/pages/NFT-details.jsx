@@ -1,29 +1,35 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useRouter } from "next/router";
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 
 //INTERNAL IMPORT
 import { Button, Category, Brand } from "../components/componentsindex";
-import NFTDetailsPage from "../NFTDetailsPage/NFTDetailsPage";
+import NFTDetailsPage from "../components/NFTDetailsPage/NFTDetailsPage";
 
 //IMPORT SMART CONTRACT DATA
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
+
 const NFTDetails = () => {
-  const { currentAccount } = useContext(NFTMarketplaceContext);
+  const { currentAccount, fetchNftWithId } = useContext(NFTMarketplaceContext);
+
+  const location = useLocation();
 
   const [nft, setNft] = useState({
-    image: "",
-    tokenId: "",
+    description: "",
     name: "",
     owner: "",
     price: "",
     seller: "",
+    tokenId: "",
+    tokenURI: "",
   });
 
-  const router = useRouter();
   useEffect(() => {
-    if (!router.isReady) return;
-    setNft(router.query);
-  }, [router.isReady]);
+    const parsedQuery = queryString.parse(location.search);
+    fetchNftWithId(parsedQuery.tokenId).then((item) => {
+      setNft(item[0]);
+    });
+  }, []);
 
   return (
     <div>

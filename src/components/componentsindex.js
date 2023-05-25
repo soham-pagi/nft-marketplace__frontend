@@ -18,7 +18,7 @@ import Brand from "./Brand/Brand";
 import Video from "./Video/Video";
 import Loader from "./Loader/Loader";
 // import Subscription from "./Subscription/Subscription";
-// import Error from "./Error/Error";
+import Error from "./Error/Error";
 
 export {
   Button,
@@ -41,5 +41,5 @@ export {
   Video,
   Loader,
   // Subscription
-  // Error,
+  Error,
 };

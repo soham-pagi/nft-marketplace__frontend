@@ -27,8 +27,7 @@ const HelpCenter = () => {
     <div className={Style.box}>
       {helpCenter.map((el, i) => (
         <div className={Style.helpCenter} key={i + 1}>
-          {/* <Link to={el.link}> {el.name} </Link> */}
-          <a href={el.link}>{el.name}</a>
+          <Link to={el.link}> {el.name} </Link>
         </div>
       ))}
     </div>

@@ -191,6 +191,20 @@ contract NFTMarketplace is ERC721URIStorage {
         return items;
     }
 
+    // Function to check if a token ID exists
+    function tokenExists(uint256 tokenId) public view returns (bool) {
+        return idToMarketItem[tokenId].owner != address(0);
+    }
+
+    // Function to fetch an item by ID
+    function fetchItemWithId(
+        uint256 tokenId
+    ) public view returns (MarketItem memory) {
+        require(tokenExists(tokenId), "Token ID does not exist");
+
+        return idToMarketItem[tokenId];
+    }
+
     /* Returns only items a user has listed */
     function fetchItemsListed() public view returns (MarketItem[] memory) {
         uint256 totalItemCount = _tokenIds.current();

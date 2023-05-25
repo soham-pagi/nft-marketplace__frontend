@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-// import Image from "next/image";
+
 import {
   MdVerified,
   MdCloudUpload,
   MdOutlineReportProblem,
 } from "react-icons/md";
+
 import { FiCopy } from "react-icons/fi";
 import {
   TiSocialFacebook,
@@ -71,7 +72,7 @@ function AuthorProfileCard({ currentAccount }) {
           </h2>
 
           <div className={Style.AuthorProfileCard_box_info_address}>
-            <input type="text" value={currentAccount} id="myInput" />
+            <input readOnly type="text" value={currentAccount} id="myInput" />
             <FiCopy
               onClick={() => copyAddress()}
               className={Style.AuthorProfileCard_box_info_address_icon}
@@ -112,7 +113,6 @@ function AuthorProfileCard({ currentAccount }) {
                 <span>
                   <TiSocialFacebook />
                 </span>{" "}
-                {""}
                 Facebook
               </p>
               <p>
@@ -149,7 +149,6 @@ function AuthorProfileCard({ currentAccount }) {
               <span>
                 <MdOutlineReportProblem />
               </span>{" "}
-              {""}
               Report abuse
             </p>
           )}

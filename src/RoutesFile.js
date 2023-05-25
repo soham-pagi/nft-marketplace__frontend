@@ -10,8 +10,11 @@ import Login from "./pages/login";
 import SignUp from "./pages/signUp";
 import UploadNFTPage from "./pages/uploadNFTPage";
 import Blog from "./pages/blog";
-import UploadNFT from "./components/UploadNFT/UploadNFT";
+import NFTDetails from "./pages/NFT-details";
+import ReSellToken from "./pages/reSellToken";
+
 import { Footer, NavBar } from "./components/componentsindex";
+import { Error } from "./components/componentsindex";
 
 import NFTMarketplaceProvider from "./Context/NFTMarketplaceContext";
 
@@ -30,11 +33,12 @@ const RoutesFile = () => {
           <Route path="/author" element={<Author />} />
           <Route path="/account" element={<Account />} />
           {/* <Route path='/connectWallet' element={<ConnectWallet />}/> */}
-          {/* <Route path="/index" element={<Home />} /> */}
+          <Route path="/nft-details" element={<NFTDetails />} />
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/UploadNFT-one" element={<UploadNFTPage />} />
-          <Route path="/test" element={<UploadNFT />} />
+          <Route path="/uploadNFT" element={<UploadNFTPage />} />
+          <Route path="/reSellToken" element={<ReSellToken />} />
+          <Route path="/test" element={<Error />} />
         </Routes>
         <Footer />
       </Router>

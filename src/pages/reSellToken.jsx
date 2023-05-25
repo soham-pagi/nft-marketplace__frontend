@@ -1,43 +1,45 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useRouter } from "next/router";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import Image from "next/image";
+import queryString from "query-string";
 
 //INTERNAL IMPORT
 import Style from "../styles/reSellToken.module.css";
-import formStyle from "../AccountPage/Form/Form.module.css";
+import formStyle from "../components/AccountPage/Form/Form.module.css";
 import { Button } from "../components/componentsindex";
 
 //IMPORT SMART CONTRACT
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
-const reSellToken = () => {
+const ReSellToken = () => {
   const { createSale } = useContext(NFTMarketplaceContext);
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState('"');
-  const router = useRouter();
-  const { id, tokenURI } = router.query;
 
-  const fetchNFT = async () => {
-    if (!tokenURI) return;
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const { data } = await axios.get(tokenURI);
-
-    setImage(data.image);
-  };
+  const [nft, setNft] = useState({
+    tokenURI: "",
+    id: "",
+    price: "",
+  });
+  const [price, setPrice] = useState();
 
   useEffect(() => {
-    fetchNFT();
-  }, [id]);
+    const parsedQuery = queryString.parse(location.search);
+    console.log(parsedQuery);
+    setNft(parsedQuery);
+  }, []);
 
   const resell = async () => {
     try {
+      const { tokenURI, price, id } = nft;
       await createSale(tokenURI, price, true, id);
-      router.push("/author");
+      navigate("/author");
     } catch (error) {
       console.log("Error while resell", error);
     }
   };
+
   return (
     <div className={Style.reSellToken}>
       <div className={Style.reSellToken_box}>
@@ -47,16 +49,14 @@ const reSellToken = () => {
           <input
             type="number"
             min={1}
-            placeholder="reSell price"
+            placeholder="New price"
             className={formStyle.Form_box_input_userName}
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
 
         <div className={Style.reSellToken_box_image}>
-          {image && (
-            <Image src={image} alt="resell nft" width={400} height={400} />
-          )}
+          <img src={nft.tokenURI} alt="resell nft" width={400} height={400} />
         </div>
 
         <div className={Style.reSellToken_box_btn}>
@@ -67,4 +67,4 @@ const reSellToken = () => {
   );
 };
 
-export default reSellToken;
+export default ReSellToken;

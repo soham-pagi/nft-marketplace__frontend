@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-// import { useRouter } from "next/router";
+import { Link, useNavigate } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import {
   TiSocialFacebook,
@@ -18,13 +17,12 @@ import Style from "./SideBar.module.css";
 import images from "../../../img";
 import Button from "../../Button/Button";
 
-
 const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   //------USESTATE
   const [openDiscover, setOpenDiscover] = useState(false);
   const [openHelp, setOpenHelp] = useState(false);
 
-  // const router = useRouter();
+  const navigate = useNavigate();
 
   //--------DISCOVER NAVIGATION MENU
   const discover = [
@@ -42,7 +40,7 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
     },
     {
       name: "NFT Details",
-      link: "NFT-details",
+      link: "nft-details",
     },
     {
       name: "Account Setting",
@@ -157,7 +155,7 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
               {discover.map((el, i) => (
                 <p key={i + 1}>
                   {/* <Link href={{ pathname: `${el.link}` }}>{el.name}</Link> */}
-                  <Link to= {el.link} > {el.name} </Link>
+                  <Link to={el.link}> {el.name} </Link>
                 </p>
               ))}
             </div>
@@ -178,7 +176,7 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
               {helpCenter.map((el, i) => (
                 <p key={i + 1}>
                   {/* <Link href={{ pathname: `${el.link}` }}>{el.name}</Link> */}
-                  <Link to= {el.link} > {el.name} </Link>
+                  <Link to={el.link}> {el.name} </Link>
                 </p>
               ))}
             </div>
@@ -190,13 +188,8 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
         {currentAccount === "" ? (
           <Button btnName="connect" handleClick={() => connectWallet()} />
         ) : (
-          {/* <Button
-            btnName="Create"
-            handleClick={() => router.push("/uploadNFT")}
-          /> */}
+          <Button btnName="Create" handleClick={() => navigate("/uploadNFT")} />
         )}
-
-        <Button btnName="Connect Wallet" handleClick={() => {}} />
       </div>
     </div>
   );

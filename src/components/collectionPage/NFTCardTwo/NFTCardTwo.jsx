@@ -1,21 +1,36 @@
-import React, { useEffect, useState } from "react";
-// import Image from "next/image";
+import React, { useContext, useEffect, useState } from "react";
 import { BsImage } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { MdVerified, MdTimer } from "react-icons/md";
-// import Link from "next/link";
+import { Link } from "react-router-dom";
 
 //INTERNAL IMPORT
 import Style from "./NFTCardTwo.module.css";
 import { LikeProfile } from "../../componentsindex";
 
-const NFTCardTwo = ({ fetchNFTs }) => {
+import { NFTMarketplaceContext } from "../../../Context/NFTMarketplaceContext";
+
+const NFTCardTwo = ({ fetchType }) => {
+  const { fetchNFTs, fetchMyNFTsOrListedNFTs } = useContext(
+    NFTMarketplaceContext
+  );
+
   const [like, setLike] = useState(false);
   const [likeInc, setLikeInc] = useState(21);
   const [nftData, setNftData] = useState([]);
 
   useEffect(() => {
-    fetchNFTs().then((data) => setNftData(data));
+    if (fetchType === "all") {
+      fetchNFTs().then((data) => {
+        setNftData(data);
+      });
+    } else if (fetchType === "listed") {
+      fetchMyNFTsOrListedNFTs("fetchItemsListed").then((data) =>
+        setNftData(data)
+      );
+    } else {
+      fetchMyNFTsOrListedNFTs("myNFTs").then((data) => setNftData(data));
+    }
   }, []);
 
   const likeNFT = () => {
@@ -31,7 +46,7 @@ const NFTCardTwo = ({ fetchNFTs }) => {
   return (
     <div className={Style.NFTCardTwo}>
       {nftData.map((nft, i) => (
-        <a href={{ pathname: "/NFT-details", query: nft }} key={i}>
+        <Link to={`/nft-details?tokenId=${nft.tokenId}`} key={i}>
           <div className={Style.NFTCardTwo_box} key={i}>
             <div className={Style.NFTCardTwo_box_like}>
               <div className={Style.NFTCardTwo_box_like_box}>
@@ -73,7 +88,7 @@ const NFTCardTwo = ({ fetchNFTs }) => {
               </p>
             </div>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
