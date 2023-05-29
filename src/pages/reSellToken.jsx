@@ -22,7 +22,7 @@ const ReSellToken = () => {
     id: "",
     price: "",
   });
-  const [price, setPrice] = useState();
+  const [newPrice, setPrice] = useState();
 
   useEffect(() => {
     const parsedQuery = queryString.parse(location.search);
@@ -32,8 +32,8 @@ const ReSellToken = () => {
 
   const resell = async () => {
     try {
-      const { tokenURI, price, id } = nft;
-      await createSale(tokenURI, price, true, id);
+      const { tokenURI, price, id, name, description } = nft;
+      await createSale(tokenURI, newPrice, name, description, true, id);
       navigate("/author");
     } catch (error) {
       console.log("Error while resell", error);

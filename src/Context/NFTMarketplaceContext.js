@@ -153,7 +153,8 @@ function NFTMarketplaceProvider({ children }) {
     id
   ) => {
     try {
-      console.log(url, formInputPrice, isReselling, id);
+      console.log({ url, formInputPrice, isReselling, id });
+
       const price = ethers.utils.parseUnits(formInputPrice, "ether");
 
       const contract = await connectingWithSmartContract();
@@ -161,7 +162,7 @@ function NFTMarketplaceProvider({ children }) {
       console.log({ contract });
 
       const listingPrice = await contract.getListingPrice();
-      console.log({ listingPrice });
+      // console.log({ listingPrice });
 
       const transaction = !isReselling
         ? await contract.createToken(url, price, name, description, {
@@ -182,9 +183,11 @@ function NFTMarketplaceProvider({ children }) {
   // Return single nft
   const fetchNftWithId = async (tokenId) => {
     try {
-      const provider = new ethers.providers.JsonRpcProvider(
-        "http://127.0.0.1:7545"
-      );
+      // const provider = new ethers.providers.JsonRpcProvider(
+      //   "http://127.0.0.1:7545"
+      // );
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const contract = fetchContract(provider);
 
@@ -231,9 +234,10 @@ function NFTMarketplaceProvider({ children }) {
   //--FETCHNFTS FUNCTION
   const fetchNFTs = async () => {
     try {
-      const provider = new ethers.providers.JsonRpcProvider(
-        "http://127.0.0.1:7545"
-      );
+      // const provider = new ethers.providers.JsonRpcProvider(
+      //   "http://127.0.0.1:7545"
+      // );
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const contract = fetchContract(provider);
       window.c = contract;
