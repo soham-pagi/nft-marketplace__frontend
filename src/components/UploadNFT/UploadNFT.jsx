@@ -16,16 +16,11 @@ function UploadNFT({ createNFT }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [active, setActive] = useState(0);
-  const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
-  const [royalties, setRoyalties] = useState("");
   const [fileSize, setFileSize] = useState(0);
-  const [category, setCategory] = useState(0);
-  const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
-  // console.log(createNFT);
 
   const categoryArry = [
     {
@@ -55,13 +50,9 @@ function UploadNFT({ createNFT }) {
       <h1>Upload your NFT</h1>
       <DropZone
         name={name}
-        website={website}
         description={description}
-        royalties={royalties}
         fileSize={fileSize}
         setFileSize={setFileSize}
-        category={category}
-        properties={properties}
         setImage={setImage}
       />
 
@@ -75,7 +66,7 @@ function UploadNFT({ createNFT }) {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-
+        {/*
         <div className={formStyle.Form_box_input}>
           <label htmlFor="website">Website</label>
           <div className={formStyle.Form_box_input_box}>
@@ -88,13 +79,14 @@ function UploadNFT({ createNFT }) {
               onChange={(e) => setWebsite(e.target.value)}
             />
           </div>
-
+          
           <p className={Style.upload_box_input_para}>
-            We will include a link to this URL on this item's detail page, so
-            that users can click to learn more about it. You are welcome to link
-            to your own webpage with more details.
+          We will include a link to this URL on this item's detail page, so
+          that users can click to learn more about it. You are welcome to link
+          to your own webpage with more details.
           </p>
-        </div>
+          </div>
+        */}
 
         <div className={formStyle.Form_box_input}>
           <label htmlFor="description">Description</label>
@@ -112,6 +104,7 @@ function UploadNFT({ createNFT }) {
           </p>
         </div>
 
+        {/*
         <div className={formStyle.Form_box_input}>
           <label htmlFor="name">Choose collection</label>
           <p className={Style.upload_box_input_para}>
@@ -146,8 +139,10 @@ function UploadNFT({ createNFT }) {
             ))}
           </div>
         </div>
+              */}
 
         <div className={formStyle.Form_box_input_social}>
+          {/*
           <div className={formStyle.Form_box_input}>
             <label htmlFor="Royalties">Royalties</label>
             <div className={formStyle.Form_box_input_box}>
@@ -161,6 +156,8 @@ function UploadNFT({ createNFT }) {
               />
             </div>
           </div>
+         */}
+
           <div className={formStyle.Form_box_input}>
             <label htmlFor="size">Size</label>
             <div className={formStyle.Form_box_input_box}>
@@ -209,16 +206,8 @@ function UploadNFT({ createNFT }) {
           <Button
             btnName="Upload"
             handleClick={async () => {
-              createNFT(
-                name,
-                price,
-                image,
-                description,
-                website,
-                royalties,
-                category,
-                properties
-              );
+              await createNFT(name, price, image, description);
+              navigate("/collection");
             }}
             classStyle={Style.upload_box_btn_style}
           />

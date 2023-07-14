@@ -12,28 +12,25 @@ import { Button } from "../components/componentsindex";
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
 const ReSellToken = () => {
-  const { createSale } = useContext(NFTMarketplaceContext);
+  const { createSale, fetchNftWithId } = useContext(NFTMarketplaceContext);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [nft, setNft] = useState({
-    tokenURI: "",
-    id: "",
-    price: "",
-  });
-  const [newPrice, setPrice] = useState();
+  const [nft, setNft] = useState([]);
+  const [newPrice, setNewPrice] = useState(0);
 
   useEffect(() => {
     const parsedQuery = queryString.parse(location.search);
-    console.log(parsedQuery);
-    setNft(parsedQuery);
+    fetchNftWithId(parsedQuery.id).then((item) => {
+      setNft(item[0]);
+    });
   }, []);
 
   const resell = async () => {
     try {
-      const { tokenURI, price, id, name, description } = nft;
-      await createSale(tokenURI, newPrice, name, description, true, id);
+      const { tokenURI, tokenId, name, description } = nft;
+      await createSale(tokenURI, newPrice, name, description, true, tokenId);
       navigate("/author");
     } catch (error) {
       console.log("Error while resell", error);
@@ -51,7 +48,9 @@ const ReSellToken = () => {
             min={1}
             placeholder="New price"
             className={formStyle.Form_box_input_userName}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => {
+              setNewPrice(e.target.value);
+            }}
           />
         </div>
 

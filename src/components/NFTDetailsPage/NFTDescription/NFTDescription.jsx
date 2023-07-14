@@ -267,18 +267,17 @@ const NFTDescription = ({ nft }) => {
                 <Button
                   icon={<FaWallet />}
                   btnName="List on Marketplace"
-                  handleClick={() =>
-                    navigate(
-                      `/reSellToken?id=${nft.tokenId}&tokenURI=${nft.tokenURI}&price=${nft.price}`
-                    )
-                  }
+                  handleClick={() => navigate(`/reSellToken?id=${nft.tokenId}`)}
                   classStyle={Style.button}
                 />
               ) : (
                 <Button
                   icon={<FaWallet />}
                   btnName="Buy NFT"
-                  handleClick={() => buyNFT(nft)}
+                  handleClick={async () => {
+                    await buyNFT(nft);
+                    navigate("/author");
+                  }}
                   classStyle={Style.button}
                 />
               )}

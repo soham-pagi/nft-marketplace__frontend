@@ -1,6 +1,7 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 
 //INTERNAL  IMPORT
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
@@ -8,6 +9,8 @@ import { apiKey, apiSecret } from "../constants";
 
 // Create context
 const NFTMarketplaceContext = createContext();
+
+// const navigate = useNavigate();
 
 // COMPONENT STARTS HERE
 function NFTMarketplaceProvider({ children }) {
@@ -112,21 +115,9 @@ function NFTMarketplaceProvider({ children }) {
   };
 
   //---CREATENFT FUNCTION
-  const createNFT = async (
-    name,
-    price,
-    image,
-    description,
-    website,
-    royalities,
-    category,
-    properties
-  ) => {
+  const createNFT = async (name, price, image, description) => {
     if (!name || !description || !price || !image)
       return setError("Data Is Missing"), setOpenError(true);
-
-    const data = JSON.stringify({ name, description, image });
-    console.log(data);
 
     try {
       setIsLoading(true);
@@ -136,7 +127,7 @@ function NFTMarketplaceProvider({ children }) {
 
       await createSale(url, price, name, description);
       console.log({ url, price });
-      // router("/searchPage");
+      // navigate("/collection");
     } catch (error) {
       setError("Error while creating NFT");
       setOpenError(true);
@@ -156,10 +147,9 @@ function NFTMarketplaceProvider({ children }) {
       console.log({ url, formInputPrice, isReselling, id });
 
       const price = ethers.utils.parseUnits(formInputPrice, "ether");
+      console.log({ price });
 
       const contract = await connectingWithSmartContract();
-      window.contract = contract;
-      console.log({ contract });
 
       const listingPrice = await contract.getListingPrice();
       // console.log({ listingPrice });
@@ -177,21 +167,18 @@ function NFTMarketplaceProvider({ children }) {
     } catch (error) {
       setError("error while creating sale");
       setOpenError(true);
+      console.log(error);
     }
   };
 
   // Return single nft
   const fetchNftWithId = async (tokenId) => {
     try {
-      // const provider = new ethers.providers.JsonRpcProvider(
-      //   "http://127.0.0.1:7545"
-      // );
-
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const contract = fetchContract(provider);
 
-      const data = await contract.fetchItemWithId(tokenId);
+      const data = await contract.fetchItemWithId(+tokenId);
 
       const item = await Promise.all(
         [data].map(

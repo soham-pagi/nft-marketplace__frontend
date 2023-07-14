@@ -24,11 +24,24 @@ function NavBar() {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [isMetamaskConnected, setIsMetamaskConnected] = useState(false);
+
   const navigate = useNavigate();
 
   const { currentAccount, connectWallet, openError } = useContext(
     NFTMarketplaceContext
   );
+
+  const checkMetamaskConnection = async () => {
+    if (window.ethereum && window.ethereum.isConnected()) {
+      setIsMetamaskConnected(true);
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    checkMetamaskConnection();
+  }, []);
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -74,7 +87,6 @@ function NavBar() {
 
   const handleSearch = () => {
     const searchQuery = document.getElementById("search-nft").value;
-    // window.location.replace(`/searchPage?${searchQuery}`);
     navigate(`/searchPage?${searchQuery}`);
   };
 
@@ -126,12 +138,18 @@ function NavBar() {
 
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
-            {currentAccount === "" ? (
-              <Button btnName="Connect" handleClick={() => connectWallet()} />
-            ) : (
+            {isMetamaskConnected ? (
               <Button
                 btnName="Create"
                 handleClick={() => navigate("/uploadNFT")}
+              />
+            ) : (
+              <Button
+                btnName="Connect"
+                handleClick={() => {
+                  connectWallet();
+                  checkMetamaskConnection();
+                }}
               />
             )}
           </div>
