@@ -9,12 +9,11 @@ import {
 import { HiOutlineMail } from "react-icons/hi";
 
 //INTERNAL IMPORT
-import Style from "../styles/contactus.module.css";
+import Style from "../styles/contact.module.css";
 import formStyle from "../components/AccountPage/Form/Form.module.css";
 import { Button } from "../components/componentsindex";
-import Footer from '../components/Footer/Footer';
 
-const contactus = () => {
+const contact = () => {
   return (
     <div className={Style.contactus}>
       <div className={Style.contactus_box}>
@@ -81,8 +80,8 @@ const contactus = () => {
                   id=""
                   cols="30"
                   rows="6"
-                  placeholder="something about yourself in few words">
-                </textarea>
+                  placeholder="something about yourself in few words"
+                ></textarea>
               </div>
               <Button
                 btnName="Send Message"
@@ -97,4 +96,4 @@ const contactus = () => {
   );
 };
 
-export default contactus;
+export default contact;

@@ -2,7 +2,8 @@ import React from "react";
 
 //INTERNAL IMPORT
 import Style from "../styles/subscription.module.css";
-import { Subscription } from '../components/componentsindex';
+import Subscribe from "../components/Subscribe/Subscribe";
+import Subscription from "../components/Subscription/Subscription";
 
 const SubscriptionPage = () => {
   const subscriptionArray = [
@@ -41,19 +42,21 @@ const SubscriptionPage = () => {
     },
   ];
   return (
-    <div className={Style.Subscription}>
-      <div className={Style.Subscription_box}>
-        <div className={Style.Subscription_box_info}>
-          <h1>💎 Subscription</h1>
-          <p>Pricing to fit the needs of any companie size.</p>
-        </div>
-
-        <div className={Style.Subscription_box_box}>
-          {subscriptionArray.map((el, i) => (
-            <Subscription key={i + 1} i={1} el={el} />
-          ))}
+    <div>
+      <div className={Style.Subscription}>
+        <div className={Style.Subscription_box}>
+          <div className={Style.Subscription_box_info}>
+            <h1>💎 Subscription</h1>
+            <p>Pricing to fit the needs of any companie size.</p>
+          </div>
+          <div className={Style.Subscription_box_box}>
+            {subscriptionArray.map((el, i) => (
+              <Subscription key={i + 1} i={1} el={el} />
+            ))}
+          </div>
         </div>
       </div>
+      <Subscribe />
     </div>
   );
 };

@@ -14,6 +14,7 @@ const NFTMarketplaceContext = createContext();
 
 // COMPONENT STARTS HERE
 function NFTMarketplaceProvider({ children }) {
+  const [mainNft, setMainNFt] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   /// wallet state
@@ -116,8 +117,11 @@ function NFTMarketplaceProvider({ children }) {
 
   //---CREATENFT FUNCTION
   const createNFT = async (name, price, image, description) => {
-    if (!name || !description || !price || !image)
-      return setError("Data Is Missing"), setOpenError(true);
+    if (!name || !description || !price || !image) {
+      setError("Data Is Missing");
+      setOpenError(true);
+      return false;
+    }
 
     try {
       setIsLoading(true);
@@ -164,10 +168,11 @@ function NFTMarketplaceProvider({ children }) {
 
       const receipt = await transaction.wait();
       console.log({ receipt });
+      return true;
     } catch (error) {
       setError("error while creating sale");
       setOpenError(true);
-      console.log(error);
+      return false;
     }
   };
 
@@ -310,6 +315,7 @@ function NFTMarketplaceProvider({ children }) {
       // console.log(items);
       return items;
     } catch (error) {
+      console.log(error);
       setError("Error while fetching listed NFTs");
       setOpenError(true);
     }
@@ -338,6 +344,8 @@ function NFTMarketplaceProvider({ children }) {
   return (
     <NFTMarketplaceContext.Provider
       value={{
+        mainNft,
+        setMainNFt,
         connectWallet,
         uploadToIPFS,
         createNFT,

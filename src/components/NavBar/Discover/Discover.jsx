@@ -5,27 +5,18 @@ import { Link } from "react-router-dom";
 import Style from "./Discover.module.css";
 
 const Discover = () => {
-  //--------DISCOVER NAVIGATION MENU
   const discover = [
     {
       name: "Collection",
       link: "collection",
     },
     {
-      name: "Author Profile",
-      link: "author",
-    },
-    {
-      name: "Account Setting",
-      link: "account",
-    },
-    {
       name: "Upload NFT",
       link: "uploadNFT",
     },
     {
-      name: "Connect Wallet",
-      link: "connectWallet",
+      name: "Subscription",
+      link: "subscription",
     },
     {
       name: "Blog",

@@ -29,7 +29,7 @@
     border-radius: 50%;
 }
 
-.upload_box_slider_box_img_icon{
+.upload_box_slider_box_img_icon {
     background-color: var(--icons-color);
     color: var(--main-bg-color);
     border-radius: 50%;
@@ -37,20 +37,20 @@
     padding: .2rem;
 }
 
-.upload_box_slider p{
+.upload_box_slider p {
     font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.2;
 }
 
-.upload_box_btn{
+.upload_box_btn {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     margin-block: 4rem;
     gap: 2rem;
 }
 
-.upload_box_btn_style{
+.upload_box_btn_style {
     width: 100%;
     display: grid;
     align-self: center;

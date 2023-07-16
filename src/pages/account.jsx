@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-// import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 
 //INTERNAL IMPORT
@@ -8,23 +7,23 @@ import images from "../img";
 import Form from "../components/AccountPage/Form/Form";
 
 const Account = () => {
-  // const [fileUrl, setFileUrl] = useState(null);
+  window.scrollTo(0, 0);
 
-  // const onDrop = useCallback(async (acceptedFile) => {
-  //   setFileUrl(acceptedFile[0]);
-  // }, []);
+  const [fileUrl, setFileUrl] = useState(null);
 
-  // const { getRootProps, getInputProps } = useDropzone({
-  //   onDrop,
-  //   accept: "image/*",
-  //   maxSize: 5000000,
-  // });
+  const onDrop = useCallback(async (acceptedFile) => {
+    setFileUrl(acceptedFile[0]);
+  }, []);
 
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "image/*",
+    maxSize: 5000000,
+  });
 
   return (
     <div className={Style.account}>
-      <h1>Hello</h1>
-      {/* <div className={Style.account_info}>
+      <div className={Style.account_info}>
         <h1>Profile settings</h1>
         <p>
           You can set preferred display name, create your profile URL and manage
@@ -47,7 +46,7 @@ const Account = () => {
         <div className={Style.account_box_from}>
           <Form />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

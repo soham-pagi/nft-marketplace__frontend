@@ -1,0 +1,10 @@
+.ruler {
+    color: #333;
+    height: 2px;
+    background-color: #333;
+    margin: -50px 0 40px 0;
+    border: none;
+    overflow: visible;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}

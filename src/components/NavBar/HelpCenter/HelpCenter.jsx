@@ -8,21 +8,14 @@ const HelpCenter = () => {
   const helpCenter = [
     {
       name: "About",
-      link: "aboutus",
+      link: "about",
     },
     {
-      name: "Contact Us",
-      link: "contactus",
-    },
-    {
-      name: "Sign Up",
-      link: "signUp",
-    },
-    {
-      name: "LogIn",
-      link: "login",
+      name: "Contact",
+      link: "contact",
     },
   ];
+
   return (
     <div className={Style.box}>
       {helpCenter.map((el, i) => (

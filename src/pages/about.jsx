@@ -1,11 +1,13 @@
 import React from "react";
 
 //INTERNAL IMPORT
-import Style from "../styles/aboutus.module.css";
+import Style from "../styles/about.module.css";
 import { Brand } from "../components/componentsindex";
 import images from "../img";
 
-const aboutus = () => {
+const about = () => {
+  window.scrollTo(0, 0);
+
   const founderArray = [
     {
       name: "Tanmay Nivaskar",
@@ -109,4 +111,4 @@ const aboutus = () => {
   );
 };
 
-export default aboutus;
+export default about;

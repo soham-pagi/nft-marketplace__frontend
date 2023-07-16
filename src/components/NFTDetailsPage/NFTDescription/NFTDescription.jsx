@@ -171,7 +171,7 @@ const NFTDescription = ({ nft }) => {
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
               <img
-                src={images.user1}
+                src={images.user9}
                 alt="profile"
                 width={40}
                 height={40}
@@ -181,85 +181,14 @@ const NFTDescription = ({ nft }) => {
                 <small>Creator</small> <br />
                 <Link to={"/author"}>
                   <span>
-                    Karli Costa <MdVerified />
+                    Jane <MdVerified />
                   </span>
                 </Link>
-              </div>
-            </div>
-
-            <div className={Style.NFTDescription_box_profile_box_right}>
-              <img
-                src={images.creatorbackground1}
-                alt="profile"
-                width={40}
-                height={40}
-                className={Style.NFTDescription_box_profile_box_left_img}
-              />
-
-              <div className={Style.NFTDescription_box_profile_box_right_info}>
-                <small>Collection</small> <br />
-                <span>
-                  Mokeny app <MdVerified />
-                </span>
               </div>
             </div>
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
-            <p>
-              <MdTimer /> <span>Auction ending in:</span>
-            </p>
-
-            <div className={Style.NFTDescription_box_profile_biding_box_timer}>
-              <div
-                className={
-                  Style.NFTDescription_box_profile_biding_box_timer_item
-                }
-              >
-                <p>2</p>
-                <span>Days</span>
-              </div>
-              <div
-                className={
-                  Style.NFTDescription_box_profile_biding_box_timer_item
-                }
-              >
-                <p>22</p>
-                <span>hours</span>
-              </div>
-              <div
-                className={
-                  Style.NFTDescription_box_profile_biding_box_timer_item
-                }
-              >
-                <p>45</p>
-                <span>mins</span>
-              </div>
-              <div
-                className={
-                  Style.NFTDescription_box_profile_biding_box_timer_item
-                }
-              >
-                <p>12</p>
-                <span>secs</span>
-              </div>
-            </div>
-
-            <div className={Style.NFTDescription_box_profile_biding_box_price}>
-              <div
-                className={
-                  Style.NFTDescription_box_profile_biding_box_price_bid
-                }
-              >
-                <small>Current Bid</small>
-                <p>
-                  {nft.price} ETH <span>( ≈ $3,221.22)</span>
-                </p>
-              </div>
-
-              <span>[90 in stock]</span>
-            </div>
-
             <div className={Style.NFTDescription_box_profile_biding_box_button}>
               {currentAccount == nft.seller.toLowerCase() ? (
                 <p>You can't buy your own NFT</p>
@@ -289,29 +218,6 @@ const NFTDescription = ({ nft }) => {
                 classStyle={Style.button}
               />
             </div>
-
-            <div className={Style.NFTDescription_box_profile_biding_box_tabs}>
-              <button onClick={(e) => openTabs(e)}>Bid History</button>
-              <button onClick={(e) => openTabs(e)}>Provanance</button>
-              <button onClick={() => openOwmer()}>Owner</button>
-            </div>
-
-            {history && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={historyArray} />
-              </div>
-            )}
-            {provanance && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={provananceArray} />
-              </div>
-            )}
-
-            {owner && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={ownerArray} icon={<MdVerified />} />
-              </div>
-            )}
           </div>
         </div>
       </div>

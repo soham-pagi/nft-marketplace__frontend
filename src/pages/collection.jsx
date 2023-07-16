@@ -7,12 +7,14 @@ import { Banner } from "../components/collectionPage/collectionIndex";
 import CollectionProfile from "../components/collectionPage/collectionProfile/collectionProfile";
 import NFTCardTwo from "../components/collectionPage/NFTCardTwo/NFTCardTwo";
 
-import { Slider, Brand } from "../components/componentsindex";
+import { Brand } from "../components/componentsindex";
 import Filter from "../components/Filter/Filter";
 
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
 const CollectionPage = () => {
+  window.scrollTo(0, 0);
+
   const { fetchNFTs } = useContext(NFTMarketplaceContext);
 
   return (
@@ -20,8 +22,8 @@ const CollectionPage = () => {
       <Banner bannerImage={images.creatorbackground1} />
       <CollectionProfile />
       <Filter />
+      <hr className={Style.ruler} />
       <NFTCardTwo fetchType={"all"} />
-      {/* <Slider /> */}
       <Brand />
     </div>
   );

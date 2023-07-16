@@ -1,6 +1,8 @@
 import React from "react";
 
 function blog() {
+  window.scrollTo(0, 0);
+
   return (
     <div>
       <br />

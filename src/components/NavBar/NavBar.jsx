@@ -4,7 +4,7 @@ import { DiJqueryLogo } from "react-icons/di";
 //----IMPORT ICON
 import { MdNotifications } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
-import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
+import { CgMenuRight } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 
 //INTERNAL IMPORT
@@ -158,7 +158,7 @@ function NavBar() {
           <div className={Style.navbar_container_right_profile_box}>
             <div className={Style.navbar_container_right_profile}>
               <img
-                src={images.user9}
+                src={images.user5}
                 alt="Profile"
                 width={40}
                 height={40}
