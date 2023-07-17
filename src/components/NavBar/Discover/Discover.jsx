@@ -11,16 +11,16 @@ const Discover = () => {
       link: "collection",
     },
     {
+      name: "NFT Generator",
+      link: "generator",
+    },
+    {
       name: "Upload NFT",
       link: "uploadNFT",
     },
     {
       name: "Subscription",
       link: "subscription",
-    },
-    {
-      name: "Blog",
-      link: "blog",
     },
   ];
 

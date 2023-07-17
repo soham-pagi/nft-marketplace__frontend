@@ -4,7 +4,8 @@
     margin-block: 6rem;
 }
 
-.account_info{
+.account_info {
+    padding: 40px 0;
     width: 50%;
     margin:  0 auto;
     border-bottom: 1px solid var(--shadow-dark-color);

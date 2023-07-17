@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
 //INTERNAL IMPORT
@@ -6,13 +6,22 @@ import Style from "../styles/account.module.css";
 import images from "../img";
 import Form from "../components/AccountPage/Form/Form";
 
+import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
+
 const Account = () => {
   window.scrollTo(0, 0);
+  const { userProfileData } = useContext(NFTMarketplaceContext);
+  const [fileUrl, setFileUrl] = useState(images.upload);
+  const [imgFile, setImgFile] = useState(null);
 
-  const [fileUrl, setFileUrl] = useState(null);
+  useEffect(() => {
+    setFileUrl(userProfileData.imgUrl);
+    console.log(fileUrl);
+  }, [userProfileData.imgUrl]);
 
   const onDrop = useCallback(async (acceptedFile) => {
-    setFileUrl(acceptedFile[0]);
+    setImgFile(acceptedFile[0]);
+    setFileUrl(URL.createObjectURL(acceptedFile[0]));
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -34,17 +43,19 @@ const Account = () => {
       <div className={Style.account_box}>
         <div className={Style.account_box_img} {...getRootProps()}>
           <input {...getInputProps()} />
-          <img
-            src={images.user1}
-            alt="account upload"
-            width={150}
-            height={150}
-            className={Style.account_box_img_img}
-          />
+          {fileUrl && (
+            <img
+              src={fileUrl}
+              alt="Profile"
+              width={150}
+              height={150}
+              className={Style.account_box_img_img}
+            />
+          )}
           <p className={Style.account_box_img_para}>Change Image</p>
         </div>
         <div className={Style.account_box_from}>
-          <Form />
+          <Form imgFile={imgFile} />
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import { FaUserAlt, FaUserEdit } from "react-icons/fa";
 import { MdHelpCenter } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -8,15 +7,17 @@ import { Link } from "react-router-dom";
 import Style from "./Profile.module.css";
 import images from "../../../img";
 
-const Profile = ({ currentAccount }) => {
+import { NFTMarketplaceContext } from "../../../Context/NFTMarketplaceContext";
+
+const Profile = () => {
   window.scrollTo(0, 0);
-  const navigate = useNavigate();
+  const { currentAccount, userProfileData } = useContext(NFTMarketplaceContext);
 
   return (
     <div className={Style.profile}>
       <div className={Style.profile_account}>
         <img
-          src={images.user5}
+          src={userProfileData.imgUrl}
           alt="user profile"
           width={50}
           height={50}
@@ -24,7 +25,7 @@ const Profile = ({ currentAccount }) => {
         />
 
         <div className={Style.profile_account_info}>
-          <p>Jane</p>
+          <p>{userProfileData.username}</p>
           <small>{currentAccount.slice(0, 18)}..</small>
         </div>
       </div>

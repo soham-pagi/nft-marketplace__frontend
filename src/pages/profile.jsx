@@ -12,6 +12,7 @@ import {
 } from "../components/authorPage/componentIndex";
 
 const Profile = () => {
+  window.scrollTo(0, 0);
   const [collectiables, setCollectiables] = useState(true);
   const [created, setCreated] = useState(false);
 

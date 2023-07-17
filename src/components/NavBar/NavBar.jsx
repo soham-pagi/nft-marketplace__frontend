@@ -11,37 +11,37 @@ import { useNavigate } from "react-router-dom";
 import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Profile, SideBar } from "./index";
 import { Button, Error } from "../componentsindex";
-import images from "../../img";
 import { Notification } from "./index";
 
 //IMPORT FROM SMART CONTRACT
 import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 function NavBar() {
+  window.scrollTo(0, 0);
+
   //----USESTATE COMPONNTS
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-  const [isMetamaskConnected, setIsMetamaskConnected] = useState(false);
 
   const navigate = useNavigate();
 
-  const { currentAccount, connectWallet, openError } = useContext(
-    NFTMarketplaceContext
-  );
-
-  const checkMetamaskConnection = async () => {
-    if (window.ethereum && window.ethereum.isConnected()) {
-      setIsMetamaskConnected(true);
-    }
-  };
+  const {
+    currentAccount,
+    connectWallet,
+    isMetamaskConnected,
+    checkMetamaskConnection,
+    openError,
+    userProfileData,
+    getProfile,
+  } = useContext(NFTMarketplaceContext);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     checkMetamaskConnection();
-  }, []);
+    getProfile(currentAccount);
+  }, [currentAccount]);
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -92,6 +92,13 @@ function NavBar() {
 
   return (
     <div className={Style.navbar}>
+      <button
+        onClick={() => {
+          getProfile("0xab7e84c947b35656ccf9ff27331845cb1101bd2b");
+        }}
+      >
+        click
+      </button>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
           <div className={Style.logo}>
@@ -141,7 +148,9 @@ function NavBar() {
             {isMetamaskConnected ? (
               <Button
                 btnName="Create"
-                handleClick={() => navigate("/uploadNFT")}
+                handleClick={() => {
+                  navigate("/uploadNFT");
+                }}
               />
             ) : (
               <Button
@@ -158,7 +167,7 @@ function NavBar() {
           <div className={Style.navbar_container_right_profile_box}>
             <div className={Style.navbar_container_right_profile}>
               <img
-                src={images.user5}
+                src={userProfileData.imgUrl}
                 alt="Profile"
                 width={40}
                 height={40}
@@ -184,11 +193,7 @@ function NavBar() {
       {/* SIDBAR CPMPONE/NT */}
       {openSideMenu && (
         <div className={Style.sideBar}>
-          <SideBar
-            setOpenSideMenu={setOpenSideMenu}
-            // currentAccount={currentAccount}
-            // connectWallet={connectWallet}
-          />
+          <SideBar setOpenSideMenu={setOpenSideMenu} />
         </div>
       )}
 
