@@ -57,6 +57,7 @@ import loader from "./loadergif.gif";
 import errorgif from "./error.gif";
 import google from "./google.png";
 import dinoRefresh from "./DinoRefresh.gif";
+import randomGuy from "./RandomGuy.png";
 
 export default {
   hero2,
@@ -118,4 +119,5 @@ export default {
   errorgif,
   google,
   dinoRefresh,
+  randomGuy,
 };

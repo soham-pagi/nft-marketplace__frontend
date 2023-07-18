@@ -41,6 +41,7 @@ function NavBar() {
   useEffect(() => {
     checkMetamaskConnection();
     getProfile(currentAccount);
+    console.log({ currentAccount });
   }, [currentAccount]);
 
   const openMenu = (e) => {
@@ -92,13 +93,6 @@ function NavBar() {
 
   return (
     <div className={Style.navbar}>
-      <button
-        onClick={() => {
-          getProfile("0xab7e84c947b35656ccf9ff27331845cb1101bd2b");
-        }}
-      >
-        click
-      </button>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
           <div className={Style.logo}>
@@ -198,6 +192,13 @@ function NavBar() {
       )}
 
       {openError && <Error />}
+      <button
+        onClick={() => {
+          getProfile("0xab7e84c947b35656ccf9ff27331845cb1101bd2b");
+        }}
+      >
+        click
+      </button>
     </div>
   );
 }

@@ -20,8 +20,6 @@ const AuthorTaps = ({ setCollectiables, setCreated }) => {
     }
   };
 
-  console.log(Style);
-
   return (
     <div className={Style.AuthorTaps}>
       <div className={Style.AuthorTaps_box}>

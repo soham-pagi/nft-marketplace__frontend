@@ -14,7 +14,6 @@ import ReSellToken from "./pages/reSellToken";
 import SubscriptionPage from "./pages/subscriptionPage";
 
 import { Footer, NavBar } from "./components/componentsindex";
-import { Error } from "./components/componentsindex";
 
 import NFTMarketplaceProvider from "./Context/NFTMarketplaceContext";
 import Account from "./pages/account";

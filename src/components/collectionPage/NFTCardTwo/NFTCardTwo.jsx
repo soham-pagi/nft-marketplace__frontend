@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BsImage } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { Loader } from "../../componentsindex";
 
 //INTERNAL IMPORT
 import Style from "./NFTCardTwo.module.css";
@@ -30,6 +31,12 @@ const NFTCardTwo = ({ fetchType }) => {
 
   return (
     <div className={Style.NFTCardTwo}>
+      {nftData.length === 0 && fetchType === "listed" && (
+        <h1>You don't have any nft listed</h1>
+      )}
+      {nftData.length === 0 && fetchType === "myNFTs" && (
+        <h1>You don't own any NFTs</h1>
+      )}
       {nftData &&
         nftData.map((nft, i) => (
           <Link to={`/nft-details?tokenId=${nft.tokenId}`} key={i}>

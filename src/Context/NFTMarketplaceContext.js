@@ -6,6 +6,7 @@ import axios from "axios";
 //INTERNAL  IMPORT
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
 import { apiKey, apiSecret } from "../constants";
+import images from "../img/index";
 
 // Create context
 const NFTMarketplaceContext = createContext();
@@ -16,8 +17,8 @@ function NFTMarketplaceProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isMetamaskConnected, setIsMetamaskConnected] = useState(false);
   const [userProfileData, setUserProfileData] = useState({
-    username: "John Doe",
-    imgUrl: "",
+    username: "Guest",
+    imgUrl: images.randomGuy,
   });
 
   /// wallet state
@@ -54,27 +55,24 @@ function NFTMarketplaceProvider({ children }) {
   async function connectWallet() {
     try {
       if (!window.ethereum)
-        return setOpenError(true), setError("Install MetaMask");
+        return (
+          setOpenError(true), setError("Please install Metamask to continue...")
+        );
 
       const accounts = await window.ethereum.request({
         method: "eth_accounts",
       });
 
-      console.log(accounts[0]);
-
-      // if (accounts.length) {
-      //   setCurrentAccount(accounts[0]);
-      // } else {
-      //   setError("No Account Found");
-      //   setOpenError(true);
-      // }
-
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const unformattedBalance = await provider.getBalance(accounts[0]);
-      const balance = ethers.utils.formatEther(unformattedBalance);
-      setCurrentAccount(accounts[0]);
-      setBalance(balance);
-      checkMetamaskConnection();
+      if (accounts.length) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const unformattedBalance = await provider.getBalance(accounts[0]);
+        const balance = ethers.utils.formatEther(unformattedBalance);
+        setCurrentAccount(accounts[0]);
+        setBalance(balance);
+      } else {
+        setError("No Account Found");
+        setOpenError(true);
+      }
     } catch (error) {
       setError("Something wrong while connecting to wallet");
       setOpenError(true);
@@ -364,13 +362,13 @@ function NFTMarketplaceProvider({ children }) {
     }
   };
 
-  const getProfile = async (metamaskWalletAddress) => {
+  const getProfile = async (metamaskWalletAddress = "12345") => {
     if (metamaskWalletAddress === "") {
       return;
     }
 
     const apiUrl = `http://localhost:5000/api/users/${metamaskWalletAddress}`;
-    const userPhotoExtensionType = "image/jpeg"; // Replace with the desired image format
+    const userPhotoExtensionType = "image/jpeg";
 
     try {
       const response = await fetch(apiUrl);
@@ -382,14 +380,12 @@ function NFTMarketplaceProvider({ children }) {
 
       setUserProfileData({ username: jsonData.username, imgUrl });
     } catch (error) {
-      console.log("Failed to fetch", error);
+      console.log("Failed to fetch");
     }
   };
 
   const setProfile = async (metamaskWalletAddress, username, imgFile) => {
-    if (!metamaskWalletAddress && !username && !imgFile) {
-      return;
-    }
+    if (metamaskWalletAddress === "" && username === "" && !imgFile) return;
 
     const formData = new FormData();
     formData.append("metamaskWalletAddress", metamaskWalletAddress);
@@ -413,6 +409,8 @@ function NFTMarketplaceProvider({ children }) {
       }
     } catch (error) {
       console.error("Error creating user:", error);
+      setOpenError(true);
+      setError("Error setting profile. Try again later.");
     }
   };
 

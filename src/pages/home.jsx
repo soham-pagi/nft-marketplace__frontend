@@ -12,7 +12,6 @@ const Home = () => {
     <div style={{ marginTop: 95 }}>
       <HeroSection />
       <Service />
-      <Collection />
     </div>
   );
 };

@@ -16,7 +16,6 @@ const Account = () => {
 
   useEffect(() => {
     setFileUrl(userProfileData.imgUrl);
-    console.log(fileUrl);
   }, [userProfileData.imgUrl]);
 
   const onDrop = useCallback(async (acceptedFile) => {
@@ -34,10 +33,7 @@ const Account = () => {
     <div className={Style.account}>
       <div className={Style.account_info}>
         <h1>Profile settings</h1>
-        <p>
-          You can set preferred display name, create your profile URL and manage
-          other personal settings.
-        </p>
+        <p>You can set preferred display name, create your profile picture.</p>
       </div>
 
       <div className={Style.account_box}>
