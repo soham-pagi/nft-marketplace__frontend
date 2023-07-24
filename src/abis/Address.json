@@ -4337,8 +4337,8 @@
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.13",
-  "updatedAt": "2023-07-14T07:46:56.581Z",
+  "schemaVersion": "3.4.14",
+  "updatedAt": "2023-07-24T09:40:50.726Z",
   "devdoc": {
     "details": "Collection of functions related to the address type",
     "kind": "dev",

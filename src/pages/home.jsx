@@ -4,7 +4,6 @@ import React from "react";
 import {
   HeroSection,
   Service,
-  Collection,
 } from "../components/componentsindex";
 
 const Home = () => {

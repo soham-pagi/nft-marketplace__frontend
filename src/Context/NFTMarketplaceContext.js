@@ -30,26 +30,10 @@ function NFTMarketplaceProvider({ children }) {
   const [openError, setOpenError] = useState(false);
 
   const checkMetamaskConnection = async () => {
-    if (window.ethereum && window.ethereum.isConnected()) {
-      setIsMetamaskConnected(true);
-
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-
-      try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const bal = await provider.getBalance(accounts[0]);
-        const formattedBalance = ethers.utils.formatEther(bal);
-        const trimmedBalance = parseFloat(formattedBalance).toFixed(3);
-        setCurrentAccount(accounts[0]);
-        setBalance(trimmedBalance);
-      } catch (error) {
-        console.log("Something went wrong", error);
-      }
-
-      console.log({ currentAccount });
-    }
+    const acc = localStorage.getItem("currentAccount");
+    console.log({acc})
+    setCurrentAccount(acc);
+    setIsMetamaskConnected(true);
   };
 
   async function connectWallet() {
@@ -59,20 +43,20 @@ function NFTMarketplaceProvider({ children }) {
           setOpenError(true), setError("Please install Metamask to continue...")
         );
 
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-
-      if (accounts.length) {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const unformattedBalance = await provider.getBalance(accounts[0]);
-        const balance = ethers.utils.formatEther(unformattedBalance);
-        setCurrentAccount(accounts[0]);
-        setBalance(balance);
-      } else {
-        setError("No Account Found");
-        setOpenError(true);
-      }
+      const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      window.signer = signer;
+      const acc = await signer.getAddress();
+      const unformattedPrice = await signer.getBalance();
+      const bal = ethers.utils.formatUnits(
+        unformattedPrice.toString(),
+        "ether"
+      );
+      setIsMetamaskConnected(true);
+      setCurrentAccount(acc);
+      setBalance(bal);
+      localStorage.setItem("currentAccount", acc);
     } catch (error) {
       setError("Something wrong while connecting to wallet");
       setOpenError(true);
@@ -154,10 +138,11 @@ function NFTMarketplaceProvider({ children }) {
 
       await createSale(url, price, name, description);
       console.log({ url, price });
-      // navigate("/collection");
+      return true;
     } catch (error) {
       setError("Error while creating NFT");
       setOpenError(true);
+      return false;
     }
   };
 
@@ -248,11 +233,10 @@ function NFTMarketplaceProvider({ children }) {
   //--FETCHNFTS FUNCTION
   const fetchNFTs = async () => {
     try {
-      // const provider = new ethers.providers.JsonRpcProvider(
-      //   "http://127.0.0.1:7545"
-      // );
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-
+      const provider = new ethers.providers.JsonRpcProvider(
+        "http://127.0.0.1:7545"
+      );
+      // const provider = new ethers.providers.Web3Provider(window.ethereum);
       const contract = fetchContract(provider);
       window.c = contract;
       window.f = fetchNftWithId;
@@ -292,6 +276,7 @@ function NFTMarketplaceProvider({ children }) {
       return items;
     } catch (error) {
       setError("Error while fetching NFTS");
+      console.log(error)
       setOpenError(true);
     }
   };
@@ -373,6 +358,7 @@ function NFTMarketplaceProvider({ children }) {
     try {
       const response = await fetch(apiUrl);
       const jsonData = await response.json();
+      console.log({ jsonData})
 
       const imageData = new Uint8Array(jsonData.image.data.data);
       const base64Data = btoa(String.fromCharCode.apply(null, imageData));
@@ -380,7 +366,7 @@ function NFTMarketplaceProvider({ children }) {
 
       setUserProfileData({ username: jsonData.username, imgUrl });
     } catch (error) {
-      console.log("Failed to fetch");
+      console.log("Failed to fetch", error);
     }
   };
 
@@ -406,6 +392,8 @@ function NFTMarketplaceProvider({ children }) {
         getProfile(currentAccount);
       } else {
         console.error("Error creating user:", response.statusText);
+        setOpenError(true);
+        setError("An error occured");
       }
     } catch (error) {
       console.error("Error creating user:", error);

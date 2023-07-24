@@ -4,7 +4,7 @@ import React from "react";
 import Style from "./Notification.module.css";
 import images from "../../../img";
 
-const Notification = (notificationData) => {
+const Notification = ({ setNotification}) => {
   // notificationData object will contain the actual data
 
   const sampleNotifications = [

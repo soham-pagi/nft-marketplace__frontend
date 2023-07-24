@@ -4,7 +4,6 @@ import { DiJqueryLogo } from "react-icons/di";
 //----IMPORT ICON
 import { MdNotifications } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
-import { CgMenuRight } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 
 //INTERNAL IMPORT
@@ -24,7 +23,6 @@ function NavBar() {
   const [help, setHelp] = useState(false);
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
-  const [openSideMenu, setOpenSideMenu] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,30 +38,17 @@ function NavBar() {
 
   useEffect(() => {
     checkMetamaskConnection();
+
+    window.ethereum.on("accountsChanged", async function() {
+      connectWallet();
+      // window.location.reload();
+    });
+  }, []);
+
+  useEffect(() => {
     getProfile(currentAccount);
-    console.log({ currentAccount });
+
   }, [currentAccount]);
-
-  const openMenu = (e) => {
-    const btnText = e.target.innerText;
-
-    if (btnText === "Discover") {
-      setDiscover((pre) => !pre);
-      setHelp(false);
-      setNotification(false);
-      setProfile(false);
-    } else if (btnText === "Help Center") {
-      setDiscover(false);
-      setHelp((pre) => !pre);
-      setNotification(false);
-      setProfile(false);
-    } else {
-      setDiscover(false);
-      setHelp(false);
-      setNotification(false);
-      setProfile(false);
-    }
-  };
 
   const openNotification = () => {
     setNotification((pre) => !pre);
@@ -78,11 +63,32 @@ function NavBar() {
     setDiscover(false);
   };
 
-  const openSideBar = () => {
-    if (!openSideMenu) {
-      setOpenSideMenu(true);
+  const openDiscover = () => {
+    setDiscover((pre) => !pre);
+    setHelp(false);
+    setNotification(false);
+    setProfile(false);
+  }
+
+  const openHelp = () => {
+    setHelp((pre) => !pre);
+    setDiscover(false);
+    setNotification(false);
+    setProfile(false);
+  }
+
+  const openMenu = (e) => {
+    const btnText = e.target.innerText;
+
+    if (btnText === "Discover") {
+      openDiscover();
+    } else if (btnText === "Help Center") {
+      openHelp();
+    }
+    else if (btnText === "Notifications") {
+      openNotification();
     } else {
-      setOpenSideMenu(false);
+      openProfile();
     }
   };
 
@@ -113,7 +119,7 @@ function NavBar() {
             <p onClick={(e) => openMenu(e)}>Discover</p>
             {discover && (
               <div className={Style.navbar_container_right_discover_box}>
-                <Discover />
+                <Discover setDiscover={setDiscover}/>
               </div>
             )}
           </div>
@@ -123,7 +129,7 @@ function NavBar() {
             <p onClick={(e) => openMenu(e)}>Help Center</p>
             {help && (
               <div className={Style.navbar_container_right_help_box}>
-                <HelpCenter />
+                <HelpCenter setHelp={setHelp} />
               </div>
             )}
           </div>
@@ -132,9 +138,11 @@ function NavBar() {
           <div className={Style.navbar_container_right_notify}>
             <MdNotifications
               className={Style.notify}
-              onClick={() => openNotification()}
+              onClick={(e) => {
+                openMenu({target: { innerText: "Notifications"}})
+              }}
             />
-            {notification && <Notification />}
+            {notification && <Notification setNotification={setNotification} />}
           </div>
 
           {/* CREATE BUTTON SECTION */}
@@ -143,6 +151,9 @@ function NavBar() {
               <Button
                 btnName="Create"
                 handleClick={() => {
+                  setDiscover(false);
+                  setHelp(false);
+                  setNotification(false)
                   navigate("/uploadNFT");
                 }}
               />
@@ -151,7 +162,6 @@ function NavBar() {
                 btnName="Connect"
                 handleClick={() => {
                   connectWallet();
-                  checkMetamaskConnection();
                 }}
               />
             )}
@@ -165,36 +175,21 @@ function NavBar() {
                 alt="Profile"
                 width={40}
                 height={40}
-                onClick={() => openProfile()}
+                onClick={(e) => openMenu(e)}
                 className={Style.navbar_container_right_profile}
               />
 
-              {profile && <Profile currentAccount={currentAccount} />}
+              {profile && <Profile currentAccount={currentAccount} setProfile={setProfile} />}
             </div>
-          </div>
-
-          {/* MENU BUTTON */}
-
-          <div className={Style.navbar_container_right_menuBtn}>
-            <CgMenuRight
-              className={Style.menuIcon}
-              onClick={() => openSideBar()}
-            />
           </div>
         </div>
       </div>
 
-      {/* SIDBAR CPMPONE/NT */}
-      {openSideMenu && (
-        <div className={Style.sideBar}>
-          <SideBar setOpenSideMenu={setOpenSideMenu} />
-        </div>
-      )}
-
       {openError && <Error />}
       <button
         onClick={() => {
-          getProfile("0xab7e84c947b35656ccf9ff27331845cb1101bd2b");
+          checkMetamaskConnection();
+          getProfile(currentAccount);
         }}
       >
         click

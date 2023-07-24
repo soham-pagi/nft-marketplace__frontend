@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 
 //INTERNAL IMPORT
 import Style from "../styles/author.module.css";
 import { Banner } from "../components/collectionPage/collectionIndex";
-import { Brand, Title } from "../components/componentsindex";
+import { Brand } from "../components/componentsindex";
 import images from "../img";
 
 import {
@@ -12,12 +12,9 @@ import {
 } from "../components/authorPage/componentIndex";
 
 const Profile = () => {
+  window.scrollTo(0, 0);
   const [collectiables, setCollectiables] = useState(true);
   const [created, setCreated] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className={Style.author}>

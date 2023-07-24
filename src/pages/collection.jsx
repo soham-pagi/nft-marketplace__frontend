@@ -15,8 +15,6 @@ import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 const CollectionPage = () => {
   window.scrollTo(0, 0);
 
-  const { fetchNFTs } = useContext(NFTMarketplaceContext);
-
   return (
     <div className={Style.collection}>
       <Banner bannerImage={images.creatorbackground1} />

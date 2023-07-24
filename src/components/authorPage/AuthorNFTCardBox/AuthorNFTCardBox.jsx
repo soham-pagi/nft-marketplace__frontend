@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 //INTERNAL IMPORT
 import Style from "./AuthorNFTCardBox.module.css";

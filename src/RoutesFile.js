@@ -12,7 +12,7 @@ import Blog from "./pages/blog";
 import NFTDetails from "./pages/NFT-details";
 import ReSellToken from "./pages/reSellToken";
 import SubscriptionPage from "./pages/subscriptionPage";
-
+import PageNotFound from "./pages/PageNotFound";
 import { Footer, NavBar } from "./components/componentsindex";
 
 import NFTMarketplaceProvider from "./Context/NFTMarketplaceContext";
@@ -38,6 +38,7 @@ const RoutesFile = () => {
           <Route path="/reSellToken" element={<ReSellToken />} />
           <Route path="/account" element={<Account />} />
           <Route path="/subscription" element={<SubscriptionPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
       </Router>

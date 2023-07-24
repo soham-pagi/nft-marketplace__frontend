@@ -12,7 +12,7 @@ const Account = () => {
   window.scrollTo(0, 0);
   const { userProfileData } = useContext(NFTMarketplaceContext);
   const [fileUrl, setFileUrl] = useState(images.upload);
-  const [imgFile, setImgFile] = useState(null);
+  const [imgFile, setImgFile] = useState(images.upload);
 
   useEffect(() => {
     setFileUrl(userProfileData.imgUrl);
