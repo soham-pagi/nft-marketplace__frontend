@@ -40,7 +40,7 @@ const Profile = ({ setProfile }) => {
           <div className={Style.profile_menu_one_item}>
             <FaUserEdit />
             <p>
-              <Link onClick={() => setProfile(false) } to={"/account"}>Edit Profile</Link>
+              <Link onClick={() => setProfile(false) } to={"/my-items"}>My Items</Link>
             </p>
           </div>
         </div>

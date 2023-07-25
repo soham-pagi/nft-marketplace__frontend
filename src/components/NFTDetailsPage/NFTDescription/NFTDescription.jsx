@@ -32,6 +32,8 @@ import { NFTTabs } from "../NFTDetailsIndex";
 import { NFTMarketplaceContext } from "../../../Context/NFTMarketplaceContext";
 
 const NFTDescription = ({ nft }) => {
+  const { buyNFT, currentAccount, userProfileData } = useContext(NFTMarketplaceContext);
+
   const [social, setSocial] = useState(false);
   const [NFTMenu, setNFTMenu] = useState(false);
   const [history, setHistory] = useState(true);
@@ -106,7 +108,7 @@ const NFTDescription = ({ nft }) => {
   };
 
   //SMART CONTRACT DATA
-  const { buyNFT, currentAccount } = useContext(NFTMarketplaceContext);
+  console.log(nft.seller === currentAccount);
 
   return (
     <div className={Style.NFTDescription}>
@@ -154,7 +156,7 @@ const NFTDescription = ({ nft }) => {
                   <BiTransferAlt /> Transfer
                 </a>
                 <a href="#">
-                  <MdReportProblem /> Report abouse
+                  <MdReportProblem /> Report abuse
                 </a>
                 <a href="#">
                   <MdOutlineDeleteSweep /> Delete item
@@ -171,7 +173,7 @@ const NFTDescription = ({ nft }) => {
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
               <img
-                src={images.user9}
+                src={userProfileData.imgUrl}
                 alt="profile"
                 width={40}
                 height={40}
@@ -179,18 +181,14 @@ const NFTDescription = ({ nft }) => {
               />
               <div className={Style.NFTDescription_box_profile_box_left_info}>
                 <small>Creator</small> <br />
-                <Link to={"/author"}>
-                  <span>
-                    Jane <MdVerified />
-                  </span>
-                </Link>
+                <span>{userProfileData.username}</span>
               </div>
             </div>
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
             <div className={Style.NFTDescription_box_profile_biding_box_button}>
-              {currentAccount == nft.seller.toLowerCase() ? (
+              {currentAccount.toLowerCase() === nft.seller.toLowerCase() ? (
                 <p>You can't buy your own NFT</p>
               ) : currentAccount == nft.owner.toLowerCase() ? (
                 <Button

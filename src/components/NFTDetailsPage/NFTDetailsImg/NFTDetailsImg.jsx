@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-// import Image from "next/image";
+import React, { useState } from "react";
 import { BsImages } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 //INTERNAL IMPORT
 import Style from "./NFTDetailsImg.module.css";
-import images from "../../../img";
 
 const NFTDetailsImg = ({ nft }) => {
   const [description, setDescription] = useState(true);
@@ -26,14 +23,6 @@ const NFTDetailsImg = ({ nft }) => {
       setDetails(true);
     } else {
       setDetails(false);
-    }
-  };
-
-  const likeNFT = () => {
-    if (!like) {
-      setLike(true);
-    } else {
-      setLike(false);
     }
   };
 
@@ -80,7 +69,6 @@ const NFTDetailsImg = ({ nft }) => {
 
         {details && (
           <div className={Style.NFTDetailsImg_box_details_box}>
-            <small>2000 x 2000 px.IMAGE(685KB)</small>
             <p>
               <small>Contract Address</small>
               <br></br>
