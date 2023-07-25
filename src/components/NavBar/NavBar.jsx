@@ -41,8 +41,14 @@ function NavBar() {
 
     window.ethereum.on("accountsChanged", async function() {
       connectWallet();
-      // window.location.reload();
     });
+
+    // window.addEventListener("beforeunload", function(event) {
+    //   if (!event.currentTarget.performance || event.currentTarget.performance.navigation.type !== 1) {
+    //     this.localStorage.removeItem("currentAccount");
+    //       return;
+    //   }
+    // });
   }, []);
 
   useEffect(() => {
