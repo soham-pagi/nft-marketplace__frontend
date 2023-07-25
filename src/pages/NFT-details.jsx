@@ -3,14 +3,14 @@ import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 //INTERNAL IMPORT
-import { Button, Category, Brand } from "../components/componentsindex";
+import { Category, Brand } from "../components/componentsindex";
 import NFTDetailsPage from "../components/NFTDetailsPage/NFTDetailsPage";
 
 //IMPORT SMART CONTRACT DATA
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
 const NFTDetails = () => {
-  const { currentAccount, fetchNftWithId } = useContext(NFTMarketplaceContext);
+  const { fetchNftWithId } = useContext(NFTMarketplaceContext);
 
   const location = useLocation();
 
@@ -32,7 +32,7 @@ const NFTDetails = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingTop: 20}}>
       <NFTDetailsPage nft={nft} />
       <Category />
       <Brand />

@@ -357,16 +357,19 @@ function NFTMarketplaceProvider({ children }) {
 
     try {
       const response = await fetch(apiUrl);
-      const jsonData = await response.json();
-      console.log({ jsonData})
 
-      const imageData = new Uint8Array(jsonData.image.data.data);
-      const base64Data = btoa(String.fromCharCode.apply(null, imageData));
-      const imgUrl = `data:${userPhotoExtensionType};base64, ${base64Data}`;
+      if (response.ok) {
+        const jsonData = await response.json();
+        console.log({ jsonData })
 
-      setUserProfileData({ username: jsonData.username, imgUrl });
+        const imageData = new Uint8Array(jsonData.image.data.data);
+        const base64Data = btoa(String.fromCharCode.apply(null, imageData));
+        const imgUrl = `data:${userPhotoExtensionType};base64, ${base64Data}`;
+
+        setUserProfileData({ username: jsonData.username, imgUrl });
+      }
     } catch (error) {
-      console.log("Failed to fetch", error);
+      console.log(error.message);
     }
   };
 

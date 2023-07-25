@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 //INTERNAL IMPORT
@@ -6,10 +6,6 @@ import Style from "./HeroSection.module.css";
 import images from "../../img";
 import Button from "../Button/Button";
 
-// import { Button } from "../componentsindex";
-
-//SMART CONTRACT IMPORT
-// import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -18,7 +14,6 @@ const HeroSection = () => {
     <div className={Style.heroSection}>
       <div className={Style.heroSection_box}>
         <div className={Style.heroSection_box_left}>
-          {/* <h1>{titleData} 🖼️</h1> */}
           <h1>Discover, Collect and Sell</h1>
           <p>
             Discover the most outstanding NTFs in all topics of life. Creative
