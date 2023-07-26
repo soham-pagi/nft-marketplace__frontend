@@ -1,11 +1,11 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 // import Buffer from "buffer";
 
 //INTERNAL  IMPORT
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
-import { apiKey, apiSecret } from "../constants";
+// import { apiKey, apiSecret } from "../constants";
 import images from "../img/index";
 
 // Create context
@@ -23,7 +23,7 @@ function NFTMarketplaceProvider({ children }) {
 
   /// wallet state
   const [currentAccount, setCurrentAccount] = useState("");
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(0.0);
 
   //------USESTATE
   const [error, setError] = useState("");
@@ -31,9 +31,12 @@ function NFTMarketplaceProvider({ children }) {
 
   const checkMetamaskConnection = async () => {
     const acc = localStorage.getItem("currentAccount");
-    console.log({acc})
-    setCurrentAccount(acc);
-    setIsMetamaskConnected(true);
+    if (acc) {
+      console.log({acc})
+      setCurrentAccount(acc);
+      setIsMetamaskConnected(true);
+
+    }
   };
 
   async function connectWallet() {
@@ -46,13 +49,13 @@ function NFTMarketplaceProvider({ children }) {
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner();
-      window.signer = signer;
       const acc = await signer.getAddress();
       const unformattedPrice = await signer.getBalance();
       const bal = ethers.utils.formatUnits(
         unformattedPrice.toString(),
         "ether"
       );
+
       setIsMetamaskConnected(true);
       setCurrentAccount(acc);
       setBalance(bal);
@@ -61,6 +64,19 @@ function NFTMarketplaceProvider({ children }) {
       setError("Something wrong while connecting to wallet");
       setOpenError(true);
     }
+  }
+
+  const getBalance = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const unformattedPrice = await signer.getBalance();
+    const bal = ethers.utils.formatUnits(
+      unformattedPrice.toString(),
+      "ether"
+    );
+
+    setBalance(bal);
   }
 
   //---FETCHING SMART CONTRACT
@@ -86,36 +102,28 @@ function NFTMarketplaceProvider({ children }) {
 
   //---UPLOAD TO IPFS FUNCTION
   const uploadToIPFS = async (image) => {
-    console.log("In uploadToIPFS");
-
     try {
-      console.log("In try block", image);
       const formData = new FormData();
-
-      // formData.append("pinataMetadata", JSON.stringify(metadata));
       formData.append("file", image);
 
-      console.log("above axios");
       const resFile = await axios({
         method: "post",
-        url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        // url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        url: `${process.env.REACT_APP_IPFS_URL}`,
         maxBodyLength: "Infinity",
         data: formData,
         headers: {
           "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
-          pinata_api_key: `${apiKey}`,
-          pinata_secret_api_key: `${apiSecret}`,
+          pinata_api_key: `${process.env.REACT_APP_API_KEY}`,
+          pinata_secret_api_key: `${process.env.REACT_APP_API_SECRET}`,
           Accept: "text/plain",
         },
       });
 
-      console.log("res.data", resFile.data);
-
-      const imageLink = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
+      const imageLink = `${process.env.REACT_APP_API_PREFIX}${resFile.data.IpfsHash}`;
       console.log(imageLink);
       return imageLink;
     } catch (error) {
-      console.log("Error sending File to IPFS: ");
       console.log(error);
       setError("Error Uploading to IPFS");
       setOpenError(true);
@@ -156,10 +164,7 @@ function NFTMarketplaceProvider({ children }) {
     id
   ) => {
     try {
-      console.log({ url, formInputPrice, isReselling, id });
-
       const price = ethers.utils.parseUnits(formInputPrice, "ether");
-      console.log({ price });
 
       const contract = await connectingWithSmartContract();
 
@@ -347,17 +352,20 @@ function NFTMarketplaceProvider({ children }) {
     }
   };
 
-  const getProfile = async (metamaskWalletAddress = "12345") => {
+  const getProfile = async (metamaskWalletAddress) => {
+    console.log({ metamaskWalletAddress });
     if (metamaskWalletAddress === "") {
+      // metamaskWalletAddress = "12345";
       return;
     }
 
+
     const apiUrl = `${process.env.REACT_APP_GET_USER_PROFILE}${metamaskWalletAddress}`;
+    const response = await fetch(apiUrl);
     const userPhotoExtensionType = "image/jpeg";
 
-    try {
-      const response = await fetch(apiUrl);
 
+    try {
       if (response.ok) {
         const jsonData = await response.json();
         console.log({ jsonData })
@@ -375,6 +383,8 @@ function NFTMarketplaceProvider({ children }) {
 
   const setProfile = async (metamaskWalletAddress, username, imgFile) => {
     if (metamaskWalletAddress === "" && username === "" && !imgFile) return;
+
+    console.log({ metamaskWalletAddress, username, imgFile})
 
     const formData = new FormData();
     formData.append("metamaskWalletAddress", metamaskWalletAddress);
@@ -405,6 +415,10 @@ function NFTMarketplaceProvider({ children }) {
     }
   };
 
+  useEffect(() => {
+    getBalance();
+  }, []);
+
   return (
     <NFTMarketplaceContext.Provider
       value={{
@@ -432,6 +446,7 @@ function NFTMarketplaceProvider({ children }) {
         setIsLoading,
         getProfile,
         setProfile,
+        getBalance,
       }}
     >
       {children}
