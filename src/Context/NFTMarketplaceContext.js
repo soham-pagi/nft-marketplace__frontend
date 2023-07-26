@@ -352,7 +352,7 @@ function NFTMarketplaceProvider({ children }) {
       return;
     }
 
-    const apiUrl = `http://localhost:5000/api/users/${metamaskWalletAddress}`;
+    const apiUrl = `${process.env.REACT_APP_GET_USER_PROFILE}${metamaskWalletAddress}`;
     const userPhotoExtensionType = "image/jpeg";
 
     try {
@@ -381,7 +381,7 @@ function NFTMarketplaceProvider({ children }) {
     formData.append("username", username);
     formData.append("image", imgFile);
 
-    const apiUrl = `http://localhost:5000/api/users/`;
+    const apiUrl = `${process.env.REACT_APP_SET_USER_PROFILE}`;
 
     try {
       const response = await fetch(apiUrl, {
