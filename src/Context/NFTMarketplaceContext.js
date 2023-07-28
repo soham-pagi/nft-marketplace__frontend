@@ -38,10 +38,15 @@ function NFTMarketplaceProvider({ children }) {
 
   async function connectWallet() {
     try {
-      if (!window.ethereum)
+      if (!window.ethereum) {
         return (
           setOpenError(true), setError("Please install Metamask to continue...")
         );
+      }
+
+      window.ethereum.on("accountsChanged", async function() {
+        connectWallet();
+      });
 
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await provider.send("eth_requestAccounts", []);
@@ -64,6 +69,12 @@ function NFTMarketplaceProvider({ children }) {
   }
 
   const getBalance = async () => {
+    if (!window.ethereum) {
+      return (
+        setOpenError(true), setError("Please install Metamask to continue...")
+      );
+    }
+    
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
