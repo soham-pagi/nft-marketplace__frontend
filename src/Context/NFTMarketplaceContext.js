@@ -273,7 +273,7 @@ function NFTMarketplaceProvider({ children }) {
       );
 
       console.log(items);
-      return [];
+      return items;
     } catch (error) {
       setError("Error while fetching NFTS");
       console.log(error)
