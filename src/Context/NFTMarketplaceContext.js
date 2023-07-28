@@ -1,11 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
-// import Buffer from "buffer";
 
 //INTERNAL  IMPORT
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
-// import { apiKey, apiSecret } from "../constants";
 import images from "../img/index";
 
 // Create context
@@ -35,7 +33,6 @@ function NFTMarketplaceProvider({ children }) {
       console.log({acc})
       setCurrentAccount(acc);
       setIsMetamaskConnected(true);
-
     }
   };
 
@@ -239,12 +236,10 @@ function NFTMarketplaceProvider({ children }) {
   const fetchNFTs = async () => {
     try {
       const provider = new ethers.providers.JsonRpcProvider(
-        "http://127.0.0.1:7545"
+        // "http://127.0.0.1:7545"
+        "https://polygon-mumbai.g.alchemy.com/v2/m3ZhghonD5KpQKNavSsYtwug5Glsyve2"
       );
-      // const provider = new ethers.providers.Web3Provider(window.ethereum);
       const contract = fetchContract(provider);
-      window.c = contract;
-      window.f = fetchNftWithId;
 
       const data = await contract.fetchMarketItems();
 
@@ -278,11 +273,12 @@ function NFTMarketplaceProvider({ children }) {
       );
 
       console.log(items);
-      return items;
+      return [];
     } catch (error) {
       setError("Error while fetching NFTS");
       console.log(error)
       setOpenError(true);
+      return [];
     }
   };
 
@@ -330,6 +326,7 @@ function NFTMarketplaceProvider({ children }) {
       console.log(error);
       setError("Error while fetching listed NFTs");
       setOpenError(true);
+      return [];
     }
   };
 
