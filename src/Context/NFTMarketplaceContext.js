@@ -238,7 +238,6 @@ function NFTMarketplaceProvider({ children }) {
         )
       );
 
-      console.log(item);
       return item;
     } catch (error) {
       console.log(error);
@@ -371,7 +370,6 @@ function NFTMarketplaceProvider({ children }) {
   };
 
   const getProfile = async (metamaskWalletAddress) => {
-    console.log({ metamaskWalletAddress });
     if (metamaskWalletAddress === "") {
       metamaskWalletAddress = "12345";
     }
@@ -389,6 +387,7 @@ function NFTMarketplaceProvider({ children }) {
         const base64Data = btoa(String.fromCharCode.apply(null, imageData));
         const imgUrl = `data:${userPhotoExtensionType};base64, ${base64Data}`;
 
+        return { username: jsonData.username, imgUrl };
         setUserProfileData({ username: jsonData.username, imgUrl });
       }
     } catch (error) {
@@ -464,6 +463,7 @@ function NFTMarketplaceProvider({ children }) {
         setError,
         isLoading,
         setIsLoading,
+        setUserProfileData,
         getProfile,
         setProfile,
         getBalance,

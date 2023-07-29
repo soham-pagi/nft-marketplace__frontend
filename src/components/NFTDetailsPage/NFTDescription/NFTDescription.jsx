@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-// import Image from "next/image";
-// import Link from "next/link";
-import { Link, useNavigate } from "react-router-dom";
-// import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 
 import {
-  MdVerified,
   MdCloudUpload,
-  MdTimer,
   MdReportProblem,
   MdOutlineDeleteSweep,
 } from "react-icons/md";
@@ -24,21 +19,24 @@ import { BiTransferAlt, BiDollar } from "react-icons/bi";
 
 //INTERNAL IMPORT
 import Style from "./NFTDescription.module.css";
-import images from "../../../img";
 import { Button } from "../../../components/componentsindex.js";
-import { NFTTabs } from "../NFTDetailsIndex";
 
 //IMPORT SMART CONTRACT
 import { NFTMarketplaceContext } from "../../../Context/NFTMarketplaceContext";
 
 const NFTDescription = ({ nft }) => {
-  const { buyNFT, currentAccount, userProfileData } = useContext(NFTMarketplaceContext);
+  const { buyNFT, currentAccount, getProfile } = useContext(NFTMarketplaceContext);
 
   const [social, setSocial] = useState(false);
   const [NFTMenu, setNFTMenu] = useState(false);
-  const [history, setHistory] = useState(true);
-  const [provanance, setProvanance] = useState(false);
-  const [owner, setOwner] = useState(false);
+  const [creatorData, setCreatorData] = useState({ username: "", image: {}});
+
+  useEffect(() => {
+    (async function() {
+      const data = await getProfile(nft.seller);
+      setCreatorData(data);
+    })();
+  }, [nft])
 
   const navigate = useNavigate();
 
@@ -57,17 +55,6 @@ const NFTDescription = ({ nft }) => {
       setSocial(false);
     } else {
       setNFTMenu(false);
-    }
-  };
-
-  const openOwmer = () => {
-    if (!owner) {
-      setOwner(true);
-      setHistory(false);
-      setProvanance(false);
-    } else {
-      setOwner(false);
-      setHistory(true);
     }
   };
 
@@ -126,6 +113,7 @@ const NFTDescription = ({ nft }) => {
             )}
           </div>
         </div>
+
         {/* //Part TWO */}
         <div className={Style.NFTDescription_box_profile}>
           <h1>
@@ -134,7 +122,7 @@ const NFTDescription = ({ nft }) => {
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
               <img
-                src={userProfileData.imgUrl}
+                src={creatorData.imgUrl}
                 alt="profile"
                 width={40}
                 height={40}
@@ -142,7 +130,7 @@ const NFTDescription = ({ nft }) => {
               />
               <div className={Style.NFTDescription_box_profile_box_left_info}>
                 <small>Creator</small> <br />
-                <span>{userProfileData.username}</span>
+                <span>{creatorData.username}</span>
               </div>
             </div>
           </div>

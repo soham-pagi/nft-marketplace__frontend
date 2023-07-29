@@ -29,15 +29,18 @@ function NavBar() {
     currentAccount,
     connectWallet,
     isMetamaskConnected,
-    checkMetamaskConnection,
     openError,
     userProfileData,
+    setUserProfileData,
     getProfile,
     isLoading
   } = useContext(NFTMarketplaceContext);
 
   useEffect(() => {
-    getProfile(currentAccount);
+    (async function () {
+      const user = await getProfile(currentAccount);
+      setUserProfileData(user);
+    })();
 
   }, [currentAccount]);
 

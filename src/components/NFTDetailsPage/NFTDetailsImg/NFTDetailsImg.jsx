@@ -8,7 +8,6 @@ import Style from "./NFTDetailsImg.module.css";
 const NFTDetailsImg = ({ nft }) => {
   const [description, setDescription] = useState(true);
   const [details, setDetails] = useState(true);
-  const [like, setLike] = useState(false);
 
   const openDescription = () => {
     if (!description) {
