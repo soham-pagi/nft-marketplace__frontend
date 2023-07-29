@@ -1,17 +1,19 @@
-.NFTCardTwo{
+.NFTCardTwo {
     width: 95%;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 3rem;
+    gap: 2rem;
     margin-bottom: 14rem;
 }
 
-.NFTCardTwo_box{
+.NFTCardTwo_box {
     display: grid;
     cursor: pointer;
     transition: all .3s ease-in;
     border-radius: 1rem;
+    border: 2px solid rgb(56, 56, 56);
+    width: 303px;
 }
 
 .NFTCardTwo_box:hover{

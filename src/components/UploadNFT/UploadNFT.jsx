@@ -94,7 +94,7 @@ function UploadNFT({ createNFT }) {
             handleClick={async () => {
               const success = await createNFT(name, price, image, description);
               if (success) {
-                navigate("/profile"); 
+                navigate("/my-items"); 
               }
             }}
             classStyle={Style.upload_box_btn_style}

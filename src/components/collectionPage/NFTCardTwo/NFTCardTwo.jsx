@@ -15,11 +15,12 @@ const NFTCardTwo = ({ fetchType, nfts }) => {
   useEffect(() => {
     if (nfts) {
       setMainNft(nfts);
+      console.log("here?????")
     }
     else if (fetchType === "all") {
       fetchNFTs().then((data) => {
         setMainNft(data);
-        console.log("here")
+        console.log("this")
       });
     } else if (fetchType === "listed") {
       fetchMyNFTsOrListedNFTs("fetchItemsListed").then((data) =>
@@ -60,8 +61,8 @@ const NFTCardTwo = ({ fetchType, nfts }) => {
                 <img
                   src={nft.tokenURI}
                   alt="NFT"
-                  width={405}
-                  height={400}
+                  width={300}
+                  height={300}
                   className={Style.NFTCardTwo_box_img_img}
                 />
               </div>
@@ -75,7 +76,7 @@ const NFTCardTwo = ({ fetchType, nfts }) => {
               <div className={Style.NFTCardTwo_box_price}>
                 <div className={Style.NFTCardTwo_box_price_box}>
                   <small>Current Price</small>
-                  <p>{nft.price || i + 4} ETH</p>
+                  <p>{nft.price} ETH</p>
                 </div>
               </div>
             </div>

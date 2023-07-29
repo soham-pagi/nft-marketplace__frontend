@@ -346,7 +346,7 @@ function NFTMarketplaceProvider({ children }) {
       setOpenError(true);
       return [];
     } finally {
-    setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
