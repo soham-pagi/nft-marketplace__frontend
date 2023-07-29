@@ -22,7 +22,7 @@ const UploadNFTPage = () => {
 
       <div className={Style.uploadNFT_box_title}>
         <h2>Image</h2>
-        <p>File types supported: JPG, PNG, Max size: 10 MB</p>
+        <p>File types supported: JPG, PNG, Max size: 100 MB</p>
       </div>
       <UploadNFT createNFT={createNFT} />
     </div>

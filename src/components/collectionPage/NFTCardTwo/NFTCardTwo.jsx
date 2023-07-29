@@ -12,10 +12,6 @@ const NFTCardTwo = ({ fetchType, nfts }) => {
     NFTMarketplaceContext
   );
 
-  // useEffect(() => {
-  //   setMainNft(nfts);
-  // }, [nfts])
-
   useEffect(() => {
     if (nfts) {
       setMainNft(nfts);
