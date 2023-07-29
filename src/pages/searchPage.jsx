@@ -2,9 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 //INTRNAL IMPORT
 import Style from "../styles/searchPage.module.css";
-import Slider from "../components/Slider/Slider";
 import Brand from "../components/Brand/Brand";
-import Loader from "../components/Loader/Loader";
 import SearchBar from "../components/SearchPage/SearchBar/SearchBar";
 import { Filter } from "../components/componentsindex";
 
@@ -15,63 +13,43 @@ import {
 import images from "../img";
 
 //SMART CONTRACT IMPORT
-// import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 import {
-  mainNft,
-  setMainNft,
   NFTMarketplaceContext,
 } from "../Context/NFTMarketplaceContext";
 
 const SearchPage = () => {
-  const { mainNft, setMainNft, fetchNFTs, setError } = useContext(
+  const { mainNft, setMainNft, fetchNFTs } = useContext(
     NFTMarketplaceContext
   );
-  const [nfts, setNfts] = useState([]);
-  const [nftsCopy, setNftsCopy] = useState([]);
 
-  function check() {}
+  const [nfts, setNfts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredNft, setFilteredNft] = useState([]);
 
   useEffect(() => {
-    try {
-      fetchNFTs().then((items) => {
-        setMainNft(items);
-        setNftsCopy(items);
-        console.log(items);
-      });
-    } catch (error) {
-      setError("Please reload the browser");
-    }
+    fetchNFTs().then(data => {
+      setNfts(data);
+      console.log({data});
+    });
   }, []);
 
-  const onHandleSearch = (value) => {
-    const filteredNFTS = nfts.filter(({ name }) =>
-      name.toLowerCase().includes(value.toLowerCase())
-    );
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+    console.log(value);
 
-    if (filteredNFTS.length === 0) {
-      setNfts(nftsCopy);
-    } else {
-      setNfts(filteredNFTS);
-    }
-  };
-
-  const onClearSearch = () => {
-    if (nfts.length && nftsCopy.length) {
-      setNfts(nftsCopy);
-    }
+    const filteredNft = nfts.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+    setMainNft(filteredNft);
   };
 
   return (
     <div className={Style.searchPage}>
-      <Banner bannerImage={images.creatorbackground2} />
+      {/* <Banner bannerImage={images.creatorbackground2} /> */}
       <SearchBar
-        onHandleSearch={onHandleSearch}
-        onClearSearch={onClearSearch}
+        searchQuery={searchQuery}
+        handleSearch={handleSearch}
       />
       <Filter />
-      <button onClick={check}>Click</button>
-      {nftsCopy.length === 0 ? <Loader /> : <NFTCardTwo fetchType="all" />}
-      {/* <Slider /> */}
+      <NFTCardTwo fetchType="all" nfts={nfts}/>
       <Brand />
     </div>
   );

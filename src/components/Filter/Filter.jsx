@@ -8,7 +8,7 @@ const Filter = () => {
     <div className={Style.filter}>
       <div className={Style.filter_box}>
         <div className={Style.filter_box_left}>
-          <button>NFTs</button>
+          <button>NFTs Collection</button>
         </div>
       </div>
     </div>

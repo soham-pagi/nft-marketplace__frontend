@@ -7,39 +7,47 @@ import Style from "./NFTCardTwo.module.css";
 
 import { NFTMarketplaceContext } from "../../../Context/NFTMarketplaceContext";
 
-const NFTCardTwo = ({ fetchType }) => {
-  const { fetchNFTs, fetchMyNFTsOrListedNFTs } = useContext(
+const NFTCardTwo = ({ fetchType, nfts }) => {
+  const { mainNft, setMainNft, fetchNFTs, fetchMyNFTsOrListedNFTs } = useContext(
     NFTMarketplaceContext
   );
 
-  const [nftData, setNftData] = useState([]);
+  // useEffect(() => {
+  //   setMainNft(nfts);
+  // }, [nfts])
 
   useEffect(() => {
-    if (fetchType === "all") {
+    if (nfts) {
+      setMainNft(nfts);
+    }
+    else if (fetchType === "all") {
       fetchNFTs().then((data) => {
-        setNftData(data);
+        setMainNft(data);
+        console.log("here")
       });
     } else if (fetchType === "listed") {
       fetchMyNFTsOrListedNFTs("fetchItemsListed").then((data) =>
-        setNftData(data)
+      setMainNft(data)
       );
+      console.log("listed")
     } else {
-      fetchMyNFTsOrListedNFTs("myNFTs").then((data) => setNftData(data));
+      fetchMyNFTsOrListedNFTs("myNFTs").then((data) => setMainNft(data));
+      console.log("my")
     }
-  }, []);
+  }, [nfts]);
 
   return (
     <div className={Style.NFTCardTwo}>
-      {nftData.length === 0 && fetchType === "listed" && (
+      {mainNft.length === 0 && fetchType === "listed" && (
         <h1>You don't have any nft listed</h1>
       )}
       
-      {nftData.length === 0 && fetchType === "myNFTs" && (
+      {mainNft.length === 0 && fetchType === "myNFTs" && (
         <h1>You don't own any NFTs</h1>
       )}
 
-      {nftData &&
-        nftData.map((nft, i) => (
+      {mainNft &&
+        mainNft.map((nft, i) => (
           <Link to={`/nft-details?tokenId=${nft.tokenId}`} key={i}>
             <div className={Style.NFTCardTwo_box} key={i}>
               <div className={Style.NFTCardTwo_box_like}>

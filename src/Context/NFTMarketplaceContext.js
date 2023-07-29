@@ -11,7 +11,7 @@ const NFTMarketplaceContext = createContext();
 
 // COMPONENT STARTS HERE
 function NFTMarketplaceProvider({ children }) {
-  const [mainNft, setMainNFt] = useState([]);
+  const [mainNft, setMainNft] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isMetamaskConnected, setIsMetamaskConnected] = useState(false);
   const [userProfileData, setUserProfileData] = useState({
@@ -26,6 +26,14 @@ function NFTMarketplaceProvider({ children }) {
   //------USESTATE
   const [error, setError] = useState("");
   const [openError, setOpenError] = useState(false);
+
+  const checkExtension = () => {
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", async function() {
+        connectWallet();
+      });
+    }
+  }
 
   const checkMetamaskConnection = async () => {
     const acc = localStorage.getItem("currentAccount");
@@ -43,10 +51,6 @@ function NFTMarketplaceProvider({ children }) {
           setOpenError(true), setError("Please install Metamask to continue...")
         );
       }
-
-      window.ethereum.on("accountsChanged", async function() {
-        connectWallet();
-      });
 
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
       await provider.send("eth_requestAccounts", []);
@@ -245,15 +249,15 @@ function NFTMarketplaceProvider({ children }) {
 
   //--FETCHNFTS FUNCTION
   const fetchNFTs = async () => {
+    setIsLoading(true);
+
     try {
       const provider = new ethers.providers.JsonRpcProvider(
         // "http://127.0.0.1:7545"
         "https://polygon-mumbai.g.alchemy.com/v2/m3ZhghonD5KpQKNavSsYtwug5Glsyve2"
       );
       const contract = fetchContract(provider);
-
       const data = await contract.fetchMarketItems();
-
       const items = await Promise.all(
         data.map(
           async ({
@@ -290,11 +294,15 @@ function NFTMarketplaceProvider({ children }) {
       console.log(error)
       setOpenError(true);
       return [];
+    } finally {
+      setIsLoading(false);
     }
   };
 
   //--FETCHING MY NFT OR LISTED NFTs
   const fetchMyNFTsOrListedNFTs = async (type) => {
+    setIsLoading(true);
+
     try {
       const contract = await connectingWithSmartContract();
 
@@ -338,6 +346,8 @@ function NFTMarketplaceProvider({ children }) {
       setError("Error while fetching listed NFTs");
       setOpenError(true);
       return [];
+    } finally {
+    setIsLoading(false);
     }
   };
 
@@ -363,15 +373,12 @@ function NFTMarketplaceProvider({ children }) {
   const getProfile = async (metamaskWalletAddress) => {
     console.log({ metamaskWalletAddress });
     if (metamaskWalletAddress === "") {
-      // metamaskWalletAddress = "12345";
-      return;
+      metamaskWalletAddress = "12345";
     }
-
 
     const apiUrl = `${process.env.REACT_APP_GET_USER_PROFILE}${metamaskWalletAddress}`;
     const response = await fetch(apiUrl);
     const userPhotoExtensionType = "image/jpeg";
-
 
     try {
       if (response.ok) {
@@ -424,6 +431,11 @@ function NFTMarketplaceProvider({ children }) {
   };
 
   useEffect(() => {
+    checkExtension();
+    checkMetamaskConnection();
+  }, []);
+
+  useEffect(() => {
     getBalance();
   }, []);
 
@@ -432,7 +444,7 @@ function NFTMarketplaceProvider({ children }) {
       value={{
         balance,
         mainNft,
-        setMainNFt,
+        setMainNft,
         userProfileData,
         setUserProfileData,
         isMetamaskConnected,

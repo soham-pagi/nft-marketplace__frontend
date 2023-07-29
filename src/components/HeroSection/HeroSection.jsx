@@ -8,6 +8,7 @@ import Button from "../Button/Button";
 
 
 const HeroSection = () => {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
 
   return (

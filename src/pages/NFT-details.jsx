@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 //INTERNAL IMPORT
-import { Category, Brand } from "../components/componentsindex";
+import { Brand } from "../components/componentsindex";
 import NFTDetailsPage from "../components/NFTDetailsPage/NFTDetailsPage";
 
 //IMPORT SMART CONTRACT DATA
@@ -34,7 +34,6 @@ const NFTDetails = () => {
   return (
     <div style={{ paddingTop: 20}}>
       <NFTDetailsPage nft={nft} />
-      <Category />
       <Brand />
     </div>
   );

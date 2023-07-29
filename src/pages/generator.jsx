@@ -3,6 +3,7 @@ import mergeImages from "merge-images";
 import Style from "../styles/generator.module.css";
 
 const useDynamicUrlState = () => {
+  window.scrollTo(0, 0);
   const [urlStates, setUrlStates] = useState([]);
   const fileInputRef = useRef(null);
 

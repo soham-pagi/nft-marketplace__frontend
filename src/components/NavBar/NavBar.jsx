@@ -8,16 +8,15 @@ import { useNavigate } from "react-router-dom";
 
 //INTERNAL IMPORT
 import Style from "./NavBar.module.css";
-import { Discover, HelpCenter, Profile, SideBar } from "./index";
-import { Button, Error } from "../componentsindex";
+import { Discover, HelpCenter, Profile } from "./index";
+import { Button, Error, Loader } from "../componentsindex";
 import { Notification } from "./index";
+
 
 //IMPORT FROM SMART CONTRACT
 import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 function NavBar() {
-  window.scrollTo(0, 0);
-
   //----USESTATE COMPONNTS
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
@@ -34,20 +33,8 @@ function NavBar() {
     openError,
     userProfileData,
     getProfile,
+    isLoading
   } = useContext(NFTMarketplaceContext);
-
-  useEffect(() => {
-    checkMetamaskConnection();
-
-    
-
-    // window.addEventListener("beforeunload", function(event) {
-    //   if (!event.currentTarget.performance || event.currentTarget.performance.navigation.type !== 1) {
-    //     this.localStorage.removeItem("currentAccount");
-    //       return;
-    //   }
-    // });
-  }, []);
 
   useEffect(() => {
     getProfile(currentAccount);
@@ -190,14 +177,7 @@ function NavBar() {
       </div>
 
       {openError && <Error />}
-      <button
-        onClick={() => {
-          checkMetamaskConnection();
-          getProfile(currentAccount);
-        }}
-      >
-        click
-      </button>
+      {isLoading && <Loader active={isLoading} />}
     </div>
   );
 }

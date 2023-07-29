@@ -42,28 +42,6 @@ const NFTDescription = ({ nft }) => {
 
   const navigate = useNavigate();
 
-  const historyArray = [
-    images.user1,
-    images.user2,
-    images.user3,
-    images.user4,
-    images.user5,
-  ];
-  const provananceArray = [
-    images.user6,
-    images.user7,
-    images.user8,
-    images.user9,
-    images.user10,
-  ];
-  const ownerArray = [
-    images.user1,
-    images.user8,
-    images.user2,
-    images.user6,
-    images.user5,
-  ];
-
   const openSocial = () => {
     if (!social) {
       setSocial(true);
@@ -82,20 +60,6 @@ const NFTDescription = ({ nft }) => {
     }
   };
 
-  const openTabs = (e) => {
-    const btnText = e.target.innerText;
-
-    if (btnText == "Bid History") {
-      setHistory(true);
-      setProvanance(false);
-      setOwner(false);
-    } else if (btnText == "Provanance") {
-      setHistory(false);
-      setProvanance(true);
-      setOwner(false);
-    }
-  };
-
   const openOwmer = () => {
     if (!owner) {
       setOwner(true);
@@ -106,9 +70,6 @@ const NFTDescription = ({ nft }) => {
       setHistory(true);
     }
   };
-
-  //SMART CONTRACT DATA
-  console.log(nft.seller === currentAccount);
 
   return (
     <div className={Style.NFTDescription}>
