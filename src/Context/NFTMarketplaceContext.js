@@ -153,7 +153,6 @@ function NFTMarketplaceProvider({ children }) {
     try {
       setIsLoading(true);
       const url = await uploadToIPFS(image);
-      setIsLoading(false);
       console.log(url);
 
       await createSale(url, price, name, description);
@@ -191,6 +190,7 @@ function NFTMarketplaceProvider({ children }) {
           });
 
       const receipt = await transaction.wait();
+      setIsLoading(false);
       console.log({ receipt });
       return true;
     } catch (error) {
