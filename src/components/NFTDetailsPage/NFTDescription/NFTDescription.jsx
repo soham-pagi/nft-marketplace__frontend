@@ -33,8 +33,17 @@ const NFTDescription = ({ nft }) => {
 
   useEffect(() => {
     (async function() {
-      const data = await getProfile(nft.seller);
-      setCreatorData(data);
+      console.log({seller: nft.seller, owner: nft.owner})
+      if (nft.seller === "0x0000000000000000000000000000000000000000") {
+        const data = await getProfile(nft.owner);
+        console.log(nft)
+        setCreatorData(data);
+      } else {
+        const data = await getProfile(nft.seller);
+        console.log(nft)
+        setCreatorData(data);
+      }
+
     })();
   }, [nft])
 
@@ -129,7 +138,7 @@ const NFTDescription = ({ nft }) => {
                 className={Style.NFTDescription_box_profile_box_left_img}
               />
               <div className={Style.NFTDescription_box_profile_box_left_info}>
-                <small>Creator</small> <br />
+                <small>Onwer</small> <br />
                 <span>{creatorData.username}</span>
               </div>
             </div>

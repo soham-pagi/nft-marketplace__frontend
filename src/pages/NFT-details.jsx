@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 
@@ -9,10 +9,6 @@ import NFTDetailsPage from "../components/NFTDetailsPage/NFTDetailsPage";
 const NFTDetails = () => {
 
   const location = useLocation();
-
-  // useEffect(() => {
-  //   const parsedQuery = queryString.parse(location.search);
-  // }, []);
 
   return (
     <div style={{ paddingTop: 20}}>

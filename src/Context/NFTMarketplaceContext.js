@@ -338,7 +338,7 @@ function NFTMarketplaceProvider({ children }) {
           }
         )
       );
-      // console.log(items);
+      console.log(items);
       return items;
     } catch (error) {
       console.log(error);
