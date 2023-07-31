@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useSearchParams } from 'react-router-dom';
 
 //INTRNAL IMPORT
 import Style from "../styles/searchPage.module.css";
@@ -24,20 +25,27 @@ const SearchPage = () => {
 
   const [nfts, setNfts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredNft, setFilteredNft] = useState([]);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     fetchNFTs().then(data => {
       setNfts(data);
-      console.log({data});
     });
   }, []);
 
+  useEffect(() => {
+    const query = searchParams.get("query");
+    
+    if (!query) return
+
+    handleSearch(query);
+  }, [nfts, searchParams]);
+
   const handleSearch = (value) => {
     setSearchQuery(value);
-    console.log(value);
+    console.log({value});
 
-    const filteredNft = nfts.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+    const filteredNft = nfts.filter(item => item.name.toLowerCase().includes(value.trim().toLowerCase()));
     setMainNft(filteredNft);
   };
 

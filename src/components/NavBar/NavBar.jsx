@@ -88,7 +88,7 @@ function NavBar() {
 
   const handleSearch = () => {
     const searchQuery = document.getElementById("search-nft").value;
-    navigate(`/searchPage?${searchQuery}`);
+    navigate(`/searchPage?query=${searchQuery}`);
   };
 
   return (
